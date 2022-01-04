@@ -61,14 +61,12 @@ public class RequestManagerRetriever implements Handler.Callback {
      */
     @SuppressWarnings("deprecation")
     @VisibleForTesting
-    final Map<android.app.FragmentManager, RequestManagerFragment> pendingRequestManagerFragments =
-            new HashMap<>();
+    final Map<android.app.FragmentManager, RequestManagerFragment> pendingRequestManagerFragments = new HashMap<>();
 
     /**
      * Pending adds for SupportRequestManagerFragments.
      */
-    @VisibleForTesting final Map<FragmentManager, SupportRequestManagerFragment> pendingSupportRequestManagerFragments =
-            new HashMap<>();
+    @VisibleForTesting final Map<FragmentManager, SupportRequestManagerFragment> pendingSupportRequestManagerFragments = new HashMap<>();
 
     /**
      * Main thread handler to handle cleaning up pending fragment maps.

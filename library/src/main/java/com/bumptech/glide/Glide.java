@@ -180,8 +180,8 @@ public class Glide implements ComponentCallbacks2 {
     @SuppressWarnings("GuardedBy")
     public static Glide get(@NonNull Context context) {
         if (glide == null) {
-            GeneratedAppGlideModule annotationGeneratedModule =
-                    getAnnotationGeneratedGlideModules(context.getApplicationContext());
+            @Important("1.生成GeneratedAppGlideModule时用的是ApplicationContext")
+            GeneratedAppGlideModule annotationGeneratedModule = getAnnotationGeneratedGlideModules(context.getApplicationContext());
             synchronized (Glide.class) {
                 if (glide == null) {
                     checkAndInitializeGlide(context, annotationGeneratedModule);
@@ -193,14 +193,11 @@ public class Glide implements ComponentCallbacks2 {
     }
 
     @GuardedBy("Glide.class")
-    private static void checkAndInitializeGlide(
-            @NonNull Context context, @Nullable GeneratedAppGlideModule generatedAppGlideModule) {
+    private static void checkAndInitializeGlide(@NonNull Context context, @Nullable GeneratedAppGlideModule generatedAppGlideModule) {
         // In the thread running initGlide(), one or more classes may call Glide.get(context).
         // Without this check, those calls could trigger infinite recursion.
         if (isInitializing) {
-            throw new IllegalStateException(
-                    "You cannot call Glide.get() in registerComponents(),"
-                            + " use the provided Glide instance instead");
+            throw new IllegalStateException("You cannot call Glide.get() in registerComponents(), use the provided Glide instance instead");
         }
         isInitializing = true;
         initializeGlide(context, generatedAppGlideModule);
@@ -253,9 +250,9 @@ public class Glide implements ComponentCallbacks2 {
         }
     }
 
+    @Important("3.?GuardedBy的作用")
     @GuardedBy("Glide.class")
-    private static void initializeGlide(
-            @NonNull Context context, @Nullable GeneratedAppGlideModule generatedAppGlideModule) {
+    private static void initializeGlide(@NonNull Context context, @Nullable GeneratedAppGlideModule generatedAppGlideModule) {
         initializeGlide(context, new GlideBuilder(), generatedAppGlideModule);
     }
 
@@ -265,14 +262,15 @@ public class Glide implements ComponentCallbacks2 {
             @NonNull Context context,
             @NonNull GlideBuilder builder,
             @Nullable GeneratedAppGlideModule annotationGeneratedModule) {
+        @Important("4.?manifestModules")
         Context applicationContext = context.getApplicationContext();
         List<com.bumptech.glide.module.GlideModule> manifestModules = Collections.emptyList();
         if (annotationGeneratedModule == null || annotationGeneratedModule.isManifestParsingEnabled()) {
             manifestModules = new ManifestParser(applicationContext).parse();
         }
 
-        if (annotationGeneratedModule != null
-                && !annotationGeneratedModule.getExcludedModuleClasses().isEmpty()) {
+        if (annotationGeneratedModule != null && !annotationGeneratedModule.getExcludedModuleClasses().isEmpty()) {
+            @Important("5.?excludedModuleClasses")
             Set<Class<?>> excludedModuleClasses = annotationGeneratedModule.getExcludedModuleClasses();
             Iterator<com.bumptech.glide.module.GlideModule> iterator = manifestModules.iterator();
             while (iterator.hasNext()) {
@@ -293,10 +291,7 @@ public class Glide implements ComponentCallbacks2 {
             }
         }
 
-        RequestManagerRetriever.RequestManagerFactory factory =
-                annotationGeneratedModule != null
-                        ? annotationGeneratedModule.getRequestManagerFactory()
-                        : null;
+        RequestManagerRetriever.RequestManagerFactory factory = annotationGeneratedModule != null ? annotationGeneratedModule.getRequestManagerFactory() : null;
         builder.setRequestManagerFactory(factory);
         for (com.bumptech.glide.module.GlideModule module : manifestModules) {
             module.applyOptions(applicationContext, builder);
@@ -327,14 +322,12 @@ public class Glide implements ComponentCallbacks2 {
 
     @Nullable
     @SuppressWarnings({"unchecked", "TryWithIdenticalCatches", "PMD.UnusedFormalParameter"})
+    @Important("2.?GeneratedAppGlideModule的作用")
     private static GeneratedAppGlideModule getAnnotationGeneratedGlideModules(Context context) {
         GeneratedAppGlideModule result = null;
         try {
-            Class<GeneratedAppGlideModule> clazz =
-                    (Class<GeneratedAppGlideModule>)
-                            Class.forName("com.bumptech.glide.GeneratedAppGlideModuleImpl");
-            result =
-                    clazz.getDeclaredConstructor(Context.class).newInstance(context.getApplicationContext());
+            Class<GeneratedAppGlideModule> clazz = (Class<GeneratedAppGlideModule>) Class.forName("com.bumptech.glide.GeneratedAppGlideModuleImpl");
+            result = clazz.getDeclaredConstructor(Context.class).newInstance(context.getApplicationContext());
         } catch (ClassNotFoundException e) {
             if (Log.isLoggable(TAG, Log.WARN)) {
                 Log.w(

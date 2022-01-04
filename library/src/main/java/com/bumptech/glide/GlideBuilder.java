@@ -478,15 +478,14 @@ public final class GlideBuilder {
         }
 
         if (engine == null) {
-            engine =
-                    new Engine(
-                            memoryCache,
-                            diskCacheFactory,
-                            diskCacheExecutor,
-                            sourceExecutor,
-                            GlideExecutor.newUnlimitedSourceExecutor(),
-                            animationExecutor,
-                            isActiveResourceRetentionAllowed);
+            engine = new Engine(
+                    memoryCache,
+                    diskCacheFactory,
+                    diskCacheExecutor,
+                    sourceExecutor,
+                    GlideExecutor.newUnlimitedSourceExecutor(),
+                    animationExecutor,
+                    isActiveResourceRetentionAllowed);
         }
 
         if (defaultRequestListeners == null) {
@@ -496,8 +495,7 @@ public final class GlideBuilder {
         }
 
         GlideExperiments experiments = glideExperimentsBuilder.build();
-        RequestManagerRetriever requestManagerRetriever =
-                new RequestManagerRetriever(requestManagerFactory, experiments);
+        RequestManagerRetriever requestManagerRetriever = new RequestManagerRetriever(requestManagerFactory, experiments);
 
         return new Glide(
                 context,
