@@ -142,15 +142,6 @@ public interface GifDecoder {
     void resetFrameIndex();
 
     /**
-     * Gets the "Netscape" loop count, if any. A count of 0 means repeat indefinitely.
-     *
-     * @return loop count if one was specified, else 1.
-     * @deprecated Use {@link #getNetscapeLoopCount()} instead. This method cannot distinguish whether the loop count is 1 or doesn't exist.
-     */
-    @Deprecated
-    int getLoopCount();
-
-    /**
      * Gets the "Netscape" loop count, if any. A count of 0 ({@link GifHeader#NETSCAPE_LOOP_COUNT_FOREVER}) means repeat indefinitely. It must not be a negative value.
      * <br>
      * Use {@link #getTotalIterationCount()} to know how many times the animation sequence should be displayed.

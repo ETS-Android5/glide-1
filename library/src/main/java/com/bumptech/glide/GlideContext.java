@@ -13,7 +13,6 @@ import com.bumptech.glide.load.engine.bitmap_recycle.ArrayPool;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.ImageViewTargetFactory;
-import com.bumptech.glide.request.target.ViewTarget;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;

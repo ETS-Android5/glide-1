@@ -31,7 +31,6 @@ import com.bumptech.glide.request.SingleRequest;
 import com.bumptech.glide.request.ThumbnailRequestCoordinator;
 import com.bumptech.glide.request.target.PreloadTarget;
 import com.bumptech.glide.request.target.Target;
-import com.bumptech.glide.request.target.ViewTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.bumptech.glide.signature.AndroidResourceSignature;
 import com.bumptech.glide.util.Executors;
@@ -398,46 +397,6 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
     }
 
     /**
-     * Loads a resource in an identical manner to this request except with the dimensions of the target multiplied by the given size multiplier. If the thumbnail load completes before the full size load, the thumbnail will be shown. If the thumbnail load completes after the full size load, the
-     * thumbnail will not be shown.
-     *
-     * <p>Note - The thumbnail resource will be smaller than the size requested so the target (or
-     * {@link ImageView}) must be able to scale the thumbnail appropriately. See {@link android.widget.ImageView.ScaleType}.
-     *
-     * <p>Almost all options will be copied from the original load, including the {@link
-     * com.bumptech.glide.load.model.ModelLoader}, {@link com.bumptech.glide.load.ResourceDecoder}, and {@link com.bumptech.glide.load.Transformation}s. However, {@link com.bumptech.glide.request.RequestOptions#placeholder(int)} and {@link com.bumptech.glide.request.RequestOptions#error(int)}, and
-     * {@link #listener(RequestListener)} will only be used on the full size load and will not be copied for the thumbnail load.
-     *
-     * <p>Recursive calls to thumbnail are supported.
-     *
-     * <p>Overrides any previous calls to this method, {@link #thumbnail(RequestBuilder[])}, and
-     * {@link #thumbnail(RequestBuilder)}.
-     *
-     * @param sizeMultiplier The multiplier to apply to the {@link Target}'s dimensions when loading the thumbnail.
-     * @return This request builder.
-     * @see #thumbnail(RequestBuilder)
-     * @see #thumbnail(RequestBuilder[])
-     * @deprecated The behavior differences between this method and {@link #thumbnail(RequestBuilder)} are subtle, hard to understand for users and hard to maintain for developers. See the javadoc on {@link #listener(RequestListener)} for one concrete example of the behavior differences and
-     * complexity introduced by this method. Better consistency and readability can be obtained by calling {@link #thumbnail(RequestBuilder)} with a duplicate {@code RequestBuilder} on which you have called {@link BaseRequestOptions#sizeMultiplier(float)}. In practice this method also isn't
-     * especially useful. It's much more common to want to specify a number of different attributes for thumbnails than just a simple percentage modifier on the target size, so there's little justification for keeping this method. This method will be removed in a future version of Glide.
-     */
-    @NonNull
-    @CheckResult
-    @SuppressWarnings("unchecked")
-    @Deprecated
-    public RequestBuilder<TranscodeType> thumbnail(float sizeMultiplier) {
-        if (isAutoCloneEnabled()) {
-            return clone().thumbnail(sizeMultiplier);
-        }
-        if (sizeMultiplier < 0f || sizeMultiplier > 1f) {
-            throw new IllegalArgumentException("sizeMultiplier must be between 0 and 1");
-        }
-        this.thumbSizeMultiplier = sizeMultiplier;
-
-        return selfOrThrowIfLocked();
-    }
-
-    /**
      * Sets the specific model to load data for.
      *
      * @param model The model to load data for, or null.
@@ -580,20 +539,6 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
     @Override
     public RequestBuilder<TranscodeType> load(@RawRes @DrawableRes @Nullable Integer resourceId) {
         return loadGeneric(resourceId).apply(signatureOf(AndroidResourceSignature.obtain(context)));
-    }
-
-    /**
-     * Returns a request builder to load the given {@link URL}.
-     *
-     * @param url The URL representing the image.
-     * @see #load(Object)
-     * @deprecated The {@link java.net.URL} class has <a href="http://goo.gl/c4hHNu">a number of performance problems</a> and should generally be avoided when possible. Prefer {@link #load(android.net.Uri)} or {@link #load(String)}.
-     */
-    @Deprecated
-    @CheckResult
-    @Override
-    public RequestBuilder<TranscodeType> load(@Nullable URL url) {
-        return loadGeneric(url);
     }
 
     /**
@@ -762,19 +707,6 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
     /**
      * Returns a future that can be used to do a blocking get on a background thread.
      *
-     * @param width  The desired width in pixels, or {@link Target#SIZE_ORIGINAL}. This will be overridden by {@link com.bumptech.glide.request.RequestOptions#override(int, int)} if previously called.
-     * @param height The desired height in pixels, or {@link Target#SIZE_ORIGINAL}. This will be overridden by {@link com.bumptech.glide.request.RequestOptions#override(int, int)}} if previously called).
-     * @see RequestManager#clear(Target)
-     * @deprecated Use {@link #submit(int, int)} instead.
-     */
-    @Deprecated
-    public FutureTarget<TranscodeType> into(int width, int height) {
-        return submit(width, height);
-    }
-
-    /**
-     * Returns a future that can be used to do a blocking get on a background thread.
-     *
      * <p>This method defaults to {@link Target#SIZE_ORIGINAL} for the width and the height. However,
      * since the width and height will be overridden by values passed to {@link RequestOptions#override(int, int)}, this method can be used whenever {@link RequestOptions} with override values are applied, or whenever you want to retrieve the image in its original size.
      *
@@ -828,34 +760,6 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
     @NonNull
     public Target<TranscodeType> preload() {
         return preload(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL);
-    }
-
-    /**
-     * Loads the original unmodified data into the cache and calls the given Target with the cache File.
-     *
-     * @param target The Target that will receive the cache File when the load completes
-     * @param <Y>    The type of Target.
-     * @return The given Target.
-     * @deprecated Use {@link RequestManager#downloadOnly()} and {@link #into(Target)}.
-     */
-    @Deprecated
-    @CheckResult
-    public <Y extends Target<File>> Y downloadOnly(@NonNull Y target) {
-        return getDownloadOnlyRequest().into(target);
-    }
-
-    /**
-     * Loads the original unmodified data into the cache and returns a {@link java.util.concurrent.Future} that can be used to retrieve the cache File containing the data.
-     *
-     * @param width  The width in pixels to use to fetch the data.
-     * @param height The height in pixels to use to fetch the data.
-     * @return A {@link java.util.concurrent.Future} that can be used to retrieve the cache File containing the data.
-     * @deprecated Use {@link RequestManager#downloadOnly()} and {@link #submit(int, int)}.
-     */
-    @Deprecated
-    @CheckResult
-    public FutureTarget<File> downloadOnly(int width, int height) {
-        return getDownloadOnlyRequest().submit(width, height);
     }
 
     @NonNull

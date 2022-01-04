@@ -863,26 +863,6 @@ public abstract class BaseRequestOptions<T extends BaseRequestOptions<T>> implem
     }
 
     /**
-     * Applies the given {@link Transformation}s in the given order for {@link Bitmap Bitmaps} to the default types ({@link Bitmap}, {@link android.graphics.drawable.BitmapDrawable}, and {@link com.bumptech.glide.load.resource.gif.GifDrawable}) and throws an exception if asked to transform an
-     * unknown type.
-     *
-     * <p>This will override previous calls to {@link #dontTransform()}.
-     *
-     * @param transformations One or more {@link Transformation}s for {@link Bitmap}s.
-     * @see #optionalTransform(Transformation)
-     * @see #optionalTransform(Class, Transformation)
-     * @deprecated Deprecated due to api update, use {@link #transform(Transformation[])} instead
-     */
-    // Guaranteed to modify the current object by the isAutoCloneEnabledCheck.
-    @SuppressWarnings({"unchecked", "varargs", "CheckResult"})
-    @NonNull
-    @CheckResult
-    @Deprecated
-    public T transforms(@NonNull Transformation<Bitmap>... transformations) {
-        return transform(new MultiTransformation<>(transformations), /*isRequired=*/ true);
-    }
-
-    /**
      * Applies the given {@link Transformation} for {@link Bitmap Bitmaps} to the default types ({@link Bitmap}, {@link android.graphics.drawable.BitmapDrawable}, and {@link com.bumptech.glide.load.resource.gif.GifDrawable}) and ignores unknown types.
      *
      * <p>This will override previous calls to {@link #dontTransform()}.

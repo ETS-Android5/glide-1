@@ -15,15 +15,6 @@ public class BitmapThumbnailImageViewTarget extends ThumbnailImageViewTarget<Bit
         super(view);
     }
 
-    /**
-     * @deprecated Use {@link #waitForLayout()} instead.
-     */
-    @SuppressWarnings("deprecation")
-    @Deprecated
-    public BitmapThumbnailImageViewTarget(ImageView view, boolean waitForLayout) {
-        super(view, waitForLayout);
-    }
-
     @Override
     protected Drawable getDrawable(Bitmap resource) {
         return new BitmapDrawable(view.getResources(), resource);

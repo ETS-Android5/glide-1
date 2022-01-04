@@ -47,12 +47,6 @@ public final class LruArrayPool implements ArrayPool {
         this.maxSize = maxSize;
     }
 
-    @Deprecated
-    @Override
-    public <T> void put(T array, Class<T> arrayClass) {
-        put(array);
-    }
-
     @Override
     public synchronized <T> void put(T array) {
         @SuppressWarnings("unchecked")

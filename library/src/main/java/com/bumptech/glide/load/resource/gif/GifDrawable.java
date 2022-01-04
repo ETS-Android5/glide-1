@@ -85,32 +85,6 @@ public class GifDrawable extends Drawable
      * Constructor for GifDrawable.
      *
      * @param context             A context.
-     * @param bitmapPool          Ignored, see deprecation note.
-     * @param frameTransformation An {@link com.bumptech.glide.load.Transformation} that can be applied to each frame.
-     * @param targetFrameWidth    The desired width of the frames displayed by this drawable (the width of the view or {@link com.bumptech.glide.request.target.Target} this drawable is being loaded into).
-     * @param targetFrameHeight   The desired height of the frames displayed by this drawable (the height of the view or {@link com.bumptech.glide.request.target.Target} this drawable is being loaded into).
-     * @param gifDecoder          The decoder to use to decode GIF data.
-     * @param firstFrame          The decoded and transformed first frame of this GIF.
-     * @see #setFrameTransformation(com.bumptech.glide.load.Transformation, android.graphics.Bitmap)
-     * @deprecated Use {@link #GifDrawable(Context, GifDecoder, Transformation, int, int, Bitmap)}
-     */
-    @SuppressWarnings("deprecation")
-    @Deprecated
-    public GifDrawable(
-            Context context,
-            GifDecoder gifDecoder,
-            @SuppressWarnings("unused") BitmapPool bitmapPool,
-            Transformation<Bitmap> frameTransformation,
-            int targetFrameWidth,
-            int targetFrameHeight,
-            Bitmap firstFrame) {
-        this(context, gifDecoder, frameTransformation, targetFrameWidth, targetFrameHeight, firstFrame);
-    }
-
-    /**
-     * Constructor for GifDrawable.
-     *
-     * @param context             A context.
      * @param frameTransformation An {@link com.bumptech.glide.load.Transformation} that can be applied to each frame.
      * @param targetFrameWidth    The desired width of the frames displayed by this drawable (the width of the view or {@link com.bumptech.glide.request.target.Target} this drawable is being loaded into).
      * @param targetFrameHeight   The desired height of the frames displayed by this drawable (the height of the view or {@link com.bumptech.glide.request.target.Target} this drawable is being loaded into).

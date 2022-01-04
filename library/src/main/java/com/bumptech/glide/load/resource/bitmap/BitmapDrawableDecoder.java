@@ -28,17 +28,6 @@ public class BitmapDrawableDecoder<DataType> implements ResourceDecoder<DataType
         this(context.getResources(), decoder);
     }
 
-    /**
-     * @deprecated Use {@link #BitmapDrawableDecoder(Context, ResourceDecoder)}, {@code bitmapPool} is ignored.
-     */
-    @Deprecated
-    public BitmapDrawableDecoder(
-            Resources resources,
-            @SuppressWarnings("unused") BitmapPool bitmapPool,
-            ResourceDecoder<DataType, Bitmap> decoder) {
-        this(resources, decoder);
-    }
-
     public BitmapDrawableDecoder(
             @NonNull Resources resources, @NonNull ResourceDecoder<DataType, Bitmap> decoder) {
         this.resources = Preconditions.checkNotNull(resources);

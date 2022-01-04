@@ -388,21 +388,6 @@ public class GlideRequest<TranscodeType> extends RequestBuilder<TranscodeType> i
     }
 
     /**
-     * @see GlideOptions#transforms(Transformation<Bitmap>[])
-     */
-    @Deprecated
-    @NonNull
-    @CheckResult
-    @SuppressWarnings({
-            "unchecked",
-            "varargs"
-    })
-    public GlideRequest<TranscodeType> transforms(
-            @NonNull Transformation<Bitmap>... transformations) {
-        return (GlideRequest<TranscodeType>) super.transforms(transformations);
-    }
-
-    /**
      * @see GlideOptions#optionalTransform(Transformation<Bitmap>)
      */
     @NonNull
@@ -534,14 +519,6 @@ public class GlideRequest<TranscodeType> extends RequestBuilder<TranscodeType> i
     }
 
     @Override
-    @Deprecated
-    @NonNull
-    @CheckResult
-    public GlideRequest<TranscodeType> thumbnail(float sizeMultiplier) {
-        return (GlideRequest<TranscodeType>) super.thumbnail(sizeMultiplier);
-    }
-
-    @Override
     @NonNull
     @CheckResult
     public GlideRequest<TranscodeType> load(@Nullable Object o) {
@@ -588,13 +565,6 @@ public class GlideRequest<TranscodeType> extends RequestBuilder<TranscodeType> i
     @CheckResult
     public GlideRequest<TranscodeType> load(@RawRes @DrawableRes @Nullable Integer id) {
         return (GlideRequest<TranscodeType>) super.load(id);
-    }
-
-    @Override
-    @Deprecated
-    @CheckResult
-    public GlideRequest<TranscodeType> load(@Nullable URL url) {
-        return (GlideRequest<TranscodeType>) super.load(url);
     }
 
     @Override

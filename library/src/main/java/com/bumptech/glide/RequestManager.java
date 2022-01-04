@@ -464,19 +464,6 @@ public class RequestManager
     }
 
     /**
-     * Equivalent to calling {@link #asDrawable()} and then {@link RequestBuilder#load(URL)}.
-     *
-     * @return A new request builder for loading a {@link Drawable} using the given model.
-     */
-    @SuppressWarnings("deprecation")
-    @CheckResult
-    @Override
-    @Deprecated
-    public RequestBuilder<Drawable> load(@Nullable URL url) {
-        return asDrawable().load(url);
-    }
-
-    /**
      * Equivalent to calling {@link #asDrawable()} and then {@link RequestBuilder#load(byte[])}.
      *
      * @return A new request builder for loading a {@link Drawable} using the given model.

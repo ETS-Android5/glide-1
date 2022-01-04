@@ -62,20 +62,6 @@ public final class RecyclerViewPreloader<T> extends RecyclerView.OnScrollListene
     }
 
     /**
-     * Helper constructor that accepts an {@link android.app.Fragment}.
-     *
-     * @deprecated Use constructor <code>RecyclerViewPreloader(Fragment, PreloadModelProvider<T>, PreloadSizeProvider<T>)</code> instead.
-     */
-    @Deprecated
-    public RecyclerViewPreloader(
-            @NonNull android.app.Fragment fragment,
-            @NonNull PreloadModelProvider<T> preloadModelProvider,
-            @NonNull PreloadSizeProvider<T> preloadDimensionProvider,
-            int maxPreload) {
-        this(Glide.with(fragment), preloadModelProvider, preloadDimensionProvider, maxPreload);
-    }
-
-    /**
      * Constructor that accepts interfaces for providing the dimensions of images to preload, the list of models to preload for a given position, and the request to use to load images.
      *
      * @param preloadModelProvider     Provides models to load and requests capable of loading them.

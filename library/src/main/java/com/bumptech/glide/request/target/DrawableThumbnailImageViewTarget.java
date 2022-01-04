@@ -13,15 +13,6 @@ public class DrawableThumbnailImageViewTarget extends ThumbnailImageViewTarget<D
         super(view);
     }
 
-    /**
-     * @deprecated Use {@link #waitForLayout()} instead.
-     */
-    @Deprecated
-    @SuppressWarnings("deprecation")
-    public DrawableThumbnailImageViewTarget(ImageView view, boolean waitForLayout) {
-        super(view, waitForLayout);
-    }
-
     @Override
     protected Drawable getDrawable(Drawable resource) {
         return resource;

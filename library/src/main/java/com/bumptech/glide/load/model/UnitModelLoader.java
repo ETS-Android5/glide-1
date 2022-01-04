@@ -21,16 +21,6 @@ public class UnitModelLoader<Model> implements ModelLoader<Model, Model> {
         return (UnitModelLoader<T>) INSTANCE;
     }
 
-    /**
-     * @deprecated Use {@link #getInstance()} instead.
-     */
-    // Need constructor to document deprecation, will be removed, when constructor is privatized.
-    @SuppressWarnings({"PMD.UnnecessaryConstructor", "DeprecatedIsStillUsed"})
-    @Deprecated
-    public UnitModelLoader() {
-        // Intentionally empty.
-    }
-
     @Override
     public LoadData<Model> buildLoadData(
             @NonNull Model model, int width, int height, @NonNull Options options) {
@@ -94,16 +84,6 @@ public class UnitModelLoader<Model> implements ModelLoader<Model, Model> {
         @SuppressWarnings("unchecked")
         public static <T> Factory<T> getInstance() {
             return (Factory<T>) FACTORY;
-        }
-
-        /**
-         * @deprecated Use {@link #getInstance()} instead.
-         */
-        // Need constructor to document deprecation, will be removed, when constructor is privatized.
-        @SuppressWarnings("PMD.UnnecessaryConstructor")
-        @Deprecated
-        public Factory() {
-            // Intentionally empty.
         }
 
         @NonNull

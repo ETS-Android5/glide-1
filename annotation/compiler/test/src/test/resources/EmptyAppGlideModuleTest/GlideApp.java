@@ -52,16 +52,6 @@ public final class GlideApp {
     }
 
     /**
-     * @see Glide#init(Glide)
-     */
-    @Deprecated
-    @VisibleForTesting
-    @SuppressLint("VisibleForTests")
-    public static void init(Glide glide) {
-        Glide.init(glide);
-    }
-
-    /**
      * @see Glide#init(Context, GlideBuilder)
      */
     @VisibleForTesting
@@ -117,15 +107,6 @@ public final class GlideApp {
      */
     @NonNull
     public static GlideRequests with(@NonNull Fragment fragment) {
-        return (GlideRequests) Glide.with(fragment);
-    }
-
-    /**
-     * @see Glide#with(Fragment)
-     */
-    @Deprecated
-    @NonNull
-    public static GlideRequests with(@NonNull android.app.Fragment fragment) {
         return (GlideRequests) Glide.with(fragment);
     }
 

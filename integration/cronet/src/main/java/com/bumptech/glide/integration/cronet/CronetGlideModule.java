@@ -5,7 +5,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.Registry;
 import com.bumptech.glide.load.model.GlideUrl;
-import com.bumptech.glide.module.GlideModule;
+import com.bumptech.glide.module.AppliesOptions;
+import com.bumptech.glide.module.RegistersComponents;
 import com.google.common.base.Supplier;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
@@ -14,7 +15,7 @@ import org.chromium.net.CronetEngine;
 /**
  * A {@link GlideModule} that registers components allowing remote image fetching to be done using Cronet.
  */
-public final class CronetGlideModule implements GlideModule {
+public final class CronetGlideModule implements RegistersComponents, AppliesOptions {
 
     @Override
     public void applyOptions(Context context, GlideBuilder builder) {}

@@ -427,27 +427,6 @@ public final class TransformationUtils {
     /**
      * Creates a bitmap from a source bitmap and rounds the corners.
      *
-     * @param inBitmap       the source bitmap to use as a basis for the created bitmap.
-     * @param width          the width of the generated bitmap.
-     * @param height         the height of the generated bitmap.
-     * @param roundingRadius the corner radius to be applied (in device-specific pixels).
-     * @return a {@link Bitmap} similar to inBitmap but with rounded corners.
-     * @throws IllegalArgumentException if roundingRadius, width or height is 0 or less.
-     * @deprecated Width and height are unused and ignored. Use {@link #roundedCorners(BitmapPool, Bitmap, int)} instead.
-     */
-    @Deprecated
-    public static Bitmap roundedCorners(
-            @NonNull BitmapPool pool,
-            @NonNull Bitmap inBitmap,
-            @SuppressWarnings("unused") int width,
-            @SuppressWarnings("unused") int height,
-            int roundingRadius) {
-        return roundedCorners(pool, inBitmap, roundingRadius);
-    }
-
-    /**
-     * Creates a bitmap from a source bitmap and rounds the corners.
-     *
      * <p>This method does <em>NOT</em> resize the given {@link Bitmap}, it only rounds it's corners.
      * To both resize and round the corners of an image, consider {@link com.bumptech.glide.request.RequestOptions#transform(Transformation[])} and/or {@link com.bumptech.glide.load.MultiTransformation}.
      *

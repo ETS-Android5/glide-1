@@ -83,32 +83,6 @@ public final class GlideExecutor implements ExecutorService {
     }
 
     /**
-     * @deprecated Use {@link #newDiskCacheBuilder()} and {@link Builder#setUncaughtThrowableStrategy(UncaughtThrowableStrategy)} instead.
-     */
-    // Public API.
-    @SuppressWarnings("unused")
-    @Deprecated
-    public static GlideExecutor newDiskCacheExecutor(
-            UncaughtThrowableStrategy uncaughtThrowableStrategy) {
-        return newDiskCacheBuilder().setUncaughtThrowableStrategy(uncaughtThrowableStrategy).build();
-    }
-
-    /**
-     * @deprecated Use {@link #newDiskCacheBuilder()} instead.
-     */
-    // Public API.
-    @SuppressWarnings("WeakerAccess")
-    @Deprecated
-    public static GlideExecutor newDiskCacheExecutor(
-            int threadCount, String name, UncaughtThrowableStrategy uncaughtThrowableStrategy) {
-        return newDiskCacheBuilder()
-                .setThreadCount(threadCount)
-                .setName(name)
-                .setUncaughtThrowableStrategy(uncaughtThrowableStrategy)
-                .build();
-    }
-
-    /**
      * Returns a new {@link Builder} with the default thread count returned from {@link #calculateBestThreadCount()}, the {@link #DEFAULT_SOURCE_EXECUTOR_NAME} thread name prefix, and the {@link com.bumptech.glide.load.engine.executor.GlideExecutor.UncaughtThrowableStrategy#DEFAULT} uncaught
      * throwable strategy.
      *
@@ -125,32 +99,6 @@ public final class GlideExecutor implements ExecutorService {
      */
     public static GlideExecutor newSourceExecutor() {
         return newSourceBuilder().build();
-    }
-
-    /**
-     * @deprecated Use {@link #newSourceBuilder()} instead.
-     */
-    // Public API.
-    @SuppressWarnings("unused")
-    @Deprecated
-    public static GlideExecutor newSourceExecutor(
-            UncaughtThrowableStrategy uncaughtThrowableStrategy) {
-        return newSourceBuilder().setUncaughtThrowableStrategy(uncaughtThrowableStrategy).build();
-    }
-
-    /**
-     * @deprecated Use {@link #newSourceBuilder()} instead.
-     */
-    // Public API.
-    @SuppressWarnings("WeakerAccess")
-    @Deprecated
-    public static GlideExecutor newSourceExecutor(
-            int threadCount, String name, UncaughtThrowableStrategy uncaughtThrowableStrategy) {
-        return newSourceBuilder()
-                .setThreadCount(threadCount)
-                .setName(name)
-                .setUncaughtThrowableStrategy(uncaughtThrowableStrategy)
-                .build();
     }
 
     /**
@@ -199,20 +147,6 @@ public final class GlideExecutor implements ExecutorService {
      */
     public static GlideExecutor newAnimationExecutor() {
         return newAnimationBuilder().build();
-    }
-
-    /**
-     * @deprecated Use {@link #newAnimationBuilder()} instead.
-     */
-    // Public API.
-    @SuppressWarnings("WeakerAccess")
-    @Deprecated
-    public static GlideExecutor newAnimationExecutor(
-            int threadCount, UncaughtThrowableStrategy uncaughtThrowableStrategy) {
-        return newAnimationBuilder()
-                .setThreadCount(threadCount)
-                .setUncaughtThrowableStrategy(uncaughtThrowableStrategy)
-                .build();
     }
 
     @VisibleForTesting

@@ -56,17 +56,6 @@ public final class Util {
     }
 
     /**
-     * Returns the allocated byte size of the given bitmap.
-     *
-     * @see #getBitmapByteSize(android.graphics.Bitmap)
-     * @deprecated Use {@link #getBitmapByteSize(android.graphics.Bitmap)} instead. Scheduled to be removed in Glide 4.0.
-     */
-    @Deprecated
-    public static int getSize(@NonNull Bitmap bitmap) {
-        return getBitmapByteSize(bitmap);
-    }
-
-    /**
      * Returns the in memory size of the given {@link Bitmap} in bytes.
      */
     @TargetApi(Build.VERSION_CODES.KITKAT)

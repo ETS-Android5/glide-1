@@ -132,26 +132,6 @@ public final class GlideBuilder {
      * @return This builder.
      * @see #setDiskCacheExecutor(GlideExecutor)
      * @see GlideExecutor
-     * @deprecated Use {@link #setSourceExecutor(GlideExecutor)}
-     */
-    @Deprecated
-    public GlideBuilder setResizeExecutor(@Nullable GlideExecutor service) {
-        return setSourceExecutor(service);
-    }
-
-    /**
-     * Sets the {@link GlideExecutor} to use when retrieving {@link com.bumptech.glide.load.engine.Resource}s that are not already in the cache.
-     *
-     * <p>The thread count defaults to the number of cores available on the device, with a maximum of
-     * 4.
-     *
-     * <p>Use the {@link GlideExecutor#newSourceExecutor()} methods if you'd like to specify options
-     * for the source executor.
-     *
-     * @param service The ExecutorService to use.
-     * @return This builder.
-     * @see #setDiskCacheExecutor(GlideExecutor)
-     * @see GlideExecutor
      */
     // Public API.
     @SuppressWarnings("WeakerAccess")

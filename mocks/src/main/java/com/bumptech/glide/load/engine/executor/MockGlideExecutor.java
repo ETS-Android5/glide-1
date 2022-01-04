@@ -30,14 +30,6 @@ public final class MockGlideExecutor {
     }
 
     /**
-     * @deprecated Use {@link #newMainThreadExecutor} instead.
-     */
-    @Deprecated
-    public static GlideExecutor newMainThreadUnlimitedExecutor() {
-        return newMainThreadExecutor();
-    }
-
-    /**
      * DirectExecutorService that enforces StrictMode and converts ExecutionExceptions into RuntimeExceptions.
      */
     private static final class DirectExecutorService extends ForwardingExecutorService {

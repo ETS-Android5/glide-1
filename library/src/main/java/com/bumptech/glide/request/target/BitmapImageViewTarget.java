@@ -14,16 +14,6 @@ public class BitmapImageViewTarget extends ImageViewTarget<Bitmap> {
     }
 
     /**
-     * @deprecated Use {@link #waitForLayout()} instead.
-     */
-    // Public API.
-    @SuppressWarnings({"unused", "deprecation"})
-    @Deprecated
-    public BitmapImageViewTarget(ImageView view, boolean waitForLayout) {
-        super(view, waitForLayout);
-    }
-
-    /**
      * Sets the {@link android.graphics.Bitmap} on the view using {@link android.widget.ImageView#setImageBitmap(android.graphics.Bitmap)}.
      *
      * @param resource The bitmap to display.

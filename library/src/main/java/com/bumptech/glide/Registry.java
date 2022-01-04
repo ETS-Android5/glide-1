@@ -68,23 +68,6 @@ public class Registry {
     }
 
     /**
-     * Registers the given {@link Encoder} for the given data class (InputStream, FileDescriptor etc).
-     *
-     * <p>The {@link Encoder} will be used both for the exact data class and any subtypes. For
-     * example, registering an {@link Encoder} for {@link java.io.InputStream} will result in the {@link Encoder} being used for {@link android.content.res.AssetFileDescriptor.AutoCloseInputStream}, {@link java.io.FileInputStream} and any other subclass.
-     *
-     * <p>If multiple {@link Encoder}s are registered for the same type or super type, the {@link
-     * Encoder} that is registered first will be used.
-     *
-     * @deprecated Use the equivalent {@link #append(Class, Class, ModelLoaderFactory)} method instead.
-     */
-    @NonNull
-    @Deprecated
-    public <Data> Registry register(@NonNull Class<Data> dataClass, @NonNull Encoder<Data> encoder) {
-        return append(dataClass, encoder);
-    }
-
-    /**
      * Appends the given {@link Encoder} onto the list of available {@link Encoder}s so that it is attempted after all earlier and default {@link Encoder}s for the given data class.
      *
      * <p>The {@link Encoder} will be used both for the exact data class and any subtypes. For
@@ -229,25 +212,6 @@ public class Registry {
         modifiedBuckets.add(BUCKET_APPEND_ALL);
         decoderRegistry.setBucketPriorityList(modifiedBuckets);
         return this;
-    }
-
-    /**
-     * Appends the given {@link ResourceEncoder} into the list of available {@link ResourceEncoder}s so that it is attempted after all earlier and default {@link ResourceEncoder}s for the given data type.
-     *
-     * <p>The {@link ResourceEncoder} will be used both for the exact resource class and any subtypes.
-     * For example, registering an {@link ResourceEncoder} for {@link android.graphics.drawable.Drawable} (not recommended) will result in the {@link ResourceEncoder} being used for {@link android.graphics.drawable.BitmapDrawable} and {@link com.bumptech.glide.load.resource.gif.GifDrawable} and any
-     * other subclass.
-     *
-     * <p>If multiple {@link ResourceEncoder}s are registered for the same type or super type, the
-     * {@link ResourceEncoder} that is registered first will be used.
-     *
-     * @deprecated Use the equivalent {@link #append(Class, ResourceEncoder)} method instead.
-     */
-    @NonNull
-    @Deprecated
-    public <TResource> Registry register(
-            @NonNull Class<TResource> resourceClass, @NonNull ResourceEncoder<TResource> encoder) {
-        return append(resourceClass, encoder);
     }
 
     /**

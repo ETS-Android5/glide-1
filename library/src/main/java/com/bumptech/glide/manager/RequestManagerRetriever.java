@@ -270,78 +270,6 @@ public class RequestManagerRetriever implements Handler.Callback {
         return result;
     }
 
-    @SuppressWarnings({"deprecation", "DeprecatedIsStillUsed"})
-    @Deprecated
-    @Nullable
-    private android.app.Fragment findFragment(@NonNull View target, @NonNull Activity activity) {
-        tempViewToFragment.clear();
-        findAllFragmentsWithViews(activity.getFragmentManager(), tempViewToFragment);
-
-        android.app.Fragment result = null;
-
-        View activityRoot = activity.findViewById(android.R.id.content);
-        View current = target;
-        while (!current.equals(activityRoot)) {
-            result = tempViewToFragment.get(current);
-            if (result != null) {
-                break;
-            }
-            if (current.getParent() instanceof View) {
-                current = (View) current.getParent();
-            } else {
-                break;
-            }
-        }
-        tempViewToFragment.clear();
-        return result;
-    }
-
-    // TODO: Consider using an accessor class in the support library package to more directly retrieve
-    // non-support Fragments.
-    @SuppressWarnings("deprecation")
-    @Deprecated
-    @TargetApi(Build.VERSION_CODES.O)
-    private void findAllFragmentsWithViews(
-            @NonNull android.app.FragmentManager fragmentManager,
-            @NonNull ArrayMap<View, android.app.Fragment> result) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            for (android.app.Fragment fragment : fragmentManager.getFragments()) {
-                if (fragment.getView() != null) {
-                    result.put(fragment.getView(), fragment);
-                    findAllFragmentsWithViews(fragment.getChildFragmentManager(), result);
-                }
-            }
-        } else {
-            findAllFragmentsWithViewsPreO(fragmentManager, result);
-        }
-    }
-
-    @SuppressWarnings("deprecation")
-    @Deprecated
-    private void findAllFragmentsWithViewsPreO(
-            @NonNull android.app.FragmentManager fragmentManager,
-            @NonNull ArrayMap<View, android.app.Fragment> result) {
-        int index = 0;
-        while (true) {
-            tempBundle.putInt(FRAGMENT_INDEX_KEY, index++);
-            android.app.Fragment fragment = null;
-            try {
-                fragment = fragmentManager.getFragment(tempBundle, FRAGMENT_INDEX_KEY);
-            } catch (Exception e) {
-                // This generates log spam from FragmentManager anyway.
-            }
-            if (fragment == null) {
-                break;
-            }
-            if (fragment.getView() != null) {
-                result.put(fragment.getView(), fragment);
-                if (VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN_MR1) {
-                    findAllFragmentsWithViews(fragment.getChildFragmentManager(), result);
-                }
-            }
-        }
-    }
-
     @Nullable
     private static Activity findActivity(@NonNull Context context) {
         if (context instanceof Activity) {
@@ -358,37 +286,6 @@ public class RequestManagerRetriever implements Handler.Callback {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 && activity.isDestroyed()) {
             throw new IllegalArgumentException("You cannot start a load for a destroyed activity");
         }
-    }
-
-    @SuppressWarnings("deprecation")
-    @Deprecated
-    @NonNull
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    public RequestManager get(@NonNull android.app.Fragment fragment) {
-        if (fragment.getActivity() == null) {
-            throw new IllegalArgumentException(
-                    "You cannot start a load on a fragment before it is attached");
-        }
-        if (Util.isOnBackgroundThread() || Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            return get(fragment.getActivity().getApplicationContext());
-        } else {
-            // In some unusual cases, it's possible to have a Fragment not hosted by an activity. There's
-            // not all that much we can do here. Most apps will be started with a standard activity. If
-            // we manage not to register the first frame waiter for a while, the consequences are not
-            // catastrophic, we'll just use some extra memory.
-            if (fragment.getActivity() != null) {
-                frameWaiter.registerSelf(fragment.getActivity());
-            }
-            android.app.FragmentManager fm = fragment.getChildFragmentManager();
-            return fragmentGet(fragment.getActivity(), fm, fragment, fragment.isVisible());
-        }
-    }
-
-    @SuppressWarnings("deprecation")
-    @Deprecated
-    @NonNull
-    RequestManagerFragment getRequestManagerFragment(Activity activity) {
-        return getRequestManagerFragment(activity.getFragmentManager(), /*parentHint=*/ null);
     }
 
     @SuppressWarnings("deprecation")
@@ -411,33 +308,6 @@ public class RequestManagerRetriever implements Handler.Callback {
             }
         }
         return current;
-    }
-
-    @SuppressWarnings({"deprecation", "DeprecatedIsStillUsed"})
-    @Deprecated
-    @NonNull
-    private RequestManager fragmentGet(
-            @NonNull Context context,
-            @NonNull android.app.FragmentManager fm,
-            @Nullable android.app.Fragment parentHint,
-            boolean isParentVisible) {
-        RequestManagerFragment current = getRequestManagerFragment(fm, parentHint);
-        RequestManager requestManager = current.getRequestManager();
-        if (requestManager == null) {
-            // TODO(b/27524013): Factor out this Glide.get() call.
-            Glide glide = Glide.get(context);
-            requestManager =
-                    factory.build(
-                            glide, current.getGlideLifecycle(), current.getRequestManagerTreeNode(), context);
-            // This is a bit of hack, we're going to start the RequestManager, but not the
-            // corresponding Lifecycle. It's safe to start the RequestManager, but starting the
-            // Lifecycle might trigger memory leaks. See b/154405040
-            if (isParentVisible) {
-                requestManager.onStart();
-            }
-            current.setRequestManager(requestManager);
-        }
-        return requestManager;
     }
 
     @NonNull

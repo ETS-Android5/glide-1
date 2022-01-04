@@ -13,16 +13,6 @@ public interface ArrayPool {
      * Optionally adds the given array of the given type to the pool.
      *
      * <p>Arrays may be ignored, for example if the array is larger than the maximum size of the pool.
-     *
-     * @deprecated Use {@link #put(Object)}
-     */
-    @Deprecated
-    <T> void put(T array, Class<T> arrayClass);
-
-    /**
-     * Optionally adds the given array of the given type to the pool.
-     *
-     * <p>Arrays may be ignored, for example if the array is larger than the maximum size of the pool.
      */
     <T> void put(T array);
 

@@ -72,12 +72,6 @@ public class FixedSizeDrawable extends Drawable {
         return wrapped.getChangingConfigurations();
     }
 
-    @Deprecated
-    @Override
-    public void setDither(boolean dither) {
-        wrapped.setDither(dither);
-    }
-
     @Override
     public void setFilterBitmap(boolean filter) {
         wrapped.setFilterBitmap(filter);

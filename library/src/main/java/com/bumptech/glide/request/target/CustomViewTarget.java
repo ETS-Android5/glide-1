@@ -139,22 +139,6 @@ public abstract class CustomViewTarget<T extends View, Z> implements Target<Z> {
     }
 
     /**
-     * Override the android resource id to store temporary state allowing loads to be automatically cancelled and resources re-used in scrolling lists.
-     *
-     * <p>Unlike {@link ViewTarget}, it is <b>not</b> necessary to set a custom tag id if your app
-     * uses {@link View#setTag(Object)}. It is only necessary if loading several Glide resources into the same view, for example one foreground and one background view.
-     *
-     * @param tagId The android resource id to use.
-     * @deprecated Using this method prevents clearing the target from working properly. Glide uses its own internal tag id so this method should not be necessary. This method is currently a no-op.
-     */
-    // Public API.
-    @SuppressWarnings({"UnusedReturnValue", "WeakerAccess"})
-    @Deprecated
-    public final CustomViewTarget<T, Z> useTagId(@IdRes int tagId) {
-        return this;
-    }
-
-    /**
      * Returns the wrapped {@link android.view.View}.
      */
     @NonNull

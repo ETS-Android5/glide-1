@@ -20,27 +20,6 @@ public final class LazyBitmapDrawableResource implements Resource<BitmapDrawable
     private final Resources resources;
     private final Resource<Bitmap> bitmapResource;
 
-    /**
-     * @deprecated Use {@link #obtain(Resources, Resource)} instead, it can be unsafe to extract {@link Bitmap}s from their wrapped {@link Resource}.
-     */
-    @Deprecated
-    public static LazyBitmapDrawableResource obtain(Context context, Bitmap bitmap) {
-        return (LazyBitmapDrawableResource)
-                obtain(
-                        context.getResources(),
-                        BitmapResource.obtain(bitmap, Glide.get(context).getBitmapPool()));
-    }
-
-    /**
-     * @deprecated Use {@link #obtain(Resources, Resource)} instead, it can be unsafe to extract {@link Bitmap}s from their wrapped {@link Resource}.
-     */
-    @Deprecated
-    public static LazyBitmapDrawableResource obtain(
-            Resources resources, BitmapPool bitmapPool, Bitmap bitmap) {
-        return (LazyBitmapDrawableResource)
-                obtain(resources, BitmapResource.obtain(bitmap, bitmapPool));
-    }
-
     @Nullable
     public static Resource<BitmapDrawable> obtain(
             @NonNull Resources resources, @Nullable Resource<Bitmap> bitmapResource) {

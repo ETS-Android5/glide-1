@@ -24,15 +24,6 @@ public abstract class ImageViewTarget<Z> extends ViewTarget<ImageView, Z>
     }
 
     /**
-     * @deprecated Use {@link #waitForLayout()} instead.
-     */
-    @SuppressWarnings({"deprecation"})
-    @Deprecated
-    public ImageViewTarget(ImageView view, boolean waitForLayout) {
-        super(view, waitForLayout);
-    }
-
-    /**
      * Returns the current {@link android.graphics.drawable.Drawable} being displayed in the view using {@link android.widget.ImageView#getDrawable()}.
      */
     @Override

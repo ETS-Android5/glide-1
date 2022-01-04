@@ -30,25 +30,6 @@ public class DiskLruCacheWrapper implements DiskCache {
     private DiskLruCache diskLruCache;
 
     /**
-     * Get a DiskCache in the given directory and size. If a disk cache has already been created with a different directory and/or size, it will be returned instead and the new arguments will be ignored.
-     *
-     * @param directory The directory for the disk cache
-     * @param maxSize   The max size for the disk cache
-     * @return The new disk cache with the given arguments, or the current cache if one already exists
-     * @deprecated Use {@link #create(File, long)} to create a new cache with the specified arguments.
-     */
-    @SuppressWarnings("deprecation")
-    @Deprecated
-    public static synchronized DiskCache get(File directory, long maxSize) {
-        // TODO calling twice with different arguments makes it return the cache for the same
-        // directory, it's public!
-        if (wrapper == null) {
-            wrapper = new DiskLruCacheWrapper(directory, maxSize);
-        }
-        return wrapper;
-    }
-
-    /**
      * Create a new DiskCache in the given directory with a specified max size.
      *
      * @param directory The directory for the disk cache
@@ -58,18 +39,6 @@ public class DiskLruCacheWrapper implements DiskCache {
     @SuppressWarnings("deprecation")
     public static DiskCache create(File directory, long maxSize) {
         return new DiskLruCacheWrapper(directory, maxSize);
-    }
-
-    /**
-     * @deprecated Do not extend this class.
-     */
-    @Deprecated
-    // Deprecated public API.
-    @SuppressWarnings({"WeakerAccess", "DeprecatedIsStillUsed"})
-    protected DiskLruCacheWrapper(File directory, long maxSize) {
-        this.directory = directory;
-        this.maxSize = maxSize;
-        this.safeKeyGenerator = new SafeKeyGenerator();
     }
 
     private synchronized DiskLruCache getDiskCache() throws IOException {

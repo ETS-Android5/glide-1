@@ -129,13 +129,6 @@ public class GlideRequests extends RequestManager {
     }
 
     @Override
-    @Deprecated
-    @CheckResult
-    public GlideRequest<Drawable> load(@Nullable URL url) {
-        return (GlideRequest<Drawable>) super.load(url);
-    }
-
-    @Override
     @NonNull
     @CheckResult
     public GlideRequest<Drawable> load(@Nullable byte[] bytes) {
