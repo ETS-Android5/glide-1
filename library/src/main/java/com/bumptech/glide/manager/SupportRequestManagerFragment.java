@@ -25,8 +25,7 @@ import java.util.Set;
 public class SupportRequestManagerFragment extends Fragment {
     private static final String TAG = "SupportRMFragment";
     private final ActivityFragmentLifecycle lifecycle;
-    private final RequestManagerTreeNode requestManagerTreeNode =
-            new SupportFragmentRequestManagerTreeNode();
+    private final RequestManagerTreeNode requestManagerTreeNode = new SupportFragmentRequestManagerTreeNode();
     private final Set<SupportRequestManagerFragment> childRequestManagerFragments = new HashSet<>();
 
     @Nullable private SupportRequestManagerFragment rootRequestManagerFragment;

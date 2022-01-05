@@ -25,6 +25,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder.WaitForFramesAfterTrimMemory;
 import com.bumptech.glide.GlideExperiments;
+import com.bumptech.glide.Important;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.resource.bitmap.HardwareConfigState;
 import com.bumptech.glide.util.Preconditions;
@@ -84,8 +85,7 @@ public class RequestManagerRetriever implements Handler.Callback {
     // break.
     private final FrameWaiter frameWaiter;
 
-    public RequestManagerRetriever(
-            @Nullable RequestManagerFactory factory, GlideExperiments experiments) {
+    public RequestManagerRetriever(@Nullable RequestManagerFactory factory, GlideExperiments experiments) {
         this.factory = factory != null ? factory : DEFAULT_FACTORY;
         handler = new Handler(Looper.getMainLooper(), this /* Callback */);
 
@@ -93,8 +93,7 @@ public class RequestManagerRetriever implements Handler.Callback {
     }
 
     private static FrameWaiter buildFrameWaiter(GlideExperiments experiments) {
-        if (!HardwareConfigState.HARDWARE_BITMAPS_SUPPORTED
-                || !HardwareConfigState.BLOCK_HARDWARE_BITMAPS_WHEN_GL_CONTEXT_MIGHT_NOT_BE_INITIALIZED) {
+        if (!HardwareConfigState.HARDWARE_BITMAPS_SUPPORTED || !HardwareConfigState.BLOCK_HARDWARE_BITMAPS_WHEN_GL_CONTEXT_MIGHT_NOT_BE_INITIALIZED) {
             return new DoNothingFirstFrameWaiter();
         }
         return experiments.isEnabled(WaitForFramesAfterTrimMemory.class)
@@ -108,6 +107,9 @@ public class RequestManagerRetriever implements Handler.Callback {
         if (applicationManager == null) {
             synchronized (this) {
                 if (applicationManager == null) {
+                    @Important("6:Normally pause/resume is taken care of by the fragment we add to the fragment or activity. "
+                            + "However, in this case since the manager attached to the application will not receive lifecycle events, "
+                            + "we must force the manager to start resumed using ApplicationLifecycle")
                     // Normally pause/resume is taken care of by the fragment we add to the fragment or
                     // activity. However, in this case since the manager attached to the application will not
                     // receive lifecycle events, we must force the manager to start resumed using
@@ -449,11 +451,10 @@ public class RequestManagerRetriever implements Handler.Callback {
     }
 
     @NonNull
-    private SupportRequestManagerFragment getSupportRequestManagerFragment(
-            @NonNull final FragmentManager fm, @Nullable Fragment parentHint) {
+    private SupportRequestManagerFragment getSupportRequestManagerFragment(@NonNull final FragmentManager fm, @Nullable Fragment parentHint) {
         // If we have a pending Fragment, we need to continue to use the pending Fragment. Otherwise
         // there's a race where an old Fragment could be added and retrieved here before our logic to
-        // add our pending Fragment notices. That can then result in both the pending Fragmeng and the
+        // add our pending Fragment notices. That can then result in both the pending Fragment and the
         // old Fragment having requests running for them, which is impossible to safely unwind.
         SupportRequestManagerFragment current = pendingSupportRequestManagerFragments.get(fm);
         if (current == null) {

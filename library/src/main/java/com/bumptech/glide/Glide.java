@@ -204,19 +204,6 @@ public class Glide implements ComponentCallbacks2 {
         isInitializing = false;
     }
 
-    /**
-     * @deprecated Use {@link #init(Context, GlideBuilder)} to get a singleton compatible with Glide's generated API.
-     * <p>This method will be removed in a future version of Glide.
-     */
-    @VisibleForTesting
-    @Deprecated
-    public static synchronized void init(Glide glide) {
-        if (Glide.glide != null) {
-            tearDown();
-        }
-        Glide.glide = glide;
-    }
-
     @VisibleForTesting
     public static void init(@NonNull Context context, @NonNull GlideBuilder builder) {
         GeneratedAppGlideModule annotationGeneratedModule = getAnnotationGeneratedGlideModules(context);

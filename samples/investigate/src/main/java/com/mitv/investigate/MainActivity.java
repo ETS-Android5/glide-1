@@ -2,13 +2,12 @@ package com.mitv.investigate;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.util.EventLog.Event;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.os.Bundle;
 import androidx.fragment.app.FragmentActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
@@ -43,12 +42,21 @@ public class MainActivity extends FragmentActivity {
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             Log.i("investigate", "load start");
-            if (count.get() % 2 == 0) {
-                Glide.with(this).asBitmap().load("https://c-ssl.duitang.com/uploads/item/202002/03/20200203232102_hjcin.thumb.700_0.jpg").into(customTarget);
-            } else {
-                Glide.with(this).asBitmap().load("https://c-ssl.duitang.com/uploads/item/202003/18/20200318222019_SFuNx.thumb.700_0.jpeg").into(customTarget);
-            }
+//            if (count.get() % 2 == 0) {
+//                Glide.with(this).asBitmap().load("https://c-ssl.duitang.com/uploads/item/202002/03/20200203232102_hjcin.thumb.700_0.jpg").into(customTarget);
+//            } else {
+//                Glide.with(this).asBitmap().load("https://c-ssl.duitang.com/uploads/item/202003/18/20200318222019_SFuNx.thumb.700_0.jpeg").into(customTarget);
+//            }
+            simpleInvestigate();
         }
         return true;
+    }
+
+    private void simpleInvestigate() {
+        Glide
+                .with(this)
+                .load("https://c-ssl.duitang.com/uploads/item/202002/03/20200203232102_hjcin.thumb.700_0.jpg")
+                .into(mIvImg);
+
     }
 }

@@ -52,8 +52,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @see Glide#with(androidx.fragment.app.Fragment)
  * @see Glide#with(Context)
  */
-public class RequestManager
-        implements ComponentCallbacks2, LifecycleListener, ModelTypes<RequestBuilder<Drawable>> {
+public class RequestManager implements ComponentCallbacks2, LifecycleListener, ModelTypes<RequestBuilder<Drawable>> {
     private static final RequestOptions DECODE_TYPE_BITMAP = decodeTypeOf(Bitmap.class).lock();
     private static final RequestOptions DECODE_TYPE_GIF = decodeTypeOf(GifDrawable.class).lock();
     private static final RequestOptions DOWNLOAD_ONLY_OPTIONS =
