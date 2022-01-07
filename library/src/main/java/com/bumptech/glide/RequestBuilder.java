@@ -674,10 +674,18 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
         if (!isModelSet) {
             throw new IllegalArgumentException("You must call #load() before calling #into()");
         }
-
         Request request = buildRequest(target, targetListener, options, callbackExecutor);
 
+        @Important("13.虽然这个target在每次请求的时候都会new一个（它总是与之前用在该view上的target不同），但是它关联着的view的tagId保存着上一个请求，参见ViewTarget#setRequest")
         Request previous = target.getRequest();
+        System.out.println("sameAsOldRequest?:" + request.isEquivalentTo(previous) + " | target:" + System.identityHashCode(target) + " | newRequest:" + System.identityHashCode(request) +  " | previousRequest:" + System.identityHashCode(previous));
+        /*
+         * sameAsOldRequest?:false | target:111782553 | newRequest:59666782  | previousRequest:0
+         * sameAsOldRequest?:true  | target:149800481 | newRequest:237083206 | previousRequest:59666782
+         * sameAsOldRequest?:true  | target:158610439 | newRequest:46037300  | previousRequest:59666782
+         * sameAsOldRequest?:true  | target:104833885 | newRequest:63771858  | previousRequest:59666782
+         * sameAsOldRequest?:true  | target:118884771 | newRequest:40105120  | previousRequest:59666782
+         */
         if (request.isEquivalentTo(previous) && !isSkipMemoryCacheWithCompletePreviousRequest(options, previous)) {
             // If the request is completed, beginning again will ensure the result is re-delivered,
             // triggering RequestListeners and Targets. If the request is failed, beginning again will

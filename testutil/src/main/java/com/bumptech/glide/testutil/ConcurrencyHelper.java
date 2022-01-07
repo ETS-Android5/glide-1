@@ -162,7 +162,8 @@ public class ConcurrencyHelper {
 
                                     @Override
                                     public void setRequest(@Nullable Request request) {
-                                        target.setRequest(request);
+                                      System.out.println("ConcurrencyHelper1: " + System.identityHashCode(target) + "setRequest for " + System.identityHashCode(request));
+                                      target.setRequest(request);
                                     }
 
                                     @Nullable
@@ -235,7 +236,8 @@ public class ConcurrencyHelper {
 
                                     @Override
                                     public void setRequest(@Nullable Request request) {
-                                        target.setRequest(request);
+                                      System.out.println("ConcurrencyHelper2: " + System.identityHashCode(target) + "setRequest for " + System.identityHashCode(request));
+                                      target.setRequest(request);
                                     }
 
                                     @Nullable

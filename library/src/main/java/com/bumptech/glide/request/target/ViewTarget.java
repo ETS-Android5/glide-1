@@ -14,6 +14,7 @@ import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import com.bumptech.glide.Important;
 import com.bumptech.glide.R;
 import com.bumptech.glide.request.Request;
 import com.bumptech.glide.util.Preconditions;
@@ -249,6 +250,7 @@ public abstract class ViewTarget<T extends View, Z> extends BaseTarget<Z> {
         return "Target for: " + view;
     }
 
+    @Important("12.当一个view用glide记载图片以后，这个view会用tag记录本次请求所用的singleRequest方便下次使用")
     private void setTag(@Nullable Object tag) {
         isTagUsedAtLeastOnce = true;
         view.setTag(tagId, tag);

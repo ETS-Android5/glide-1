@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.bumptech.glide.GlideBuilder.LogRequestOrigins;
 import com.bumptech.glide.GlideContext;
+import com.bumptech.glide.Important;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.Engine;
