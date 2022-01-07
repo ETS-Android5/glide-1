@@ -24,8 +24,7 @@ import java.util.Map.Entry;
 @SuppressWarnings("PMD.DataClass")
 public class GlideContext extends ContextWrapper {
     @VisibleForTesting
-    static final TransitionOptions<?, ?> DEFAULT_TRANSITION_OPTIONS =
-            new GenericTransitionOptions<>();
+    static final TransitionOptions<?, ?> DEFAULT_TRANSITION_OPTIONS = new GenericTransitionOptions<>();
 
     private final ArrayPool arrayPool;
     private final Registry registry;

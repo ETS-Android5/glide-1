@@ -112,6 +112,7 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
         apply(other);
     }
 
+    @Important("9.?为什么可以直接将RequestListener<Object>强转为RequestListener<TranscodeType>")
     // Casting from Object to a specific type is always safe.
     @SuppressWarnings("unchecked")
     // addListener always returns the same instance.
@@ -171,8 +172,7 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
     @NonNull
     @CheckResult
     @SuppressWarnings("unchecked")
-    public RequestBuilder<TranscodeType> listener(
-            @Nullable RequestListener<TranscodeType> requestListener) {
+    public RequestBuilder<TranscodeType> listener(@Nullable RequestListener<TranscodeType> requestListener) {
         if (isAutoCloneEnabled()) {
             return clone().listener(requestListener);
         }
@@ -216,8 +216,7 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
      */
     @NonNull
     @CheckResult
-    public RequestBuilder<TranscodeType> addListener(
-            @Nullable RequestListener<TranscodeType> requestListener) {
+    public RequestBuilder<TranscodeType> addListener(@Nullable RequestListener<TranscodeType> requestListener) {
         if (isAutoCloneEnabled()) {
             return clone().addListener(requestListener);
         }
@@ -679,8 +678,7 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
         Request request = buildRequest(target, targetListener, options, callbackExecutor);
 
         Request previous = target.getRequest();
-        if (request.isEquivalentTo(previous)
-                && !isSkipMemoryCacheWithCompletePreviousRequest(options, previous)) {
+        if (request.isEquivalentTo(previous) && !isSkipMemoryCacheWithCompletePreviousRequest(options, previous)) {
             // If the request is completed, beginning again will ensure the result is re-delivered,
             // triggering RequestListeners and Targets. If the request is failed, beginning again will
             // restart the request, giving it another chance to complete. If the request is already

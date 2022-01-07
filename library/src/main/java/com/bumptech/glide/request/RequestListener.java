@@ -48,8 +48,7 @@ public interface RequestListener<R> {
      * @return {@code true} to prevent {@link Target#onLoadFailed(Drawable)} from being called on {@code target}, typically because the listener wants to update the {@code target} or the object the {@code target} wraps itself or {@code false} to allow {@link Target#onLoadFailed(Drawable)} to be
      * called on {@code target}.
      */
-    boolean onLoadFailed(
-            @Nullable GlideException e, Object model, Target<R> target, boolean isFirstResource);
+    boolean onLoadFailed(@Nullable GlideException e, Object model, Target<R> target, boolean isFirstResource);
 
     /**
      * Called when a load completes successfully, immediately before {@link Target#onResourceReady(Object, com.bumptech.glide.request.transition.Transition)}.
@@ -64,6 +63,5 @@ public interface RequestListener<R> {
      * @return {@code true} to prevent {@link Target#onResourceReady(Drawable)} from being called on {@code target}, typically because the listener wants to update the {@code target} or the object the {@code target} wraps itself or {@code false} to allow {@link Target#onResourceReady(Drawable)} to
      * be called on {@code target}.
      */
-    boolean onResourceReady(
-            R resource, Object model, Target<R> target, DataSource dataSource, boolean isFirstResource);
+    boolean onResourceReady(R resource, Object model, Target<R> target, DataSource dataSource, boolean isFirstResource);
 }

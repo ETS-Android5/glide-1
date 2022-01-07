@@ -9,6 +9,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.Important;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.util.Synthetic;
 import java.util.Collections;
@@ -29,7 +30,9 @@ public class SupportRequestManagerFragment extends Fragment {
     private final Set<SupportRequestManagerFragment> childRequestManagerFragments = new HashSet<>();
 
     @Nullable private SupportRequestManagerFragment rootRequestManagerFragment;
-    @Nullable private RequestManager requestManager;
+    @Important("8.SupportRequestManagerFragment持有着一个requestManager")
+    @Nullable
+    private RequestManager requestManager;
     @Nullable private Fragment parentFragmentHint;
 
     public SupportRequestManagerFragment() {
@@ -146,8 +149,7 @@ public class SupportRequestManagerFragment extends Fragment {
         return false;
     }
 
-    private void registerFragmentWithRoot(
-            @NonNull Context context, @NonNull FragmentManager fragmentManager) {
+    private void registerFragmentWithRoot(@NonNull Context context, @NonNull FragmentManager fragmentManager) {
         unregisterFragmentWithRoot();
         rootRequestManagerFragment =
                 Glide.get(context)

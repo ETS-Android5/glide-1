@@ -137,8 +137,7 @@ public class RequestManager implements ComponentCallbacks2, LifecycleListener, M
         }
         lifecycle.addListener(connectivityMonitor);
 
-        defaultRequestListeners =
-                new CopyOnWriteArrayList<>(glide.getGlideContext().getDefaultRequestListeners());
+        defaultRequestListeners = new CopyOnWriteArrayList<>(glide.getGlideContext().getDefaultRequestListeners());
         setRequestOptions(glide.getGlideContext().getDefaultRequestOptions());
 
         glide.registerRequestManager(this);
@@ -203,6 +202,7 @@ public class RequestManager implements ComponentCallbacks2, LifecycleListener, M
      * listener added here has to accept any generic resource type in {@link RequestListener#onResourceReady(Object, Object, Target, DataSource, boolean)}. If you must base the behavior of the listener on the resource type, you will need to use {@code instanceof} to do so. It's not safe to cast
      * resource types without first checking with {@code instanceof}.
      */
+    @Important("10.为该requestManager添加一个全局的请求监听器，这样所有通过该requestManager发起的请求都会被该监听器监听")
     public RequestManager addDefaultRequestListener(RequestListener<Object> requestListener) {
         defaultRequestListeners.add(requestListener);
         return this;
@@ -545,8 +545,7 @@ public class RequestManager implements ComponentCallbacks2, LifecycleListener, M
      */
     @NonNull
     @CheckResult
-    public <ResourceType> RequestBuilder<ResourceType> as(
-            @NonNull Class<ResourceType> resourceClass) {
+    public <ResourceType> RequestBuilder<ResourceType> as(@NonNull Class<ResourceType> resourceClass) {
         return new RequestBuilder<>(glide, this, resourceClass, context);
     }
 

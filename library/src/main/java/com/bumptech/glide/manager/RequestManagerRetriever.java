@@ -176,6 +176,8 @@ public class RequestManagerRetriever implements Handler.Callback {
             if (fragment.getActivity() != null) {
                 frameWaiter.registerSelf(fragment.getActivity());
             }
+            @Important("7.RequestManagerRetriever#pendingSupportRequestManagerFragments中，key为FragmentManager，value为SupportRequestManagerFragment"
+                    + "这里是从Fragment发起的加载图片的请求，它使用的FragmentManager是Fragment内部的mChildFragmentManager")
             FragmentManager fm = fragment.getChildFragmentManager();
             return supportFragmentGet(fragment.getContext(), fm, fragment, fragment.isVisible());
         }
@@ -391,8 +393,7 @@ public class RequestManagerRetriever implements Handler.Callback {
 
     @SuppressWarnings("deprecation")
     @NonNull
-    private RequestManagerFragment getRequestManagerFragment(
-            @NonNull final android.app.FragmentManager fm, @Nullable android.app.Fragment parentHint) {
+    private RequestManagerFragment getRequestManagerFragment(@NonNull final android.app.FragmentManager fm, @Nullable android.app.Fragment parentHint) {
         // If we have a pending Fragment, we need to continue to use the pending Fragment. Otherwise
         // there's a race where an old Fragment could be added and retrieved here before our logic to
         // add our pending Fragment notices. That can then result in both the pending Fragmeng and the
@@ -424,9 +425,7 @@ public class RequestManagerRetriever implements Handler.Callback {
         if (requestManager == null) {
             // TODO(b/27524013): Factor out this Glide.get() call.
             Glide glide = Glide.get(context);
-            requestManager =
-                    factory.build(
-                            glide, current.getGlideLifecycle(), current.getRequestManagerTreeNode(), context);
+            requestManager = factory.build(glide, current.getGlideLifecycle(), current.getRequestManagerTreeNode(), context);
             // This is a bit of hack, we're going to start the RequestManager, but not the
             // corresponding Lifecycle. It's safe to start the RequestManager, but starting the
             // Lifecycle might trigger memory leaks. See b/154405040
@@ -495,13 +494,9 @@ public class RequestManagerRetriever implements Handler.Callback {
 
     // We care about the instance specifically.
     @SuppressWarnings({"ReferenceEquality", "PMD.CompareObjectsWithEquals"})
-    private boolean verifyOurFragmentWasAddedOrCantBeAdded(
-            android.app.FragmentManager fm, boolean hasAttemptedToAddFragmentTwice) {
-        RequestManagerFragment newlyAddedRequestManagerFragment =
-                pendingRequestManagerFragments.get(fm);
-
-        RequestManagerFragment actualFragment =
-                (RequestManagerFragment) fm.findFragmentByTag(FRAGMENT_TAG);
+    private boolean verifyOurFragmentWasAddedOrCantBeAdded(android.app.FragmentManager fm, boolean hasAttemptedToAddFragmentTwice) {
+        RequestManagerFragment newlyAddedRequestManagerFragment = pendingRequestManagerFragments.get(fm);
+        RequestManagerFragment actualFragment = (RequestManagerFragment) fm.findFragmentByTag(FRAGMENT_TAG);
         if (actualFragment == newlyAddedRequestManagerFragment) {
             return true;
         }
@@ -564,13 +559,10 @@ public class RequestManagerRetriever implements Handler.Callback {
 
     // We care about the instance specifically.
     @SuppressWarnings({"ReferenceEquality", "PMD.CompareObjectsWithEquals"})
-    private boolean verifyOurSupportFragmentWasAddedOrCantBeAdded(
-            FragmentManager supportFm, boolean hasAttemptedToAddFragmentTwice) {
-        SupportRequestManagerFragment newlyAddedSupportRequestManagerFragment =
-                pendingSupportRequestManagerFragments.get(supportFm);
+    private boolean verifyOurSupportFragmentWasAddedOrCantBeAdded(FragmentManager supportFm, boolean hasAttemptedToAddFragmentTwice) {
+        SupportRequestManagerFragment newlyAddedSupportRequestManagerFragment = pendingSupportRequestManagerFragments.get(supportFm);
 
-        SupportRequestManagerFragment actualFragment =
-                (SupportRequestManagerFragment) supportFm.findFragmentByTag(FRAGMENT_TAG);
+        SupportRequestManagerFragment actualFragment = (SupportRequestManagerFragment) supportFm.findFragmentByTag(FRAGMENT_TAG);
         if (actualFragment == newlyAddedSupportRequestManagerFragment) {
             return true;
         }
@@ -593,19 +585,15 @@ public class RequestManagerRetriever implements Handler.Callback {
         if (hasAttemptedToAddFragmentTwice || supportFm.isDestroyed()) {
             if (supportFm.isDestroyed()) {
                 if (Log.isLoggable(TAG, Log.WARN)) {
-                    Log.w(
-                            TAG,
-                            "Parent was destroyed before our Fragment could be added, all requests for the"
-                                    + " destroyed parent are cancelled");
+                    Log.w(TAG, "Parent was destroyed before our Fragment could be added, "
+                            + "all requests for the destroyed parent are cancelled");
                 }
             } else {
                 if (Log.isLoggable(TAG, Log.ERROR)) {
-                    Log.e(
-                            TAG,
-                            "ERROR: Tried adding Fragment twice and failed twice, giving up and cancelling all"
-                                    + " associated requests! This probably means you're starting loads in a unit test"
-                                    + " with an Activity that you haven't created and never create. If you're using"
-                                    + " Robolectric, create the Activity as part of your test setup");
+                    Log.e(TAG, "ERROR: Tried adding Fragment twice and failed twice, giving up and cancelling all"
+                            + " associated requests! This probably means you're starting loads in a unit test"
+                            + " with an Activity that you haven't created and never create. If you're using"
+                            + " Robolectric, create the Activity as part of your test setup");
                 }
             }
             newlyAddedSupportRequestManagerFragment.getGlideLifecycle().onDestroy();
