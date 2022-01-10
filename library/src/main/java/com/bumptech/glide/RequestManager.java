@@ -55,8 +55,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class RequestManager implements ComponentCallbacks2, LifecycleListener, ModelTypes<RequestBuilder<Drawable>> {
     private static final RequestOptions DECODE_TYPE_BITMAP = decodeTypeOf(Bitmap.class).lock();
     private static final RequestOptions DECODE_TYPE_GIF = decodeTypeOf(GifDrawable.class).lock();
-    private static final RequestOptions DOWNLOAD_ONLY_OPTIONS =
-            diskCacheStrategyOf(DiskCacheStrategy.DATA).priority(Priority.LOW).skipMemoryCache(true);
+    private static final RequestOptions DOWNLOAD_ONLY_OPTIONS = diskCacheStrategyOf(DiskCacheStrategy.DATA).priority(Priority.LOW).skipMemoryCache(true);
 
     protected final Glide glide;
     protected final Context context;

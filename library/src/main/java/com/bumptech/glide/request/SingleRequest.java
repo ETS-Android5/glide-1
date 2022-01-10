@@ -618,8 +618,7 @@ public final class SingleRequest<R> implements Request, SizeReadyCallback, Resou
     // We're using experimental APIs...
     @SuppressWarnings({"deprecation", "PMD.UnusedFormalParameter"})
     @GuardedBy("requestLock")
-    private void onResourceReady(
-            Resource<R> resource, R result, DataSource dataSource, boolean isAlternateCacheKey) {
+    private void onResourceReady(Resource<R> resource, R result, DataSource dataSource, boolean isAlternateCacheKey) {
         // We must call isFirstReadyResource before setting status.
         boolean isFirstResource = isFirstReadyResource();
         status = Status.COMPLETE;

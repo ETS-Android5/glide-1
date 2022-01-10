@@ -25,11 +25,19 @@ public class RequestTracker {
     // side affects, WeakReferences are still essentially required. A user can always make repeated
     // requests into targets other than views, or use an activity manager in a fragment pager where
     // holding strong references would steadily leak bitmaps and/or views.
-    private final Set<Request> requests =
-            Collections.newSetFromMap(new WeakHashMap<Request, Boolean>());
+    private final Set<Request> requests = Collections.newSetFromMap(new WeakHashMap<Request, Boolean>());
     // A set of requests that have not completed and are queued to be run again. We use this list to
     // maintain hard references to these requests to ensure that they are not garbage collected
     // before they start running or while they are paused. See #346.
+    /**
+     * #346:
+     * Requests started before onStart may never run:
+     * RequestTracker only maintains a map of weak references to requests. RequestTracker also does not
+     * immediately run requests if it believes the Fragment or activity is not started. Requests into
+     * non-view targets may not be strongly referenced outside of Glide's request system. As a result,
+     * requests into non-view targets made before onStart() may be only weakly referenced and be garbage
+     * collected before the fragment or activity is started, preventing the request from ever running.
+     */
     private final Set<Request> pendingRequests = new HashSet<>();
 
     private boolean isPaused;
