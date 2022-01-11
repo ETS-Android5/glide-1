@@ -134,6 +134,7 @@ public final class SingleRequest<R> implements Request, SizeReadyCallback, Resou
     @Nullable
     private Drawable placeholderDrawable;
 
+    @Important("15.这个@GuardedBy表明: fallbackDrawable只能在被该requestLock对象锁定的代码块中访问")
     @GuardedBy("requestLock")
     @Nullable
     private Drawable fallbackDrawable;

@@ -4,6 +4,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import com.bumptech.glide.Important;
 import com.bumptech.glide.request.Request;
 import com.bumptech.glide.util.Util;
 import java.util.Collections;
@@ -38,6 +39,8 @@ public class RequestTracker {
      * requests into non-view targets made before onStart() may be only weakly referenced and be garbage
      * collected before the fragment or activity is started, preventing the request from ever running.
      */
+    @Important("14.requests中保存的是Request的弱引用，这可能导致onCreate之前创建的Request对象在onCreate还没调用就被回收了，"
+        + "这里用pendingRequests来持有onCreate之前创建的Request对象，保证它不会在没被调用之前就被回收")
     private final Set<Request> pendingRequests = new HashSet<>();
 
     private boolean isPaused;

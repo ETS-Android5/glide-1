@@ -64,6 +64,7 @@ public class RequestManager implements ComponentCallbacks2, LifecycleListener, M
     @Synthetic
     final Lifecycle lifecycle;
 
+    @Important("16.这里的@GuardedBy表明:该requestTracker只能在被该RequestManager实例锁定的代码块中访问")
     @GuardedBy("this")
     private final RequestTracker requestTracker;
 
