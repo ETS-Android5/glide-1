@@ -1,6 +1,7 @@
 package com.bumptech.glide.util.pool;
 
 import androidx.annotation.NonNull;
+import com.bumptech.glide.Why;
 import com.bumptech.glide.util.Synthetic;
 
 /**
@@ -31,6 +32,7 @@ public abstract class StateVerifier {
     /**
      * Sets whether or not our object is recycled.
      */
+    @Why("什么时候设置的？")
     abstract void setRecycled(boolean isRecycled);
 
     private static class DefaultStateVerifier extends StateVerifier {

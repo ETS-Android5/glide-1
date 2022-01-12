@@ -51,11 +51,14 @@ public class MainActivity extends FragmentActivity {
         }
         return true;
     }
+    int previousWidth = 1920;
+    int previousHeight = 1080;
 
     private void simpleInvestigate() {
         Glide
                 .with(this)
                 .load("https://c-ssl.duitang.com/uploads/item/202002/03/20200203232102_hjcin.thumb.700_0.jpg")
+                .override(--previousWidth,--previousHeight)
                 .into(mIvImg);
 
     }
