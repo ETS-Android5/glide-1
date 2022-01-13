@@ -58,7 +58,7 @@ public class MainActivity extends FragmentActivity {
         Glide
                 .with(this)
                 .load("https://c-ssl.duitang.com/uploads/item/202002/03/20200203232102_hjcin.thumb.700_0.jpg")
-                .override(--previousWidth,--previousHeight)
+                .override(--previousWidth,--previousHeight) // 因为每次需要的宽高都与上次请求的宽高不同，因此不会使用上次的请求，而是重新创建一个
                 .into(mIvImg);
 
     }

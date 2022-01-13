@@ -12,8 +12,7 @@ import java.util.WeakHashMap;
  * Holds the set of {@link Target}s currently active for a {@link com.bumptech.glide.RequestManager} and forwards on lifecycle events.
  */
 public final class TargetTracker implements LifecycleListener {
-    private final Set<Target<?>> targets =
-            Collections.newSetFromMap(new WeakHashMap<Target<?>, Boolean>());
+    private final Set<Target<?>> targets = Collections.newSetFromMap(new WeakHashMap<Target<?>, Boolean>());
 
     public void track(@NonNull Target<?> target) {
         targets.add(target);

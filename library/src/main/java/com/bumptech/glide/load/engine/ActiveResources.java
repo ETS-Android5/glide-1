@@ -29,38 +29,34 @@ final class ActiveResources {
     @Nullable private volatile DequeuedResourceCallback cb;
 
     ActiveResources(boolean isActiveResourceRetentionAllowed) {
-        this(
-                isActiveResourceRetentionAllowed,
-                java.util.concurrent.Executors.newSingleThreadExecutor(
-                        new ThreadFactory() {
-                            @Override
-                            public Thread newThread(@NonNull final Runnable r) {
-                                return new Thread(
-                                        new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
-                                                r.run();
-                                            }
-                                        },
-                                        "glide-active-resources");
-                            }
-                        }));
+        this(isActiveResourceRetentionAllowed, java.util.concurrent.Executors.newSingleThreadExecutor(
+                new ThreadFactory() {
+                    @Override
+                    public Thread newThread(@NonNull final Runnable r) {
+                        return new Thread(
+                                new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
+                                        r.run();
+                                    }
+                                },
+                                "glide-active-resources");
+                    }
+                }));
     }
 
     @VisibleForTesting
-    ActiveResources(
-            boolean isActiveResourceRetentionAllowed, Executor monitorClearedResourcesExecutor) {
+    ActiveResources(boolean isActiveResourceRetentionAllowed, Executor monitorClearedResourcesExecutor) {
         this.isActiveResourceRetentionAllowed = isActiveResourceRetentionAllowed;
         this.monitorClearedResourcesExecutor = monitorClearedResourcesExecutor;
 
-        monitorClearedResourcesExecutor.execute(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        cleanReferenceQueue();
-                    }
-                });
+        monitorClearedResourcesExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                cleanReferenceQueue();
+            }
+        });
     }
 
     void setListener(ResourceListener listener) {
@@ -72,9 +68,7 @@ final class ActiveResources {
     }
 
     synchronized void activate(Key key, EngineResource<?> resource) {
-        ResourceWeakReference toPut =
-                new ResourceWeakReference(
-                        key, resource, resourceReferenceQueue, isActiveResourceRetentionAllowed);
+        ResourceWeakReference toPut = new ResourceWeakReference(key, resource, resourceReferenceQueue, isActiveResourceRetentionAllowed);
 
         ResourceWeakReference removed = activeEngineResources.put(key, toPut);
         if (removed != null) {
@@ -183,10 +177,7 @@ final class ActiveResources {
                 boolean isActiveResourceRetentionAllowed) {
             super(referent, queue);
             this.key = Preconditions.checkNotNull(key);
-            this.resource =
-                    referent.isMemoryCacheable() && isActiveResourceRetentionAllowed
-                            ? Preconditions.checkNotNull(referent.getResource())
-                            : null;
+            this.resource = referent.isMemoryCacheable() && isActiveResourceRetentionAllowed ? Preconditions.checkNotNull(referent.getResource()) : null;
             isCacheable = referent.isMemoryCacheable();
         }
 

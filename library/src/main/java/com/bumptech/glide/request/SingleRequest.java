@@ -276,8 +276,7 @@ public final class SingleRequest<R> implements Request, SizeReadyCallback, Resou
                 target.getSize(this);
             }
 
-            if ((status == Status.RUNNING || status == Status.WAITING_FOR_SIZE)
-                    && canNotifyStatusChanged()) {
+            if ((status == Status.RUNNING || status == Status.WAITING_FOR_SIZE) && canNotifyStatusChanged()) {
                 target.onLoadStarted(getPlaceholderDrawable());
             }
             if (IS_VERBOSE_LOGGABLE) {

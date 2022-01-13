@@ -17,7 +17,6 @@ class EngineKeyFactory {
             Class<?> resourceClass,
             Class<?> transcodeClass,
             Options options) {
-        return new EngineKey(
-                model, signature, width, height, transformations, resourceClass, transcodeClass, options);
+        return new EngineKey(model, signature, width, height, transformations, resourceClass, transcodeClass, options);
     }
 }

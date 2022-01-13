@@ -28,10 +28,7 @@ import java.util.concurrent.Executor;
 /**
  * Responsible for starting loads and managing active and cached resources.
  */
-public class Engine
-        implements EngineJobListener,
-        MemoryCache.ResourceRemovedListener,
-        EngineResource.ResourceListener {
+public class Engine implements EngineJobListener, MemoryCache.ResourceRemovedListener, EngineResource.ResourceListener {
     private static final String TAG = "Engine";
     private static final int JOB_POOL_SIZE = 150;
     private static final boolean VERBOSE_IS_LOGGABLE = Log.isLoggable(TAG, Log.VERBOSE);
@@ -219,8 +216,7 @@ public class Engine
 
         // Avoid calling back while holding the engine lock, doing so makes it easier for callers to
         // deadlock.
-        cb.onResourceReady(
-                memoryResource, DataSource.MEMORY_CACHE, /* isLoadedFromAlternateCacheKey= */ false);
+        cb.onResourceReady(memoryResource, DataSource.MEMORY_CACHE, /* isLoadedFromAlternateCacheKey= */ false);
         return null;
     }
 
@@ -353,9 +349,7 @@ public class Engine
             // Save an object allocation if we've cached an EngineResource (the typical case).
             result = (EngineResource<?>) cached;
         } else {
-            result =
-                    new EngineResource<>(
-                            cached, /*isMemoryCacheable=*/ true, /*isRecyclable=*/ true, key, /*listener=*/ this);
+            result = new EngineResource<>(cached, /*isMemoryCacheable=*/ true, /*isRecyclable=*/ true, key, /*listener=*/ this);
         }
         return result;
     }
@@ -370,8 +364,7 @@ public class Engine
 
     @SuppressWarnings("unchecked")
     @Override
-    public synchronized void onEngineJobComplete(
-            EngineJob<?> engineJob, Key key, EngineResource<?> resource) {
+    public synchronized void onEngineJobComplete(EngineJob<?> engineJob, Key key, EngineResource<?> resource) {
         // A null resource indicates that the load failed, usually due to an exception.
         if (resource != null && resource.isMemoryCacheable()) {
             activeResources.activate(key, resource);
