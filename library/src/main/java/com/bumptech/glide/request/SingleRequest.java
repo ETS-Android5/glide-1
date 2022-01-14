@@ -91,7 +91,8 @@ public final class SingleRequest<R> implements Request, SizeReadyCallback, Resou
     private final GlideContext glideContext;
 
     @Important("18.该model可能是url、bitmap、byte[]、、、,参见RequestBuilder#loadGeneric")
-    @Nullable private final Object model;
+    @Nullable
+    private final Object model;
 
     private final Class<R> transcodeClass;
 
@@ -305,9 +306,9 @@ public final class SingleRequest<R> implements Request, SizeReadyCallback, Resou
 
     // Avoids difficult to understand errors like #2413.
     @Important("17.You can't start or clear loads in RequestListener or"
-        + " Target callbacks. If you're trying to start a fallback request when a load fails,"
-        + " use RequestBuilder#error(RequestBuilder). Otherwise consider posting your into()"
-        + " or clear() calls to the main thread using a Handler instead.")
+            + " Target callbacks. If you're trying to start a fallback request when a load fails,"
+            + " use RequestBuilder#error(RequestBuilder). Otherwise consider posting your into()"
+            + " or clear() calls to the main thread using a Handler instead.")
     @GuardedBy("requestLock")
     private void assertNotCallingCallbacks() {
         if (isCallingCallbacks) {

@@ -108,9 +108,7 @@ final class ActiveResources {
             }
         }
 
-        EngineResource<?> newResource =
-                new EngineResource<>(
-                        ref.resource, /*isMemoryCacheable=*/ true, /*isRecyclable=*/ false, ref.key, listener);
+        EngineResource<?> newResource = new EngineResource<>(ref.resource, /*isMemoryCacheable=*/ true, /*isRecyclable=*/ false, ref.key, listener);
         listener.onResourceReleased(ref.key, newResource);
     }
 

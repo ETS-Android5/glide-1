@@ -291,8 +291,7 @@ public class Engine implements EngineJobListener, MemoryCache.ResourceRemovedLis
     }
 
     @Nullable
-    private EngineResource<?> loadFromMemory(
-            EngineKey key, boolean isMemoryCacheable, long startTime) {
+    private EngineResource<?> loadFromMemory(EngineKey key, boolean isMemoryCacheable, long startTime) {
         if (!isMemoryCacheable) {
             return null;
         }

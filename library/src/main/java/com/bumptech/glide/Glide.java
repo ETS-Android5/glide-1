@@ -794,7 +794,7 @@ public class Glide implements ComponentCallbacks2 {
         return getRetriever(fragment.getContext()).get(fragment);
     }
 
-    /**
+    /**ss
      * Begin a load with Glide that will be tied to the given {@link android.app.Fragment}'s lifecycle and that uses the given {@link android.app.Fragment}'s default options.
      *
      * @param fragment The fragment to use.

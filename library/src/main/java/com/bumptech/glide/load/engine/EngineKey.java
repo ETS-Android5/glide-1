@@ -36,10 +36,8 @@ class EngineKey implements Key {
         this.width = width;
         this.height = height;
         this.transformations = Preconditions.checkNotNull(transformations);
-        this.resourceClass =
-                Preconditions.checkNotNull(resourceClass, "Resource class must not be null");
-        this.transcodeClass =
-                Preconditions.checkNotNull(transcodeClass, "Transcode class must not be null");
+        this.resourceClass = Preconditions.checkNotNull(resourceClass, "Resource class must not be null");
+        this.transcodeClass = Preconditions.checkNotNull(transcodeClass, "Transcode class must not be null");
         this.options = Preconditions.checkNotNull(options);
     }
 
