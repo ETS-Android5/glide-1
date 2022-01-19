@@ -17,7 +17,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * A view-less {@link androidx.fragment.app.Fragment} used to safely store an {@link com.bumptech.glide.RequestManager} that can be used to start, stop and manage Glide requests started for targets within the fragment or activity this fragment is a child of.
+ * A view-less {@link androidx.fragment.app.Fragment} used to safely store an {@link com.bumptech.glide.RequestManager} that can be used to start, stop and manage Glide requests started
+ * for targets within the fragment or activity this fragment is a child of.
  *
  * @see com.bumptech.glide.manager.RequestManagerFragment
  * @see com.bumptech.glide.manager.RequestManagerRetriever

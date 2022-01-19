@@ -9,8 +9,8 @@ import java.lang.annotation.Target;
  * Identifies methods in {@link GlideExtension} annotated classes that extend {@code com.bumptech.glide.RequestManager}.
  *
  * <p>If one or more method is found with this annotation, an additional API entry point that
- * exposes a generated {@code com.bumptech.glide.RequestManager} subclass will be created. The generated API entry point acts as a drop in replacement for Glide. Glide.with(fragment) becomes GlideApp.with(fragment). Although the Glide.with variant will still be available, only the new API entry
- * point will provide access to these additional methods.
+ * exposes a generated {@code com.bumptech.glide.RequestManager} subclass will be created. The generated API entry point acts as a drop in replacement for Glide. Glide.with(fragment)
+ * becomes GlideApp.with(fragment). Although the Glide.with variant will still be available, only the new API entry point will provide access to these additional methods.
  *
  * <p>The name of the API entry point created when one of these methods is found can be controlled
  * by {@link GlideModule#glideName()}.

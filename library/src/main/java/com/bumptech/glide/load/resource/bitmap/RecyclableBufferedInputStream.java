@@ -25,8 +25,9 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Wraps an existing {@link InputStream} and <em>buffers</em> the input. Expensive interaction with the underlying input stream is minimized, since most (smaller) requests can be satisfied by accessing the buffer alone. The drawback is that some extra space is required to hold the buffer and that
- * copying takes place when filling that buffer, but this is usually outweighed by the performance benefits.
+ * Wraps an existing {@link InputStream} and <em>buffers</em> the input. Expensive interaction with the underlying input stream is minimized, since most (smaller) requests can be
+ * satisfied by accessing the buffer alone. The drawback is that some extra space is required to hold the buffer and that copying takes place when filling that buffer, but this is
+ * usually outweighed by the performance benefits.
  *
  * <p>A typical application pattern for the class looks like this:
  *
@@ -75,7 +76,8 @@ public class RecyclableBufferedInputStream extends FilterInputStream {
     }
 
     /**
-     * Returns an estimated number of bytes that can be read or skipped without blocking for more input. This method returns the number of bytes available in the buffer plus those available in the source stream, but see {@link InputStream#available} for important caveats.
+     * Returns an estimated number of bytes that can be read or skipped without blocking for more input. This method returns the number of bytes available in the buffer plus those
+     * available in the source stream, but see {@link InputStream#available} for important caveats.
      *
      * @return the estimated number of bytes available
      * @throws IOException if this stream is closed or an error occurs
@@ -176,8 +178,9 @@ public class RecyclableBufferedInputStream extends FilterInputStream {
     }
 
     /**
-     * Sets a mark position in this stream. The parameter {@code readlimit} indicates how many bytes can be read before a mark is invalidated. Calling {@link #reset()} will reposition the stream back to the marked position if {@code readlimit} has not been surpassed. The underlying buffer may be
-     * increased in size to allow {@code readlimit} number of bytes to be supported.
+     * Sets a mark position in this stream. The parameter {@code readlimit} indicates how many bytes can be read before a mark is invalidated. Calling {@link #reset()} will reposition
+     * the stream back to the marked position if {@code readlimit} has not been surpassed. The underlying buffer may be increased in size to allow {@code readlimit} number of bytes to
+     * be supported.
      *
      * @param readlimit the number of bytes that can be read before the mark is invalidated.
      * @see #reset()
@@ -205,7 +208,8 @@ public class RecyclableBufferedInputStream extends FilterInputStream {
     }
 
     /**
-     * Reads a single byte from this stream and returns it as an integer in the range from 0 to 255. Returns -1 if the end of the source string has been reached. If the internal buffer does not contain any available bytes then it is filled from the source stream and the first byte is returned.
+     * Reads a single byte from this stream and returns it as an integer in the range from 0 to 255. Returns -1 if the end of the source string has been reached. If the internal buffer
+     * does not contain any available bytes then it is filled from the source stream and the first byte is returned.
      *
      * @return the byte read or -1 if the end of the source stream has been reached.
      * @throws IOException if this stream is closed or another IOException occurs.
@@ -241,8 +245,9 @@ public class RecyclableBufferedInputStream extends FilterInputStream {
     }
 
     /**
-     * Reads at most {@code byteCount} bytes from this stream and stores them in byte array {@code buffer} starting at offset {@code offset}. Returns the number of bytes actually read or -1 if no bytes were read and the end of the stream was encountered. If all the buffered bytes have been used, a
-     * mark has not been put and the requested number of bytes is larger than the receiver's buffer size, this implementation bypasses the buffer and simply places the results directly into {@code buffer}.
+     * Reads at most {@code byteCount} bytes from this stream and stores them in byte array {@code buffer} starting at offset {@code offset}. Returns the number of bytes actually read
+     * or -1 if no bytes were read and the end of the stream was encountered. If all the buffered bytes have been used, a mark has not been put and the requested number of bytes is
+     * larger than the receiver's buffer size, this implementation bypasses the buffer and simply places the results directly into {@code buffer}.
      *
      * @param buffer the byte array in which to store the bytes read.
      * @return the number of bytes actually read or -1 if end of stream.
@@ -320,7 +325,8 @@ public class RecyclableBufferedInputStream extends FilterInputStream {
     /**
      * Resets this stream to the last marked location.
      *
-     * @throws IOException if this stream is closed, no mark has been put or the mark is no longer valid because more than {@code readlimit} bytes have been read since setting the mark.
+     * @throws IOException if this stream is closed, no mark has been put or the mark is no longer valid because more than {@code readlimit} bytes have been read since setting the
+     *                     mark.
      * @see #mark(int)
      */
     @Override

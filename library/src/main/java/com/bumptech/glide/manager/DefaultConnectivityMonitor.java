@@ -5,7 +5,8 @@ import androidx.annotation.NonNull;
 import com.bumptech.glide.util.Synthetic;
 
 /**
- * An Android Lifecycle wrapper that uses {@link SingletonConnectivityReceiver} to observer connectivity changes, allowing for registration to be removed when our listener is being destroyed as part of the Android lifecycle.
+ * An Android Lifecycle wrapper that uses {@link SingletonConnectivityReceiver} to observer connectivity changes, allowing for registration to be removed when our listener is being
+ * destroyed as part of the Android lifecycle.
  */
 final class DefaultConnectivityMonitor implements ConnectivityMonitor {
     private final Context context;

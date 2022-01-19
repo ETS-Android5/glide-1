@@ -5,7 +5,8 @@ import androidx.annotation.Nullable;
 import java.io.File;
 
 /**
- * Creates an {@link com.bumptech.glide.disklrucache.DiskLruCache} based disk cache in the external disk cache directory, which falls back to the internal disk cache if no external storage is available. If ever fell back to the internal disk cache, will use that one from that moment on.
+ * Creates an {@link com.bumptech.glide.disklrucache.DiskLruCache} based disk cache in the external disk cache directory, which falls back to the internal disk cache if no external
+ * storage is available. If ever fell back to the internal disk cache, will use that one from that moment on.
  *
  * <p><b>Images can be read by everyone when using external disk cache.</b>
  */

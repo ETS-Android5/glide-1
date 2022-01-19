@@ -8,7 +8,8 @@ import com.bumptech.glide.util.Util;
 import java.util.Queue;
 
 /**
- * A simple cache that can be used by {@link ModelLoader} and {@link ModelLoaderFactory} to cache some data for a given model, width and height. For a loader that takes a model and returns a url, the cache could be used to safely memoize url creation based on the width and height of the view.
+ * A simple cache that can be used by {@link ModelLoader} and {@link ModelLoaderFactory} to cache some data for a given model, width and height. For a loader that takes a model and
+ * returns a url, the cache could be used to safely memoize url creation based on the width and height of the view.
  *
  * @param <A> Some Model type that implements {@link #equals} and {@link #hashCode}.
  * @param <B> Some useful type that may be expensive to create (URL, file path, etc).

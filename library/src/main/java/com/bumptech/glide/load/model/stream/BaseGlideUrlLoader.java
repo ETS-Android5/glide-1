@@ -92,7 +92,8 @@ public abstract class BaseGlideUrlLoader<Model> implements ModelLoader<Model, In
     protected abstract String getUrl(Model model, int width, int height, Options options);
 
     /**
-     * Returns a list of alternate urls for the given model, width, and height from which equivalent data can be obtained (usually the same image with the same aspect ratio, but in a larger size) as the primary url.
+     * Returns a list of alternate urls for the given model, width, and height from which equivalent data can be obtained (usually the same image with the same aspect ratio, but in a
+     * larger size) as the primary url.
      *
      * <p>Implementing this method allows Glide to fulfill requests for bucketed images in smaller
      * bucket sizes using already cached data for larger bucket sizes.

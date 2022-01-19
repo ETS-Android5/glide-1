@@ -8,15 +8,18 @@ import com.bumptech.glide.util.Synthetic;
  * Indicates the algorithm to use when downsampling images.
  *
  * <p>{@code DownsampleStrategy} does not provide any guarantees about output sizes. Behavior will
- * differ depending on the {@link com.bumptech.glide.load.ResourceDecoder} using the strategy and the version of Android the code runs on. Use {@code DownsampleStrategy} as an optimization to improve memory efficiency only. If you need a particular size or shape output, use an {@link
- * com.bumptech.glide.load.Transformation} either instead or in addition to a {@code DownsampleStrategy}.
+ * differ depending on the {@link com.bumptech.glide.load.ResourceDecoder} using the strategy and the version of Android the code runs on. Use {@code DownsampleStrategy} as an
+ * optimization to improve memory efficiency only. If you need a particular size or shape output, use an {@link com.bumptech.glide.load.Transformation} either instead or in addition to
+ * a {@code DownsampleStrategy}.
  *
  * <p>Some differences between versions of Android and {@link
- * com.bumptech.glide.load.ResourceDecoder}s are listed below, but the list is not comprehensive because {@link DownsampleStrategy} only controls its output scale value, not how that output value is used.
+ * com.bumptech.glide.load.ResourceDecoder}s are listed below, but the list is not comprehensive because {@link DownsampleStrategy} only controls its output scale value, not how that
+ * output value is used.
  *
  * <p>On some versions of Android, precise scaling is not possible. In those cases, the strategies
- * can only pick between downsampling to between 1x the requested size and 2x the requested size and between 0.5x the requested size and 1x the requested size because only power of two downsampling is supported. To preserve the potential for a {@link com.bumptech.glide.load.Transformation} to scale
- * precisely without a loss in quality, all but {@link #AT_MOST} will prefer to downsample to between 1x and 2x the requested size.
+ * can only pick between downsampling to between 1x the requested size and 2x the requested size and between 0.5x the requested size and 1x the requested size because only power of two
+ * downsampling is supported. To preserve the potential for a {@link com.bumptech.glide.load.Transformation} to scale precisely without a loss in quality, all but {@link #AT_MOST} will
+ * prefer to downsample to between 1x and 2x the requested size.
  */
 // Public API.
 @SuppressWarnings("WeakerAccess")
@@ -37,14 +40,15 @@ public abstract class DownsampleStrategy {
     public static final DownsampleStrategy AT_MOST = new AtMost();
 
     /**
-     * Scales, maintaining the original aspect ratio, so that one of the image's dimensions is exactly equal to the requested size and the other dimension is less than or equal to the requested size.
+     * Scales, maintaining the original aspect ratio, so that one of the image's dimensions is exactly equal to the requested size and the other dimension is less than or equal to the
+     * requested size.
      *
      * <p>This method will upscale if the requested width and height are greater than the source width
      * and height. To avoid upscaling, use {@link #AT_LEAST}, {@link #AT_MOST} or {@link #CENTER_INSIDE}.
      *
      * <p>On pre-KitKat devices, {@code FIT_CENTER} will downsample by a power of two only so that one
-     * of the image's dimensions is greater than or equal to the requested size. No guarantees are made about the second dimensions. This is <em>NOT</em> the same as {@link #AT_LEAST} because only one dimension, not both, are greater than or equal to the requested dimensions, the other may be
-     * smaller.
+     * of the image's dimensions is greater than or equal to the requested size. No guarantees are made about the second dimensions. This is <em>NOT</em> the same as {@link #AT_LEAST}
+     * because only one dimension, not both, are greater than or equal to the requested dimensions, the other may be smaller.
      */
     public static final DownsampleStrategy FIT_CENTER = new FitCenter();
 
@@ -54,7 +58,8 @@ public abstract class DownsampleStrategy {
     public static final DownsampleStrategy CENTER_INSIDE = new CenterInside();
 
     /**
-     * Scales, maintaining the original aspect ratio, so that one of the image's dimensions is exactly equal to the requested size and the other dimension is greater than or equal to the requested size.
+     * Scales, maintaining the original aspect ratio, so that one of the image's dimensions is exactly equal to the requested size and the other dimension is greater than or equal to
+     * the requested size.
      *
      * <p>This method will upscale if the requested width and height are greater than the source width
      * and height. To avoid upscaling, use {@link #AT_LEAST}, {@link #AT_MOST}, or {@link #CENTER_INSIDE}.
@@ -75,7 +80,8 @@ public abstract class DownsampleStrategy {
     public static final DownsampleStrategy DEFAULT = CENTER_OUTSIDE;
 
     /**
-     * Indicates the {@link com.bumptech.glide.load.resource.bitmap.DownsampleStrategy} option that will be used to calculate the sample size to use to downsample an image given the original and target dimensions of the image.
+     * Indicates the {@link com.bumptech.glide.load.resource.bitmap.DownsampleStrategy} option that will be used to calculate the sample size to use to downsample an image given the
+     * original and target dimensions of the image.
      */
     // The exact String value here is retained to avoid breaking cache keys for images that were
     // loaded with older versions of Glide.
@@ -91,8 +97,8 @@ public abstract class DownsampleStrategy {
      * Returns a float (0, +infinity) indicating a scale factor to apply to the source width and height when displayed in the requested width and height.
      *
      * <p>The returned scale factor will be split into a power of two sample size applied via {@link
-     * android.graphics.BitmapFactory.Options#inSampleSize} and a float scale factor applied after downsampling via {@link android.graphics.BitmapFactory.Options#inTargetDensity} and {@link android.graphics.BitmapFactory.Options#inDensity}. Because of rounding errors the scale factor may not be
-     * applied precisely.
+     * android.graphics.BitmapFactory.Options#inSampleSize} and a float scale factor applied after downsampling via {@link android.graphics.BitmapFactory.Options#inTargetDensity} and
+     * {@link android.graphics.BitmapFactory.Options#inDensity}. Because of rounding errors the scale factor may not be applied precisely.
      *
      * <p>The float scaling factor will only be applied on KitKat+. Prior to KitKat, only the power of
      * two downsampling will be applied.

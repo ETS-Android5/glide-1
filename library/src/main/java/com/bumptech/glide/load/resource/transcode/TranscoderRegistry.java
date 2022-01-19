@@ -92,8 +92,8 @@ public class TranscoderRegistry {
         }
 
         /**
-         * If we convert from a specific Drawable, we must get that specific Drawable class or a subclass of that Drawable. In contrast, if we we convert <em>to</em> a specific Drawable, we can fulfill requests for a more generic parent class (like Drawable). As a result, we check fromClass and
-         * toClass in different orders.
+         * If we convert from a specific Drawable, we must get that specific Drawable class or a subclass of that Drawable. In contrast, if we we convert <em>to</em> a specific
+         * Drawable, we can fulfill requests for a more generic parent class (like Drawable). As a result, we check fromClass and toClass in different orders.
          */
         public boolean handles(@NonNull Class<?> fromClass, @NonNull Class<?> toClass) {
             return this.fromClass.isAssignableFrom(fromClass) && toClass.isAssignableFrom(this.toClass);

@@ -6,7 +6,8 @@ import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import java.security.MessageDigest;
 
 /**
- * Scales the image uniformly (maintaining the image's aspect ratio) so that one of the dimensions of the image will be equal to the given dimension and the other will be less than the given dimension.
+ * Scales the image uniformly (maintaining the image's aspect ratio) so that one of the dimensions of the image will be equal to the given dimension and the other will be less than the
+ * given dimension.
  */
 public class FitCenter extends BitmapTransformation {
     private static final String ID = "com.bumptech.glide.load.resource.bitmap.FitCenter";

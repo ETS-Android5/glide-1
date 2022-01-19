@@ -29,7 +29,8 @@ public final class Api {
             new LruCache<>(MAX_URLS_TO_CACHE);
     private static final int MAX_ITEMS_PER_PAGE = 300;
     /**
-     * Safe search is on by default in Flickr's API and/or enabling it isn't very effective. Instead we'll force all images to be from Flickr's commons project, which tends to be historic images. Those appear much safer than a standard search.
+     * Safe search is on by default in Flickr's API and/or enabling it isn't very effective. Instead we'll force all images to be from Flickr's commons project, which tends to be
+     * historic images. Those appear much safer than a standard search.
      */
     private static final String SAFE_SEARCH = "&is_commons=1";
 

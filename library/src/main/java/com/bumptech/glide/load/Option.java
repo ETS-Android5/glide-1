@@ -6,7 +6,8 @@ import com.bumptech.glide.util.Preconditions;
 import java.security.MessageDigest;
 
 /**
- * Defines available component (decoders, encoders, model loaders etc.) options with optional default values and the ability to affect the resource disk cache key used by {@link com.bumptech.glide.load.engine.DiskCacheStrategy#RESOURCE}.
+ * Defines available component (decoders, encoders, model loaders etc.) options with optional default values and the ability to affect the resource disk cache key used by {@link
+ * com.bumptech.glide.load.engine.DiskCacheStrategy#RESOURCE}.
  *
  * <p>Implementations must either be unique (usually declared as static final variables), or
  * implement {@link #equals(Object)} and {@link #hashCode()}.
@@ -63,7 +64,8 @@ public final class Option<T> {
     }
 
     /**
-     * Returns a new {@link Option} that uses the given {@link com.bumptech.glide.load.Option.CacheKeyUpdater} to update disk cache keys and provides the given value as the default value.
+     * Returns a new {@link Option} that uses the given {@link com.bumptech.glide.load.Option.CacheKeyUpdater} to update disk cache keys and provides the given value as the default
+     * value.
      *
      * @param key A unique package prefixed {@link String} that identifies this option (must be stable across builds, so {@link Class#getName()} should <em>not</em> be used).
      */
@@ -91,7 +93,8 @@ public final class Option<T> {
     }
 
     /**
-     * Updates the given {@link MessageDigest} used to construct a cache key with the given value using the {@link com.bumptech.glide.load.Option.CacheKeyUpdater} optionally provided in the constructor.
+     * Updates the given {@link MessageDigest} used to construct a cache key with the given value using the {@link com.bumptech.glide.load.Option.CacheKeyUpdater} optionally provided in
+     * the constructor.
      */
     public void update(@NonNull T value, @NonNull MessageDigest messageDigest) {
         cacheKeyUpdater.update(getKeyBytes(), value, messageDigest);
@@ -142,8 +145,10 @@ public final class Option<T> {
          * <p>If your {@link Option} shouldn't affect the disk cache key, you should not implement this
          * class and use {@link Option#memory(String)} or {@link Option#memory(String, Object)} instead.
          *
-         * @param keyBytes The bytes of the {@link String} used as the key for this particular {@link Option}. Should be added to the {@code messageDigest} using {@link MessageDigest#update(byte[])} by all implementations if the digest is updated with the given {@code value} parameter.
-         * @param value    The value of of this particular option. Typically you should convert the value to a byte array using some stable mechanism and then call {@link MessageDigest#update(byte[])} to update the given digest.
+         * @param keyBytes The bytes of the {@link String} used as the key for this particular {@link Option}. Should be added to the {@code messageDigest} using {@link
+         *                 MessageDigest#update(byte[])} by all implementations if the digest is updated with the given {@code value} parameter.
+         * @param value    The value of of this particular option. Typically you should convert the value to a byte array using some stable mechanism and then call {@link
+         *                 MessageDigest#update(byte[])} to update the given digest.
          */
         void update(@NonNull byte[] keyBytes, @NonNull T value, @NonNull MessageDigest messageDigest);
     }

@@ -8,11 +8,13 @@ import java.io.InputStream;
 import java.util.Queue;
 
 /**
- * An {@link java.io.InputStream} that catches, stores and rethrows {@link java.io.IOException}s during read and skip calls. This allows users of this API to handle the exception at a higher level if the exception is swallowed by some intermediate library. This class is a workaround for a framework
- * issue where exceptions during reads while decoding bitmaps in {@link android.graphics.BitmapFactory} can return partially decoded bitmaps.
+ * An {@link java.io.InputStream} that catches, stores and rethrows {@link java.io.IOException}s during read and skip calls. This allows users of this API to handle the exception at a
+ * higher level if the exception is swallowed by some intermediate library. This class is a workaround for a framework issue where exceptions during reads while decoding bitmaps in
+ * {@link android.graphics.BitmapFactory} can return partially decoded bitmaps.
  *
  * <p>Unlike the deprecated {@link ExceptionCatchingInputStream}, this class will both store and
- * re-throw any IOExceptions. Rethrowing works around bugs in wrapping streams that may not fully obey the stream contract. This is really only useful if some middle layer is going to catch the exception (like BitmapFactory) but we want to propagate the exception instead.
+ * re-throw any IOExceptions. Rethrowing works around bugs in wrapping streams that may not fully obey the stream contract. This is really only useful if some middle layer is going to
+ * catch the exception (like BitmapFactory) but we want to propagate the exception instead.
  *
  * <p>See https://github.com/bumptech/glide/issues/126 and #4438.
  */

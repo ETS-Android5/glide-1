@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Provides implementations of {@link Pool} never return {@code null}, log when new instances are created, and that can use the {@link com.bumptech.glide.util.pool.FactoryPools.Poolable} interface to ensure objects aren't used while inside the pool.
+ * Provides implementations of {@link Pool} never return {@code null}, log when new instances are created, and that can use the {@link
+ * com.bumptech.glide.util.pool.FactoryPools.Poolable} interface to ensure objects aren't used while inside the pool.
  */
 public final class FactoryPools {
     private static final String TAG = "FactoryPools";
@@ -25,7 +26,8 @@ public final class FactoryPools {
     private FactoryPools() {}
 
     /**
-     * Returns a non-thread safe {@link Pool} that never returns {@code null} from {@link Pool#acquire()} and that contains objects of the type created by the given {@link Factory} with the given maximum size.
+     * Returns a non-thread safe {@link Pool} that never returns {@code null} from {@link Pool#acquire()} and that contains objects of the type created by the given {@link Factory} with
+     * the given maximum size.
      *
      * <p>If the pool is empty when {@link Pool#acquire()} is called, the given {@link Factory} will
      * be used to create a new instance.
@@ -38,7 +40,8 @@ public final class FactoryPools {
     }
 
     /**
-     * Returns a new thread safe {@link Pool} that never returns {@code null} from {@link Pool#acquire()} and that contains objects of the type created by the given {@link Factory} with the given maximum size.
+     * Returns a new thread safe {@link Pool} that never returns {@code null} from {@link Pool#acquire()} and that contains objects of the type created by the given {@link Factory} with
+     * the given maximum size.
      *
      * <p>If the pool is empty when {@link Pool#acquire()} is called, the given {@link Factory} will
      * be used to create a new instance.

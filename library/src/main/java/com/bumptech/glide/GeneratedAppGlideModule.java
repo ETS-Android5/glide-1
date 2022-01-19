@@ -7,8 +7,8 @@ import com.bumptech.glide.module.AppGlideModule;
 import java.util.Set;
 
 /**
- * Allows {@link AppGlideModule}s to exclude {@link com.bumptech.glide.annotation.GlideModule}s to ease the migration from {@link com.bumptech.glide.annotation.GlideModule}s to Glide's annotation processing system and optionally provides a {@link
- * com.bumptech.glide.manager.RequestManagerRetriever.RequestManagerFactory} impl.
+ * Allows {@link AppGlideModule}s to exclude {@link com.bumptech.glide.annotation.GlideModule}s to ease the migration from {@link com.bumptech.glide.annotation.GlideModule}s to Glide's
+ * annotation processing system and optionally provides a {@link com.bumptech.glide.manager.RequestManagerRetriever.RequestManagerFactory} impl.
  */
 abstract class GeneratedAppGlideModule extends AppGlideModule {
     /**

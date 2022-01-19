@@ -44,15 +44,17 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * A cache that uses a bounded amount of space on a filesystem. Each cache entry has a string key and a fixed number of values. Each key must match the regex <strong>[a-z0-9_-]{1,120}</strong>. Values are byte sequences, accessible as streams or files. Each value must be between {@code 0} and {@code
- * Integer.MAX_VALUE} bytes in length.
+ * A cache that uses a bounded amount of space on a filesystem. Each cache entry has a string key and a fixed number of values. Each key must match the regex
+ * <strong>[a-z0-9_-]{1,120}</strong>. Values are byte sequences, accessible as streams or files. Each value must be between {@code 0} and {@code Integer.MAX_VALUE} bytes in length.
  *
  * <p>The cache stores its data in a directory on the filesystem. This
- * directory must be exclusive to the cache; the cache may delete or overwrite files from its directory. It is an error for multiple processes to use the same cache directory at the same time.
+ * directory must be exclusive to the cache; the cache may delete or overwrite files from its directory. It is an error for multiple processes to use the same cache directory at the
+ * same time.
  *
  * <p>This cache limits the number of bytes that it will store on the
- * filesystem. When the number of stored bytes exceeds the limit, the cache will remove entries in the background until the limit is satisfied. The limit is not strict: the cache may temporarily exceed it while waiting for files to be deleted. The limit does not include filesystem overhead or the
- * cache journal so space-sensitive applications should set a conservative limit.
+ * filesystem. When the number of stored bytes exceeds the limit, the cache will remove entries in the background until the limit is satisfied. The limit is not strict: the cache may
+ * temporarily exceed it while waiting for files to be deleted. The limit does not include filesystem overhead or the cache journal so space-sensitive applications should set a
+ * conservative limit.
  *
  * <p>Clients call {@link #edit} to create or update the values of an entry. An
  * entry may have only one editor at one time; if a value is not available to be edited then {@link #edit} will return null.
@@ -144,7 +146,8 @@ public final class DiskLruCache implements Closeable {
     private int redundantOpCount;
 
     /**
-     * To differentiate between old and current snapshots, each entry is given a sequence number each time an edit is committed. A snapshot is stale if its sequence number is not equal to its entry's sequence number.
+     * To differentiate between old and current snapshots, each entry is given a sequence number each time an edit is committed. A snapshot is stale if its sequence number is not equal
+     * to its entry's sequence number.
      */
     private long nextSequenceNumber = 0;
 

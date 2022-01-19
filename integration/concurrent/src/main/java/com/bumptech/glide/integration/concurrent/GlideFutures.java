@@ -38,12 +38,14 @@ public final class GlideFutures {
      * Submits the provided request, performs the provided {@code action} and returns a {@link ListenableFuture} that can be used to cancel the request or monitor its status.
      *
      * <p>Cancellation is best effort and may result in some resources not being returned back to
-     * Glide's pool. In particular, if the request is cancelled after the resource is loaded by Glide, but before {@code action} is run on {@code executor}, the resource will not be returned. We have the unfortunate choice between unsafely returning resources to the pool immediately when cancel is
-     * called while they may still be in use via {@link com.google.common.util.concurrent.ClosingFuture} or occasionally failing to return resources to the pool. Because failing to return resources to the pool is inefficient, but safe, that's the route we've chosen. A more sophisticated
-     * implementation may allow us to avoid the resource inefficiency.
+     * Glide's pool. In particular, if the request is cancelled after the resource is loaded by Glide, but before {@code action} is run on {@code executor}, the resource will not be
+     * returned. We have the unfortunate choice between unsafely returning resources to the pool immediately when cancel is called while they may still be in use via {@link
+     * com.google.common.util.concurrent.ClosingFuture} or occasionally failing to return resources to the pool. Because failing to return resources to the pool is inefficient, but
+     * safe, that's the route we've chosen. A more sophisticated implementation may allow us to avoid the resource inefficiency.
      *
      * <p>If you do not need to interact with resource, use {@link #preload(RequestManager,
-     * RequestBuilder, Executor)}. {@code preload} is more efficient because it knows that the resource is never used and can always clear the resource immediately on cancellation, unlike this method.
+     * RequestBuilder, Executor)}. {@code preload} is more efficient because it knows that the resource is never used and can always clear the resource immediately on cancellation,
+     * unlike this method.
      *
      * <p>An example usage:
      *

@@ -94,7 +94,8 @@ public final class LazyHeaders implements Headers {
      * <p>This class is not thread safe.
      *
      * <p>This class may include default values for User-Agent and Accept-Encoding headers. These will
-     * be replaced by calls to either {@link #setHeader(String, LazyHeaderFactory)} or {@link #addHeader(String, String)}, even though {@link #addHeader(String, LazyHeaderFactory)} would usually append an additional value.
+     * be replaced by calls to either {@link #setHeader(String, LazyHeaderFactory)} or {@link #addHeader(String, String)}, even though {@link #addHeader(String, LazyHeaderFactory)}
+     * would usually append an additional value.
      */
     public static final class Builder {
         private static final String USER_AGENT_HEADER = "User-Agent";

@@ -47,14 +47,16 @@ public final class Downsampler {
     static final String TAG = "Downsampler";
 
     /**
-     * Indicates the {@link com.bumptech.glide.load.DecodeFormat} that will be used in conjunction with the image format to determine the {@link android.graphics.Bitmap.Config} to provide to {@link android.graphics.BitmapFactory.Options#inPreferredConfig} when decoding the image.
+     * Indicates the {@link com.bumptech.glide.load.DecodeFormat} that will be used in conjunction with the image format to determine the {@link android.graphics.Bitmap.Config} to
+     * provide to {@link android.graphics.BitmapFactory.Options#inPreferredConfig} when decoding the image.
      */
     public static final Option<DecodeFormat> DECODE_FORMAT =
             Option.memory(
                     "com.bumptech.glide.load.resource.bitmap.Downsampler.DecodeFormat", DecodeFormat.DEFAULT);
 
     /**
-     * Sets the {@link PreferredColorSpace} that will be used along with the version of Android and color space of the requested image to determine the final color space used to decode the image.
+     * Sets the {@link PreferredColorSpace} that will be used along with the version of Android and color space of the requested image to determine the final color space used to decode
+     * the image.
      *
      * <p>Refer to {@link PreferredColorSpace} for details on how this option works and its various
      * limitations.
@@ -62,14 +64,16 @@ public final class Downsampler {
     public static final Option<PreferredColorSpace> PREFERRED_COLOR_SPACE =
             Option.memory("com.bumptech.glide.load.resource.bitmap.Downsampler.PreferredColorSpace");
     /**
-     * Indicates the {@link com.bumptech.glide.load.resource.bitmap.DownsampleStrategy} option that will be used to calculate the sample size to use to downsample an image given the original and target dimensions of the image.
+     * Indicates the {@link com.bumptech.glide.load.resource.bitmap.DownsampleStrategy} option that will be used to calculate the sample size to use to downsample an image given the
+     * original and target dimensions of the image.
      *
      * @deprecated Use {@link DownsampleStrategy#OPTION} directly instead.
      */
     @Deprecated
     public static final Option<DownsampleStrategy> DOWNSAMPLE_STRATEGY = DownsampleStrategy.OPTION;
     /**
-     * Ensure that the size of the bitmap is fixed to the requested width and height of the resource from the caller. The final resource dimensions may differ from the requested width and height, and thus setting this to true may result in the bitmap size differing from the resource dimensions.
+     * Ensure that the size of the bitmap is fixed to the requested width and height of the resource from the caller. The final resource dimensions may differ from the requested width
+     * and height, and thus setting this to true may result in the bitmap size differing from the resource dimensions.
      *
      * <p>This can be used as a performance optimization for KitKat and above by fixing the size of
      * the bitmap for a collection of requested resources so that the bitmap pool will not need to allocate new bitmaps for images of different sizes.
@@ -83,8 +87,10 @@ public final class Downsampler {
      * Indicates that it's safe or unsafe to decode {@link Bitmap}s with {@link Bitmap.Config#HARDWARE}.
      *
      * <p>Callers should almost never set this value to {@code true} manually. Glide will already do
-     * so when Glide believes it's safe to do (when no transformations are applied). Instead, callers can set this value to {@code false} to prevent Glide from decoding hardware bitmaps if Glide is unable to detect that hardware bitmaps are unsafe. For example, you should set this to {@code false}
-     * if you plan to draw it to a software {@link android.graphics.Canvas} or if you plan to inspect the {@link Bitmap}s pixels with {@link Bitmap#getPixel(int, int)} or {@link Bitmap#getPixels(int[], int, int, int, int, int, int)}.
+     * so when Glide believes it's safe to do (when no transformations are applied). Instead, callers can set this value to {@code false} to prevent Glide from decoding hardware bitmaps
+     * if Glide is unable to detect that hardware bitmaps are unsafe. For example, you should set this to {@code false} if you plan to draw it to a software {@link
+     * android.graphics.Canvas} or if you plan to inspect the {@link Bitmap}s pixels with {@link Bitmap#getPixel(int, int)} or {@link Bitmap#getPixels(int[], int, int, int, int, int,
+     * int)}.
      *
      * <p>Callers can disable hardware {@link Bitmap}s for all loads using {@link
      * com.bumptech.glide.GlideBuilder#setDefaultRequestOptions(RequestOptions)}.
@@ -151,7 +157,8 @@ public final class Downsampler {
     }
 
     /**
-     * Returns a Bitmap decoded from the given {@link InputStream} that is rotated to match any EXIF data present in the stream and that is downsampled according to the given dimensions and any provided {@link com.bumptech.glide.load.resource.bitmap.DownsampleStrategy} option.
+     * Returns a Bitmap decoded from the given {@link InputStream} that is rotated to match any EXIF data present in the stream and that is downsampled according to the given dimensions
+     * and any provided {@link com.bumptech.glide.load.resource.bitmap.DownsampleStrategy} option.
      *
      * @see #decode(InputStream, int, int, Options, DecodeCallbacks)
      */
@@ -175,10 +182,12 @@ public final class Downsampler {
     }
 
     /**
-     * Returns a Bitmap decoded from the given {@link InputStream} that is rotated to match any EXIF data present in the stream and that is downsampled according to the given dimensions and any provided {@link com.bumptech.glide.load.resource.bitmap.DownsampleStrategy} option.
+     * Returns a Bitmap decoded from the given {@link InputStream} that is rotated to match any EXIF data present in the stream and that is downsampled according to the given dimensions
+     * and any provided {@link com.bumptech.glide.load.resource.bitmap.DownsampleStrategy} option.
      *
      * <p>If a Bitmap is present in the {@link
-     * com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool} whose dimensions exactly match those of the image for the given InputStream is available, the operation is much less expensive in terms of memory.
+     * com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool} whose dimensions exactly match those of the image for the given InputStream is available, the operation is much less
+     * expensive in terms of memory.
      *
      * @param is              An {@link InputStream} to the data for the image.
      * @param requestedWidth  The width the final image should be close to.
@@ -625,7 +634,8 @@ public final class Downsampler {
     }
 
     /**
-     * BitmapFactory calculates the density scale factor as a float. This introduces some non-trivial error. This method attempts to account for that error by adjusting the inTargetDensity so that the final scale factor is as close to our target as possible.
+     * BitmapFactory calculates the density scale factor as a float. This introduces some non-trivial error. This method attempts to account for that error by adjusting the
+     * inTargetDensity so that the final scale factor is as close to our target as possible.
      */
     private static int adjustTargetDensityForError(double adjustedScaleFactor) {
         int densityMultiplier = getDensityMultiplier(adjustedScaleFactor);

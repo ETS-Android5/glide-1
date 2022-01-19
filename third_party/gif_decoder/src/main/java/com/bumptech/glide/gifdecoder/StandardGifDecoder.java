@@ -45,7 +45,8 @@ import java.util.Arrays;
  * Reads frame data from a GIF image source and decodes it into individual frames for animation purposes.  Image data can be read from either and InputStream source or a byte[].
  *
  * <p>This class is optimized for running animations with the frames, there are no methods to get
- * individual frame images, only to decode the next frame in the animation sequence.  Instead, it lowers its memory footprint by only housing the minimum data necessary to decode the next frame in the animation sequence.
+ * individual frame images, only to decode the next frame in the animation sequence.  Instead, it lowers its memory footprint by only housing the minimum data necessary to decode the
+ * next frame in the animation sequence.
  *
  * <p>The animation must be manually moved forward using {@link #advance()} before requesting the
  * next frame.  This method must also be called before you request the first frame or an error will occur.

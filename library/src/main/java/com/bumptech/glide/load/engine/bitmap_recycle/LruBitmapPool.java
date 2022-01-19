@@ -16,8 +16,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * An {@link com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool} implementation that uses an {@link com.bumptech.glide.load.engine.bitmap_recycle.LruPoolStrategy} to bucket {@link Bitmap}s and then uses an LRU eviction policy to evict {@link android.graphics.Bitmap}s from the least recently
- * used bucket in order to keep the pool below a given maximum size limit.
+ * An {@link com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool} implementation that uses an {@link com.bumptech.glide.load.engine.bitmap_recycle.LruPoolStrategy} to bucket {@link
+ * Bitmap}s and then uses an LRU eviction policy to evict {@link android.graphics.Bitmap}s from the least recently used bucket in order to keep the pool below a given maximum size
+ * limit.
  */
 public class LruBitmapPool implements BitmapPool {
     private static final String TAG = "LruBitmapPool";
@@ -198,7 +199,7 @@ public class LruBitmapPool implements BitmapPool {
 
     @Nullable
     private synchronized Bitmap getDirtyOrNull(int width, int height, @Nullable Bitmap.Config config) {
-        Log.i("trackBug","LruBitmapPool#getDirtyOrNull");
+        Log.i("trackBug", "LruBitmapPool#getDirtyOrNull");
         assertNotHardwareConfig(config);
         // Config will be null for non public config types, which can lead to transformations naively
         // passing in null as the requested config here. See issue #194.

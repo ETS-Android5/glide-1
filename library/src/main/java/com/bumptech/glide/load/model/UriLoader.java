@@ -18,7 +18,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * A ModelLoader for {@link android.net.Uri}s that handles local {@link android.net.Uri}s directly and routes remote {@link android.net.Uri}s to a wrapped {@link com.bumptech.glide.load.model.ModelLoader} that handles {@link com.bumptech.glide.load.model.GlideUrl}s.
+ * A ModelLoader for {@link android.net.Uri}s that handles local {@link android.net.Uri}s directly and routes remote {@link android.net.Uri}s to a wrapped {@link
+ * com.bumptech.glide.load.model.ModelLoader} that handles {@link com.bumptech.glide.load.model.GlideUrl}s.
  *
  * @param <Data> The type of data that will be retrieved for {@link android.net.Uri}s.
  */

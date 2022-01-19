@@ -19,7 +19,8 @@ import java.util.List;
  * Allows attempting multiple ModelLoaders registered for a given model and data class.
  *
  * <p>TODO: we should try to find a way to remove this class. It exists to allow individual
- * ModelLoaders to delegate to multiple ModelLoaders without having to duplicate this logic everywhere. We have very similar logic in the {@link com.bumptech.glide.load.engine.DataFetcherGenerator} implementations and should try to avoid this duplication.
+ * ModelLoaders to delegate to multiple ModelLoaders without having to duplicate this logic everywhere. We have very similar logic in the {@link
+ * com.bumptech.glide.load.engine.DataFetcherGenerator} implementations and should try to avoid this duplication.
  */
 class MultiModelLoader<Model, Data> implements ModelLoader<Model, Data> {
 

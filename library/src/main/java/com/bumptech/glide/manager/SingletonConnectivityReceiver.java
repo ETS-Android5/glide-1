@@ -94,8 +94,8 @@ final class SingletonConnectivityReceiver {
     }
 
     /**
-     * To avoid holding a lock while notifying listeners, the unregisterd listener may still be notified about a connectivity change after this method completes if this method is called on a thread other than the main thread and if a connectivity broadcast is racing with this method. Callers must
-     * handle this case.
+     * To avoid holding a lock while notifying listeners, the unregisterd listener may still be notified about a connectivity change after this method completes if this method is called
+     * on a thread other than the main thread and if a connectivity broadcast is racing with this method. Callers must handle this case.
      */
     synchronized void unregister(ConnectivityListener listener) {
         listeners.remove(listener);

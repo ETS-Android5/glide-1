@@ -11,7 +11,8 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 
 /**
- * A base class to convert byte arrays to input streams so they can be decoded. This class is abstract because there is no simple/quick way to generate an id from the bytes themselves, so subclass must include an id.
+ * A base class to convert byte arrays to input streams so they can be decoded. This class is abstract because there is no simple/quick way to generate an id from the bytes themselves,
+ * so subclass must include an id.
  *
  * @param <Data> The type of data that will be loaded from a given byte array.
  */
@@ -50,7 +51,8 @@ public class ByteArrayLoader<Data> implements ModelLoader<byte[], Data> {
         private final Converter<Data> converter;
 
         /**
-         * @param model We really ought to copy the model, but doing so can be hugely expensive and/or lead to OOMs. In practice it's unlikely that users would pass an array into Glide and then mutate it.
+         * @param model We really ought to copy the model, but doing so can be hugely expensive and/or lead to OOMs. In practice it's unlikely that users would pass an array into Glide
+         *              and then mutate it.
          */
         @SuppressWarnings("PMD.ArrayIsStoredDirectly")
         Fetcher(byte[] model, Converter<Data> converter) {

@@ -5,7 +5,8 @@ package com.bumptech.glide.load;
  */
 public enum DataSource {
     /**
-     * Indicates data was probably retrieved locally from the device, although it may have been obtained through a content provider that may have obtained the data from a remote source.
+     * Indicates data was probably retrieved locally from the device, although it may have been obtained through a content provider that may have obtained the data from a remote
+     * source.
      */
     LOCAL,
     /**

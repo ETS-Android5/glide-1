@@ -9,7 +9,8 @@ import com.bumptech.glide.Registry;
  * An interface for creating a {@link ModelLoader} for a given model type.
  *
  * <p>The application {@link android.content.Context} can be passed in to the constructor of the
- * factory when necessary. It's unsafe to retain {@link android.app.Activity} {@link android.content.Context}s in factories. The {@link android.content.Context} can be obtained from {@link com.bumptech.glide.module.LibraryGlideModule#registerComponents(Context, Glide, Registry)} in most cases.
+ * factory when necessary. It's unsafe to retain {@link android.app.Activity} {@link android.content.Context}s in factories. The {@link android.content.Context} can be obtained from
+ * {@link com.bumptech.glide.module.LibraryGlideModule#registerComponents(Context, Glide, Registry)} in most cases.
  *
  * @param <T> The type of the model the {@link com.bumptech.glide.load.model.ModelLoader}s built by this factory can handle
  * @param <Y> The type of data the {@link com.bumptech.glide.load.model.ModelLoader}s built by this factory can load.

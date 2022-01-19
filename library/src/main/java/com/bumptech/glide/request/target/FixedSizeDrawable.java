@@ -15,8 +15,9 @@ import com.bumptech.glide.util.Preconditions;
 import com.bumptech.glide.util.Synthetic;
 
 /**
- * A wrapper drawable to square the wrapped drawable so that it expands to fill a square with exactly the given side length. The goal of this drawable is to ensure that square thumbnail drawables always match the size of the view they will be displayed in to avoid a costly requestLayout call. This
- * class should not be used with views or drawables that are not square.
+ * A wrapper drawable to square the wrapped drawable so that it expands to fill a square with exactly the given side length. The goal of this drawable is to ensure that square thumbnail
+ * drawables always match the size of the view they will be displayed in to avoid a costly requestLayout call. This class should not be used with views or drawables that are not
+ * square.
  */
 public class FixedSizeDrawable extends Drawable {
     private final Matrix matrix;

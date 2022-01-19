@@ -3,7 +3,8 @@ package com.bumptech.glide.request.transition;
 import android.view.View;
 
 /**
- * A {@link Transition} that accepts an interface that can apply an animation like a {@link android.view.ViewPropertyAnimator} or a {@link android.animation.ObjectAnimator} that can be used to transition a resource into a {@link View}.
+ * A {@link Transition} that accepts an interface that can apply an animation like a {@link android.view.ViewPropertyAnimator} or a {@link android.animation.ObjectAnimator} that can be
+ * used to transition a resource into a {@link View}.
  *
  * @param <R> The type of the resource that will be transitioned into a view.
  */
@@ -23,7 +24,8 @@ public class ViewPropertyTransition<R> implements Transition<R> {
     }
 
     /**
-     * Always applies the {@link ViewPropertyTransition.Animator} given in the constructor to the given view and returns {@code false} because the animator cannot put the new resource on the view.
+     * Always applies the {@link ViewPropertyTransition.Animator} given in the constructor to the given view and returns {@code false} because the animator cannot put the new resource
+     * on the view.
      *
      * @param current {@inheritDoc}
      * @param adapter {@inheritDoc}

@@ -18,7 +18,8 @@ import java.io.IOException;
 import java.util.Collections;
 
 /**
- * Generates {@link com.bumptech.glide.load.data.DataFetcher DataFetchers} from original source data using registered {@link com.bumptech.glide.load.model.ModelLoader ModelLoaders} and the model provided for the load.
+ * Generates {@link com.bumptech.glide.load.data.DataFetcher DataFetchers} from original source data using registered {@link com.bumptech.glide.load.model.ModelLoader ModelLoaders} and
+ * the model provided for the load.
  *
  * <p>Depending on the disk cache strategy, source data may first be written to disk and then loaded
  * from the cache file rather than returned directly.
@@ -122,7 +123,8 @@ class SourceGenerator implements DataFetcherGenerator, DataFetcherGenerator.Fetc
     }
 
     /**
-     * Returns {@code true} if we were able to cache the data and should try to decode the data directly from cache and {@code false} if we were unable to cache the data and should make an attempt to decode from source.
+     * Returns {@code true} if we were able to cache the data and should try to decode the data directly from cache and {@code false} if we were unable to cache the data and should make
+     * an attempt to decode from source.
      */
     private boolean cacheData(Object dataToCache) throws IOException {
         long startTime = LogTime.getLogTime();

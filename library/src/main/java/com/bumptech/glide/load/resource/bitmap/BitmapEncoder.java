@@ -23,7 +23,8 @@ import java.io.OutputStream;
  * An {@link com.bumptech.glide.load.ResourceEncoder} that writes {@link android.graphics.Bitmap}s to {@link java.io.OutputStream}s.
  *
  * <p>{@link android.graphics.Bitmap}s that return true from {@link android.graphics.Bitmap#hasAlpha
- * ()}} are written using {@link android.graphics.Bitmap.CompressFormat#PNG} to preserve alpha and all other bitmaps are written using {@link android.graphics.Bitmap.CompressFormat#JPEG}.
+ * ()}} are written using {@link android.graphics.Bitmap.CompressFormat#PNG} to preserve alpha and all other bitmaps are written using {@link
+ * android.graphics.Bitmap.CompressFormat#JPEG}.
  *
  * @see android.graphics.Bitmap#compress(android.graphics.Bitmap.CompressFormat, int, java.io.OutputStream)
  */

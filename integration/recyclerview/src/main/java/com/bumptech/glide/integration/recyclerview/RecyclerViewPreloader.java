@@ -12,11 +12,12 @@ import com.bumptech.glide.ListPreloader.PreloadSizeProvider;
 import com.bumptech.glide.RequestManager;
 
 /**
- * Loads a few resources ahead in the direction of scrolling in any {@link RecyclerView} so that images are in the memory cache just before the corresponding view in created in the list. Gives the appearance of an infinitely large image cache, depending on scrolling speed, cpu speed, and cache
- * size.
+ * Loads a few resources ahead in the direction of scrolling in any {@link RecyclerView} so that images are in the memory cache just before the corresponding view in created in the
+ * list. Gives the appearance of an infinitely large image cache, depending on scrolling speed, cpu speed, and cache size.
  *
  * <p>Must be added as a listener to the {@link RecyclerView} using {@link
- * RecyclerView#addOnScrollListener(RecyclerView.OnScrollListener)}, or have its corresponding methods called from another {@link androidx.recyclerview.widget.RecyclerView.OnScrollListener} to function.
+ * RecyclerView#addOnScrollListener(RecyclerView.OnScrollListener)}, or have its corresponding methods called from another {@link
+ * androidx.recyclerview.widget.RecyclerView.OnScrollListener} to function.
  *
  * <p>This class only works with {@link androidx.recyclerview.widget.LinearLayoutManager} and
  * subclasses of {@link androidx.recyclerview.widget.LinearLayoutManager}.

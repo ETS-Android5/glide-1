@@ -37,7 +37,8 @@ public class GifDrawable extends Drawable
     @SuppressWarnings("WeakerAccess")
     public static final int LOOP_FOREVER = -1;
     /**
-     * A constant indicating that an animated drawable should loop for its default number of times. For animated GIFs, this constant indicates the GIF should use the netscape loop count if present.
+     * A constant indicating that an animated drawable should loop for its default number of times. For animated GIFs, this constant indicates the GIF should use the netscape loop count
+     * if present.
      */
     // Public API.
     @SuppressWarnings("WeakerAccess")
@@ -59,8 +60,8 @@ public class GifDrawable extends Drawable
      */
     private boolean isRecycled;
     /**
-     * True if the drawable is currently visible. Default to true because on certain platforms (at least 4.1.1), setVisible is not called on {@link android.graphics.drawable.Drawable Drawables} during {@link android.widget.ImageView#setImageDrawable(android.graphics.drawable.Drawable)}. See issue
-     * #130.
+     * True if the drawable is currently visible. Default to true because on certain platforms (at least 4.1.1), setVisible is not called on {@link android.graphics.drawable.Drawable
+     * Drawables} during {@link android.widget.ImageView#setImageDrawable(android.graphics.drawable.Drawable)}. See issue #130.
      */
     private boolean isVisible = true;
     /**
@@ -87,8 +88,10 @@ public class GifDrawable extends Drawable
      * @param context             A context.
      * @param bitmapPool          Ignored, see deprecation note.
      * @param frameTransformation An {@link com.bumptech.glide.load.Transformation} that can be applied to each frame.
-     * @param targetFrameWidth    The desired width of the frames displayed by this drawable (the width of the view or {@link com.bumptech.glide.request.target.Target} this drawable is being loaded into).
-     * @param targetFrameHeight   The desired height of the frames displayed by this drawable (the height of the view or {@link com.bumptech.glide.request.target.Target} this drawable is being loaded into).
+     * @param targetFrameWidth    The desired width of the frames displayed by this drawable (the width of the view or {@link com.bumptech.glide.request.target.Target} this drawable is
+     *                            being loaded into).
+     * @param targetFrameHeight   The desired height of the frames displayed by this drawable (the height of the view or {@link com.bumptech.glide.request.target.Target} this drawable
+     *                            is being loaded into).
      * @param gifDecoder          The decoder to use to decode GIF data.
      * @param firstFrame          The decoded and transformed first frame of this GIF.
      * @see #setFrameTransformation(com.bumptech.glide.load.Transformation, android.graphics.Bitmap)
@@ -112,8 +115,10 @@ public class GifDrawable extends Drawable
      *
      * @param context             A context.
      * @param frameTransformation An {@link com.bumptech.glide.load.Transformation} that can be applied to each frame.
-     * @param targetFrameWidth    The desired width of the frames displayed by this drawable (the width of the view or {@link com.bumptech.glide.request.target.Target} this drawable is being loaded into).
-     * @param targetFrameHeight   The desired height of the frames displayed by this drawable (the height of the view or {@link com.bumptech.glide.request.target.Target} this drawable is being loaded into).
+     * @param targetFrameWidth    The desired width of the frames displayed by this drawable (the width of the view or {@link com.bumptech.glide.request.target.Target} this drawable is
+     *                            being loaded into).
+     * @param targetFrameHeight   The desired height of the frames displayed by this drawable (the height of the view or {@link com.bumptech.glide.request.target.Target} this drawable
+     *                            is being loaded into).
      * @param gifDecoder          The decoder to use to decode GIF data.
      * @param firstFrame          The decoded and transformed first frame of this GIF.
      * @see #setFrameTransformation(com.bumptech.glide.load.Transformation, android.graphics.Bitmap)

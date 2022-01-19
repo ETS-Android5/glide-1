@@ -82,7 +82,8 @@ public class GifHeaderParser {
     /**
      * Mask (bits 2-0) to extract Size of the Local Color Table of the current image.
      * <p><b>GIF89a</b>: <i>If the Local Color Table Flag is set to 1, the value in this
-     * field is used to calculate the number of bytes contained in the Local Color Table. To determine that actual size of the color table, raise 2 to [the value of the field + 1]. This value should be 0 if there is no Local Color Table specified.</i></p>
+     * field is used to calculate the number of bytes contained in the Local Color Table. To determine that actual size of the color table, raise 2 to [the value of the field + 1]. This
+     * value should be 0 if there is no Local Color Table specified.</i></p>
      */
     private static final int DESCRIPTOR_MASK_LCT_SIZE = 0b00000111;
 
@@ -101,8 +102,9 @@ public class GifHeaderParser {
     /**
      * Mask (bits 2-0) to extract Size of the Global Color Table of the current image.
      * <p><b>GIF89a</b>: <i>If the Global Color Table Flag is set to 1, the value in this
-     * field is used to calculate the number of bytes contained in the Global Color Table. To determine that actual size of the color table, raise 2 to [the value of the field + 1]. Even if there is no Global Color Table specified, set this field according to the above formula so that decoders can
-     * choose the best graphics mode to display the stream in.</i></p>
+     * field is used to calculate the number of bytes contained in the Global Color Table. To determine that actual size of the color table, raise 2 to [the value of the field + 1].
+     * Even if there is no Global Color Table specified, set this field according to the above formula so that decoders can choose the best graphics mode to display the stream
+     * in.</i></p>
      */
     private static final int LSD_MASK_GCT_SIZE = 0b00000111;
 

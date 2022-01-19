@@ -16,10 +16,12 @@ import java.util.NavigableMap;
 import java.util.TreeMap;
 
 /**
- * Keys {@link android.graphics.Bitmap Bitmaps} using both {@link android.graphics.Bitmap#getAllocationByteCount()} and the {@link android.graphics.Bitmap.Config} returned from {@link android.graphics.Bitmap#getConfig()}.
+ * Keys {@link android.graphics.Bitmap Bitmaps} using both {@link android.graphics.Bitmap#getAllocationByteCount()} and the {@link android.graphics.Bitmap.Config} returned from {@link
+ * android.graphics.Bitmap#getConfig()}.
  *
  * <p>Using both the config and the byte size allows us to safely re-use a greater variety of {@link
- * android.graphics.Bitmap Bitmaps}, which increases the hit rate of the pool and therefore the performance of applications. This class works around #301 by only allowing re-use of {@link android.graphics.Bitmap Bitmaps} with a matching number of bytes per pixel.
+ * android.graphics.Bitmap Bitmaps}, which increases the hit rate of the pool and therefore the performance of applications. This class works around #301 by only allowing re-use of
+ * {@link android.graphics.Bitmap Bitmaps} with a matching number of bytes per pixel.
  */
 @RequiresApi(Build.VERSION_CODES.KITKAT)
 public class SizeConfigStrategy implements LruPoolStrategy {

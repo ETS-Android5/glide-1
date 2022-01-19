@@ -12,7 +12,8 @@ import java.security.MessageDigest;
 import java.util.Map;
 
 /**
- * A wrapper for strings representing http/https URLs responsible for ensuring URLs are properly escaped and avoiding unnecessary URL instantiations for loaders that require only string urls rather than URL objects.
+ * A wrapper for strings representing http/https URLs responsible for ensuring URLs are properly escaped and avoiding unnecessary URL instantiations for loaders that require only string
+ * urls rather than URL objects.
  *
  * <p>Users wishing to replace the class for handling URLs must register a factory using GlideUrl.
  *

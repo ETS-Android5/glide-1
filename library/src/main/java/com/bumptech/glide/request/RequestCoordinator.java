@@ -4,7 +4,8 @@ package com.bumptech.glide.request;
  * An interface for coordinating multiple requests with the same {@link com.bumptech.glide.request.target.Target}.
  *
  * <p>To avoid deadlock, implemenations must <em>not</em> call into individual {@link Request}s to
- * determine their state (ie do not call {@link Request#isCleared()} or {@link Request#isRunning()} etc). Instead use {@link RequestState} and the various methods available on this interface and {@link Request} to track states manually.
+ * determine their state (ie do not call {@link Request#isCleared()} or {@link Request#isRunning()} etc). Instead use {@link RequestState} and the various methods available on this
+ * interface and {@link Request} to track states manually.
  */
 public interface RequestCoordinator {
 

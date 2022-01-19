@@ -31,16 +31,13 @@ public class RequestTracker {
     // maintain hard references to these requests to ensure that they are not garbage collected
     // before they start running or while they are paused. See #346.
     /**
-     * #346:
-     * Requests started before onStart may never run:
-     * RequestTracker only maintains a map of weak references to requests. RequestTracker also does not
-     * immediately run requests if it believes the Fragment or activity is not started. Requests into
-     * non-view targets may not be strongly referenced outside of Glide's request system. As a result,
-     * requests into non-view targets made before onStart() may be only weakly referenced and be garbage
-     * collected before the fragment or activity is started, preventing the request from ever running.
+     * #346: Requests started before onStart may never run: RequestTracker only maintains a map of weak references to requests. RequestTracker also does not immediately run requests if
+     * it believes the Fragment or activity is not started. Requests into non-view targets may not be strongly referenced outside of Glide's request system. As a result, requests into
+     * non-view targets made before onStart() may be only weakly referenced and be garbage collected before the fragment or activity is started, preventing the request from ever
+     * running.
      */
     @Important("14.requests中保存的是Request的弱引用，这可能导致onCreate之前创建的Request对象在onCreate还没调用就被回收了，"
-        + "这里用pendingRequests来持有onCreate之前创建的Request对象，保证它不会在没被调用之前就被回收")
+            + "这里用pendingRequests来持有onCreate之前创建的Request对象，保证它不会在没被调用之前就被回收")
     private final Set<Request> pendingRequests = new HashSet<>();
 
     private boolean isPaused;

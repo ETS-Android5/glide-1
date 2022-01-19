@@ -103,7 +103,8 @@ public abstract class BaseRequestOptions<T extends BaseRequestOptions<T>> implem
     }
 
     /**
-     * Applies a multiplier to the {@link com.bumptech.glide.request.target.Target}'s size before loading the resource. Useful for loading thumbnails or trying to avoid loading huge resources (particularly {@link Bitmap}s on devices with overly dense screens.
+     * Applies a multiplier to the {@link com.bumptech.glide.request.target.Target}'s size before loading the resource. Useful for loading thumbnails or trying to avoid loading huge
+     * resources (particularly {@link Bitmap}s on devices with overly dense screens.
      *
      * @param sizeMultiplier The multiplier to apply to the {@link com.bumptech.glide.request.target.Target}'s dimensions when loading the resource.
      * @return This request builder.
@@ -128,7 +129,8 @@ public abstract class BaseRequestOptions<T extends BaseRequestOptions<T>> implem
      * If set to {@code true}, uses a cached unlimited {@link java.util.concurrent.Executor} to run the request.
      *
      * <p>This method should <em>ONLY</em> be used when a Glide load is started recursively on one of
-     * Glide's threads as part of another request. Using this method in other scenarios can lead to excessive memory usage and OOMs and/or a significant decrease in performance across an application.
+     * Glide's threads as part of another request. Using this method in other scenarios can lead to excessive memory usage and OOMs and/or a significant decrease in performance across
+     * an application.
      *
      * <p>If both this method and {@link #useAnimationPool(boolean)} are set, this method will be
      * preferred and {@link #useAnimationPool(boolean)} will be ignored.
@@ -150,7 +152,8 @@ public abstract class BaseRequestOptions<T extends BaseRequestOptions<T>> implem
      * If set to {@code true}, uses a special {@link java.util.concurrent.Executor} that is used exclusively for decoding frames of animated resources, like GIFs.
      *
      * <p>The animation executor disallows network operations and must not be used for loads that may
-     * load remote data. The animation executor has fewer threads available to it than Glide's normal executors and is only useful as a way of avoiding blocking on longer and more expensive reads for critical requests like those in an animating GIF.
+     * load remote data. The animation executor has fewer threads available to it than Glide's normal executors and is only useful as a way of avoiding blocking on longer and more
+     * expensive reads for critical requests like those in an animating GIF.
      *
      * <p>If both {@link #useUnlimitedSourceGeneratorsPool(boolean)} and this method are set, {@link
      * #useUnlimitedSourceGeneratorsPool(boolean)} will be preferred and this method will be ignored.
@@ -190,7 +193,8 @@ public abstract class BaseRequestOptions<T extends BaseRequestOptions<T>> implem
      * <p>Defaults to {@link DiskCacheStrategy#AUTOMATIC}.
      *
      * <p>For most applications {@link DiskCacheStrategy#RESOURCE} is ideal. Applications that use the
-     * same resource multiple times in multiple sizes and are willing to trade off some speed and disk space in return for lower bandwidth usage may want to consider using {@link DiskCacheStrategy#DATA} or {@link DiskCacheStrategy#ALL}.
+     * same resource multiple times in multiple sizes and are willing to trade off some speed and disk space in return for lower bandwidth usage may want to consider using {@link
+     * DiskCacheStrategy#DATA} or {@link DiskCacheStrategy#ALL}.
      *
      * @param strategy The strategy to use.
      * @return This request builder.
@@ -380,13 +384,15 @@ public abstract class BaseRequestOptions<T extends BaseRequestOptions<T>> implem
     }
 
     /**
-     * Sets the {@link android.content.res.Resources.Theme} to apply when loading {@link Drawable}s for resource ids provided via {@link #error(int)}, {@link #placeholder(int)}, and {@link #fallback(Drawable)}.
+     * Sets the {@link android.content.res.Resources.Theme} to apply when loading {@link Drawable}s for resource ids provided via {@link #error(int)}, {@link #placeholder(int)}, and
+     * {@link #fallback(Drawable)}.
      *
      * <p>The theme is <em>NOT</em> applied in the decoder that will attempt to decode a given
      * resource id model on Glide's background threads. The theme is used exclusively on the main thread to obtain placeholder/error/fallback drawables to avoid leaking Activities.
      *
      * <p>If the {@link android.content.Context} of the {@link android.app.Fragment} or {@link
-     * android.app.Activity} used to start this load has a different {@link android.content.res.Resources.Theme}, the {@link android.content.res.Resources.Theme} provided here will override the {@link android.content.res.Resources.Theme} of the {@link android.content.Context}.
+     * android.app.Activity} used to start this load has a different {@link android.content.res.Resources.Theme}, the {@link android.content.res.Resources.Theme} provided here will
+     * override the {@link android.content.res.Resources.Theme} of the {@link android.content.Context}.
      *
      * @param theme The theme to use when loading Drawables.
      * @return this request builder.
@@ -427,7 +433,8 @@ public abstract class BaseRequestOptions<T extends BaseRequestOptions<T>> implem
     }
 
     /**
-     * Overrides the {@link com.bumptech.glide.request.target.Target}'s width and height with the given values. This is useful for thumbnails, and should only be used for other cases when you need a very specific image size.
+     * Overrides the {@link com.bumptech.glide.request.target.Target}'s width and height with the given values. This is useful for thumbnails, and should only be used for other cases
+     * when you need a very specific image size.
      *
      * @param width  The width in pixels to use to load the resource.
      * @param height The height in pixels to use to load the resource.
@@ -485,7 +492,8 @@ public abstract class BaseRequestOptions<T extends BaseRequestOptions<T>> implem
      * Returns a copy of this request builder with all of the options put so far on this builder.
      *
      * <p>This method returns a "deep" copy in that all non-immutable arguments are copied such that
-     * changes to one builder will not affect the other builder. However, in addition to immutable arguments, the current model is not copied copied so changes to the model will affect both builders.
+     * changes to one builder will not affect the other builder. However, in addition to immutable arguments, the current model is not copied copied so changes to the model will affect
+     * both builders.
      *
      * <p>Even if this object was locked, the cloned object returned from this method will not be
      * locked.
@@ -588,7 +596,8 @@ public abstract class BaseRequestOptions<T extends BaseRequestOptions<T>> implem
      * Sets the {@link DecodeFormat} to use when decoding {@link Bitmap} objects using {@link Downsampler} and Glide's default GIF decoders.
      *
      * <p>{@link DecodeFormat} is a request, not a requirement. It's possible the resource will be
-     * decoded using a decoder that cannot control the format ({@link android.media.MediaMetadataRetriever} for example), or that the decoder may choose to ignore the requested format if it can't display the image (i.e. RGB_565 is requested, but the image has alpha).
+     * decoded using a decoder that cannot control the format ({@link android.media.MediaMetadataRetriever} for example), or that the decoder may choose to ignore the requested format
+     * if it can't display the image (i.e. RGB_565 is requested, but the image has alpha).
      *
      * <p>This is a component option specific to {@link Downsampler} and Glide's GIF decoders. If the
      * default Bitmap decoders are replaced or skipped because of your configuration, this option may be ignored.
@@ -607,12 +616,15 @@ public abstract class BaseRequestOptions<T extends BaseRequestOptions<T>> implem
     }
 
     /**
-     * Disables the use of {@link android.graphics.Bitmap.Config#HARDWARE} in {@link Downsampler} to avoid errors caused by inspecting Bitmap pixels, drawing with hardware support disabled, drawing to {@link android.graphics.Canvas}s backed by {@link Bitmap}s etc.
+     * Disables the use of {@link android.graphics.Bitmap.Config#HARDWARE} in {@link Downsampler} to avoid errors caused by inspecting Bitmap pixels, drawing with hardware support
+     * disabled, drawing to {@link android.graphics.Canvas}s backed by {@link Bitmap}s etc.
      *
      * <p>It's almost never safe to set {@link Downsampler#ALLOW_HARDWARE_CONFIG} to {@code true} so
-     * we only provide a way to disable hardware configs entirely. If no option is set for {@link Downsampler#ALLOW_HARDWARE_CONFIG}, Glide will set the value per request based on whether or not a {@link Transformation} is applied and if one is, the type of {@link Transformation} applied. Built in
-     * transformations like {@link FitCenter} and {@link com.bumptech.glide.load.resource.bitmap.DownsampleStrategy.CenterOutside} can safely use {@link android.graphics.Bitmap.Config#HARDWARE} because they can be entirely replaced by scaling within {@link Downsampler}. {@link Transformation}s like
-     * {@link #circleCrop()} that can't be replicated by {@link Downsampler} cannot use {@link Bitmap.Config#HARDWARE} because {@link android.graphics.Bitmap.Config#HARDWARE} cannot be drawn to {@link android.graphics.Canvas}s, which is required by most {@link Transformation}s.
+     * we only provide a way to disable hardware configs entirely. If no option is set for {@link Downsampler#ALLOW_HARDWARE_CONFIG}, Glide will set the value per request based on
+     * whether or not a {@link Transformation} is applied and if one is, the type of {@link Transformation} applied. Built in transformations like {@link FitCenter} and {@link
+     * com.bumptech.glide.load.resource.bitmap.DownsampleStrategy.CenterOutside} can safely use {@link android.graphics.Bitmap.Config#HARDWARE} because they can be entirely replaced by
+     * scaling within {@link Downsampler}. {@link Transformation}s like {@link #circleCrop()} that can't be replicated by {@link Downsampler} cannot use {@link Bitmap.Config#HARDWARE}
+     * because {@link android.graphics.Bitmap.Config#HARDWARE} cannot be drawn to {@link android.graphics.Canvas}s, which is required by most {@link Transformation}s.
      */
     @NonNull
     @CheckResult
@@ -636,7 +648,8 @@ public abstract class BaseRequestOptions<T extends BaseRequestOptions<T>> implem
      * Sets the read and write timeout for the http requests used to load the image.
      *
      * <p>This is a component option specific to Glide's default networking library and {@link
-     * com.bumptech.glide.load.model.stream.HttpGlideUrlLoader}. If you use any other networking library including Glide's Volley or OkHttp integration libraries, this option will be ignored.
+     * com.bumptech.glide.load.model.stream.HttpGlideUrlLoader}. If you use any other networking library including Glide's Volley or OkHttp integration libraries, this option will be
+     * ignored.
      *
      * @param timeoutMs The read and write timeout in milliseconds.
      * @see com.bumptech.glide.load.model.stream.HttpGlideUrlLoader#TIMEOUT
@@ -822,7 +835,8 @@ public abstract class BaseRequestOptions<T extends BaseRequestOptions<T>> implem
     }
 
     /**
-     * Applies the given {@link Transformation} for {@link Bitmap Bitmaps} to the default types ({@link Bitmap}, {@link android.graphics.drawable.BitmapDrawable}, and {@link com.bumptech.glide.load.resource.gif.GifDrawable}) and throws an exception if asked to transform an unknown type.
+     * Applies the given {@link Transformation} for {@link Bitmap Bitmaps} to the default types ({@link Bitmap}, {@link android.graphics.drawable.BitmapDrawable}, and {@link
+     * com.bumptech.glide.load.resource.gif.GifDrawable}) and throws an exception if asked to transform an unknown type.
      *
      * <p>This will override previous calls to {@link #dontTransform()}.
      *
@@ -839,8 +853,8 @@ public abstract class BaseRequestOptions<T extends BaseRequestOptions<T>> implem
     }
 
     /**
-     * Applies the given {@link Transformation}s in the given order for {@link Bitmap Bitmaps} to the default types ({@link Bitmap}, {@link android.graphics.drawable.BitmapDrawable}, and {@link com.bumptech.glide.load.resource.gif.GifDrawable}) and throws an exception if asked to transform an
-     * unknown type.
+     * Applies the given {@link Transformation}s in the given order for {@link Bitmap Bitmaps} to the default types ({@link Bitmap}, {@link android.graphics.drawable.BitmapDrawable},
+     * and {@link com.bumptech.glide.load.resource.gif.GifDrawable}) and throws an exception if asked to transform an unknown type.
      *
      * <p>This will override previous calls to {@link #dontTransform()}.
      *
@@ -863,8 +877,8 @@ public abstract class BaseRequestOptions<T extends BaseRequestOptions<T>> implem
     }
 
     /**
-     * Applies the given {@link Transformation}s in the given order for {@link Bitmap Bitmaps} to the default types ({@link Bitmap}, {@link android.graphics.drawable.BitmapDrawable}, and {@link com.bumptech.glide.load.resource.gif.GifDrawable}) and throws an exception if asked to transform an
-     * unknown type.
+     * Applies the given {@link Transformation}s in the given order for {@link Bitmap Bitmaps} to the default types ({@link Bitmap}, {@link android.graphics.drawable.BitmapDrawable},
+     * and {@link com.bumptech.glide.load.resource.gif.GifDrawable}) and throws an exception if asked to transform an unknown type.
      *
      * <p>This will override previous calls to {@link #dontTransform()}.
      *
@@ -883,7 +897,8 @@ public abstract class BaseRequestOptions<T extends BaseRequestOptions<T>> implem
     }
 
     /**
-     * Applies the given {@link Transformation} for {@link Bitmap Bitmaps} to the default types ({@link Bitmap}, {@link android.graphics.drawable.BitmapDrawable}, and {@link com.bumptech.glide.load.resource.gif.GifDrawable}) and ignores unknown types.
+     * Applies the given {@link Transformation} for {@link Bitmap Bitmaps} to the default types ({@link Bitmap}, {@link android.graphics.drawable.BitmapDrawable}, and {@link
+     * com.bumptech.glide.load.resource.gif.GifDrawable}) and ignores unknown types.
      *
      * <p>This will override previous calls to {@link #dontTransform()}.
      *
@@ -1017,13 +1032,15 @@ public abstract class BaseRequestOptions<T extends BaseRequestOptions<T>> implem
     }
 
     /**
-     * Updates this options set with any options that are explicitly set in the given {@code T} object and returns this object if {@link #autoClone()} is disabled or a new {@code T} object if {@link #autoClone()} is enabled.
+     * Updates this options set with any options that are explicitly set in the given {@code T} object and returns this object if {@link #autoClone()} is disabled or a new {@code T}
+     * object if {@link #autoClone()} is enabled.
      *
      * <p>{@code #apply} only replaces those values that are explicitly set in the given {@code T}. If
      * you need to completely reset all previously set options, create a new {@code T} object instead of using this method.
      *
      * <p>The options that will be set to values in the returned {@code T} object is the intersection
-     * of the set of options in this {@code T} object and the given {@code T} object that were explicitly set. If the values of any of the options conflict, the values in the returned {@code T} object will be set to those in the given {@code T} object.
+     * of the set of options in this {@code T} object and the given {@code T} object that were explicitly set. If the values of any of the options conflict, the values in the returned
+     * {@code T} object will be set to those in the given {@code T} object.
      */
     @NonNull
     @CheckResult
@@ -1192,7 +1209,8 @@ public abstract class BaseRequestOptions<T extends BaseRequestOptions<T>> implem
     }
 
     /**
-     * Similar to {@link #lock()} except that mutations cause a {@link #clone()} operation to happen before the mutation resulting in all methods returning a new Object and leaving the original locked object unmodified.
+     * Similar to {@link #lock()} except that mutations cause a {@link #clone()} operation to happen before the mutation resulting in all methods returning a new Object and leaving the
+     * original locked object unmodified.
      *
      * <p>Auto clone is not retained by cloned objects returned from mutations. The cloned objects are
      * mutable and are not locked.

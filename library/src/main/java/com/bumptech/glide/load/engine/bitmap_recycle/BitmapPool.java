@@ -41,8 +41,9 @@ public interface BitmapPool {
      * allocated.
      *
      * <p>Because this method erases all pixels in the {@link Bitmap}, this method is slightly slower
-     * than {@link #getDirty(int, int, android.graphics.Bitmap.Config)}. If the {@link android.graphics.Bitmap} is being obtained to be used in {@link android.graphics.BitmapFactory} or in any other case where every pixel in the {@link android.graphics.Bitmap} will always be overwritten or cleared,
-     * {@link #getDirty(int, int, android.graphics.Bitmap.Config)} will be faster. When in doubt, use this method to ensure correctness.
+     * than {@link #getDirty(int, int, android.graphics.Bitmap.Config)}. If the {@link android.graphics.Bitmap} is being obtained to be used in {@link android.graphics.BitmapFactory} or
+     * in any other case where every pixel in the {@link android.graphics.Bitmap} will always be overwritten or cleared, {@link #getDirty(int, int, android.graphics.Bitmap.Config)} will
+     * be faster. When in doubt, use this method to ensure correctness.
      *
      * <pre>
      *     Implementations can should clear out every returned Bitmap using the following:
@@ -61,13 +62,15 @@ public interface BitmapPool {
     Bitmap get(int width, int height, Bitmap.Config config);
 
     /**
-     * Identical to {@link #get(int, int, android.graphics.Bitmap.Config)} except that any returned {@link android.graphics.Bitmap} may <em>not</em> have been erased and may contain random data.
+     * Identical to {@link #get(int, int, android.graphics.Bitmap.Config)} except that any returned {@link android.graphics.Bitmap} may <em>not</em> have been erased and may contain
+     * random data.
      *
      * <p>If no Bitmap with the requested attributes is present in the pool, a new one will be
      * allocated.
      *
      * <p>Although this method is slightly more efficient than {@link #get(int, int,
-     * android.graphics.Bitmap.Config)} it should be used with caution and only when the caller is sure that they are going to erase the {@link android.graphics.Bitmap} entirely before writing new data to it.
+     * android.graphics.Bitmap.Config)} it should be used with caution and only when the caller is sure that they are going to erase the {@link android.graphics.Bitmap} entirely before
+     * writing new data to it.
      *
      * @param width  The width in pixels of the desired {@link android.graphics.Bitmap}.
      * @param height The height in pixels of the desired {@link android.graphics.Bitmap}.

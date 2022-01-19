@@ -33,7 +33,8 @@ import javax.lang.model.element.TypeParameterElement;
 import javax.lang.model.element.VariableElement;
 
 /**
- * Generates a new implementation of {@code com.bumptech.glide.request.RequestOptions} containing static versions of methods included in the base class and static and instance versions of all methods annotated with {@link GlideOption} in classes annotated with {@link GlideExtension}.
+ * Generates a new implementation of {@code com.bumptech.glide.request.RequestOptions} containing static versions of methods included in the base class and static and instance versions
+ * of all methods annotated with {@link GlideOption} in classes annotated with {@link GlideExtension}.
  *
  * <p>The generated class looks something like this:
  *
@@ -221,8 +222,9 @@ final class RequestOptionsGenerator {
     }
 
     /**
-     * This method is a bit of a hack, but it lets us tie the static version of a method with the instance version. In turn that lets us call the instance versions on the generated subclass, instead of just delegating to the RequestOptions static methods. Using the instance methods on the generated
-     * subclass allows our static methods to properly call code that overrides an existing method in RequestOptions.
+     * This method is a bit of a hack, but it lets us tie the static version of a method with the instance version. In turn that lets us call the instance versions on the generated
+     * subclass, instead of just delegating to the RequestOptions static methods. Using the instance methods on the generated subclass allows our static methods to properly call code
+     * that overrides an existing method in RequestOptions.
      *
      * <p>The string names here just map between the static methods in {@code
      * com.bumptech.glide.request.RequestOptions} and the instance methods they call.

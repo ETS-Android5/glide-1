@@ -28,7 +28,8 @@ public class NotificationTarget extends CustomTarget<Bitmap> {
     private final int viewId;
 
     /**
-     * Constructor using a Notification object and a notificationId to get a handle on the Notification in order to update it that uses {@link #SIZE_ORIGINAL} as the target width and height.
+     * Constructor using a Notification object and a notificationId to get a handle on the Notification in order to update it that uses {@link #SIZE_ORIGINAL} as the target width and
+     * height.
      *
      * @param context        Context to use in the AppWidgetManager initialization.
      * @param viewId         The id of the ImageView view that will load the image.
@@ -46,7 +47,8 @@ public class NotificationTarget extends CustomTarget<Bitmap> {
     }
 
     /**
-     * Constructor using a Notification object, a notificationId, and a notificationTag to get a handle on the Notification in order to update it that uses {@link #SIZE_ORIGINAL} as the target width and height.
+     * Constructor using a Notification object, a notificationId, and a notificationTag to get a handle on the Notification in order to update it that uses {@link #SIZE_ORIGINAL} as the
+     * target width and height.
      *
      * @param context         Context to use in the AppWidgetManager initialization.
      * @param viewId          The id of the ImageView view that will load the image.

@@ -336,7 +336,8 @@ final class RequestManagerGenerator {
     }
 
     /**
-     * The {@code RequestOptions} subclass should always be our generated subclass type to avoid inadvertent errors where a different subclass is applied that accidentally wipes out some logic in overidden methods in our generated subclass.
+     * The {@code RequestOptions} subclass should always be our generated subclass type to avoid inadvertent errors where a different subclass is applied that accidentally wipes out
+     * some logic in overidden methods in our generated subclass.
      */
     @Nullable
     private MethodSpec generateOverrideSetRequestOptions(

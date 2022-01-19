@@ -12,7 +12,8 @@ import com.bumptech.glide.util.Preconditions;
 import java.security.MessageDigest;
 
 /**
- * An {@link com.bumptech.glide.load.Transformation} that wraps a transformation for a {@link Bitmap} and can apply it to every frame of any {@link com.bumptech.glide.load.resource.gif.GifDrawable}.
+ * An {@link com.bumptech.glide.load.Transformation} that wraps a transformation for a {@link Bitmap} and can apply it to every frame of any {@link
+ * com.bumptech.glide.load.resource.gif.GifDrawable}.
  */
 public class GifDrawableTransformation implements Transformation<GifDrawable> {
     private final Transformation<Bitmap> wrapped;

@@ -7,8 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 /**
- * A factory class that produces a functional {@link com.bumptech.glide.manager.ConnectivityMonitor} if the application has the {@code android.permission.ACCESS_NETWORK_STATE} permission and a no-op non functional {@link com.bumptech.glide.manager.ConnectivityMonitor} if the app does not have the
- * required permission.
+ * A factory class that produces a functional {@link com.bumptech.glide.manager.ConnectivityMonitor} if the application has the {@code android.permission.ACCESS_NETWORK_STATE}
+ * permission and a no-op non functional {@link com.bumptech.glide.manager.ConnectivityMonitor} if the app does not have the required permission.
  */
 public class DefaultConnectivityMonitorFactory implements ConnectivityMonitorFactory {
     private static final String TAG = "ConnectivityMonitor";

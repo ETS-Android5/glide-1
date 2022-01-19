@@ -14,8 +14,9 @@ import com.bumptech.glide.request.Request;
  * {@link com.bumptech.glide.request.target.ViewTarget} or {@link com.bumptech.glide.request.target.ImageViewTarget} are preferable.
  *
  * @param <Z> The type of resource that will be received by this target.
- * @deprecated Use {@link CustomViewTarget} if loading the content into a view, the download API if in the background (http://bumptech.github.io/glide/doc/getting-started.html#background-threads), or a a fully implemented {@link Target} for any specialized use-cases. Using BaseView is unsafe if the
- * user does not implement {@link #onLoadCleared}, resulting in recycled bitmaps being referenced from the UI and hard to root-cause crashes.
+ * @deprecated Use {@link CustomViewTarget} if loading the content into a view, the download API if in the background (http://bumptech.github.io/glide/doc/getting-started.html#background-threads),
+ * or a a fully implemented {@link Target} for any specialized use-cases. Using BaseView is unsafe if the user does not implement {@link #onLoadCleared}, resulting in recycled bitmaps
+ * being referenced from the UI and hard to root-cause crashes.
  */
 @Deprecated
 public abstract class BaseTarget<Z> implements Target<Z> {

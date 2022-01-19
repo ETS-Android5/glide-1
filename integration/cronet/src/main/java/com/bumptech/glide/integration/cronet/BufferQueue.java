@@ -25,7 +25,8 @@ final class BufferQueue {
      * Use this class during a request, to combine streamed buffers of a response into a single final buffer.
      *
      * <p>For example: {@code @Override public void onResponseStarted(UrlRequest request,
-     * UrlResponseInfo info) { request.read(builder.getFirstBuffer(info)); } @Override public void onReadCompleted(UrlRequest request, UrlResponseInfo info, ByteBuffer buffer) { request.read(builder.getNextBuffer(buffer)); } }
+     * UrlResponseInfo info) { request.read(builder.getFirstBuffer(info)); } @Override public void onReadCompleted(UrlRequest request, UrlResponseInfo info, ByteBuffer buffer) {
+     * request.read(builder.getNextBuffer(buffer)); } }
      */
     public static final class Builder {
         private ArrayDeque<ByteBuffer> mBuffers = new ArrayDeque<>();

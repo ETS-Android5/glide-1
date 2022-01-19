@@ -48,7 +48,8 @@ interface DataFetcherGenerator {
     }
 
     /**
-     * Attempts to a single new {@link com.bumptech.glide.load.data.DataFetcher} and returns true if a {@link com.bumptech.glide.load.data.DataFetcher} was started, and false otherwise.
+     * Attempts to a single new {@link com.bumptech.glide.load.data.DataFetcher} and returns true if a {@link com.bumptech.glide.load.data.DataFetcher} was started, and false
+     * otherwise.
      */
     boolean startNext();
 

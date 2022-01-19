@@ -60,7 +60,8 @@ public final class ParcelFileDescriptorRewinder implements DataRewinder<ParcelFi
     }
 
     /**
-     * Catching ErrnoException cannot be done in classes that are loaded on APIs < Lollipop. To make sure that we do not do so, we catch inside this inner class instead of the outer class. The only reason this class exists is to avoid VerifyError on older APIs.
+     * Catching ErrnoException cannot be done in classes that are loaded on APIs < Lollipop. To make sure that we do not do so, we catch inside this inner class instead of the outer
+     * class. The only reason this class exists is to avoid VerifyError on older APIs.
      */
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private static final class InternalRewinder {

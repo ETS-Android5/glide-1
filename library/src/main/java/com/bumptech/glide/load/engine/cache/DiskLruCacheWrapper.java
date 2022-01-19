@@ -30,7 +30,8 @@ public class DiskLruCacheWrapper implements DiskCache {
     private DiskLruCache diskLruCache;
 
     /**
-     * Get a DiskCache in the given directory and size. If a disk cache has already been created with a different directory and/or size, it will be returned instead and the new arguments will be ignored.
+     * Get a DiskCache in the given directory and size. If a disk cache has already been created with a different directory and/or size, it will be returned instead and the new
+     * arguments will be ignored.
      *
      * @param directory The directory for the disk cache
      * @param maxSize   The max size for the disk cache

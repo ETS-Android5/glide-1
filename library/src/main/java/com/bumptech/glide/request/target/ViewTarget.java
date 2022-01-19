@@ -24,19 +24,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A base {@link Target} for loading {@link android.graphics.Bitmap}s into {@link View}s that provides default implementations for most most methods and can determine the size of views using a {@link android.view.ViewTreeObserver.OnDrawListener}.
+ * A base {@link Target} for loading {@link android.graphics.Bitmap}s into {@link View}s that provides default implementations for most most methods and can determine the size of views
+ * using a {@link android.view.ViewTreeObserver.OnDrawListener}.
  *
  * <p>To detect {@link View} reuse in {@link android.widget.ListView} or any {@link
- * android.view.ViewGroup} that reuses views, this class uses the {@link View#setTag(Object)} method to store some metadata so that if a view is reused, any previous loads or resources from previous loads can be cancelled or reused.
+ * android.view.ViewGroup} that reuses views, this class uses the {@link View#setTag(Object)} method to store some metadata so that if a view is reused, any previous loads or resources
+ * from previous loads can be cancelled or reused.
  *
  * <p>Any calls to {@link View#setTag(Object)}} on a View given to this class will result in
- * excessive allocations and and/or {@link IllegalArgumentException}s. If you must call {@link View#setTag(Object)} on a view, use {@link #setTagId(int)} to specify a custom tag for Glide to use.
+ * excessive allocations and and/or {@link IllegalArgumentException}s. If you must call {@link View#setTag(Object)} on a view, use {@link #setTagId(int)} to specify a custom tag for
+ * Glide to use.
  *
  * <p>Subclasses must call super in {@link #onLoadCleared(Drawable)}
  *
  * @param <T> The specific subclass of view wrapped by this target.
  * @param <Z> The resource type this target will receive.
- * @deprecated Use {@link CustomViewTarget}. Using this class is unsafe without implementing {@link #onLoadCleared} and results in recycled bitmaps being referenced from the UI and hard to root-cause crashes.
+ * @deprecated Use {@link CustomViewTarget}. Using this class is unsafe without implementing {@link #onLoadCleared} and results in recycled bitmaps being referenced from the UI and hard
+ * to root-cause crashes.
  */
 @Deprecated
 public abstract class ViewTarget<T extends View, Z> extends BaseTarget<Z> {
@@ -59,9 +63,11 @@ public abstract class ViewTarget<T extends View, Z> extends BaseTarget<Z> {
     }
 
     /**
-     * @param waitForLayout If set to {@code true}, Glide will always wait for any pending layout pass before checking for the size a View. If set to {@code false} Glide will only wait for a pending layout pass if it's unable to resolve the size from layout parameters or an existing View size.
-     *                      Because setting this parameter to {@code true} forces Glide to wait for the layout pass to occur before starting the load, setting this parameter to {@code true} can cause flashing in some cases and should be used sparingly. If layout parameters are set to fixed sizes,
-     *                      they will still be used instead of the View's dimensions even if this parameter is set to {@code true}. This parameter is a fallback only.
+     * @param waitForLayout If set to {@code true}, Glide will always wait for any pending layout pass before checking for the size a View. If set to {@code false} Glide will only wait
+     *                      for a pending layout pass if it's unable to resolve the size from layout parameters or an existing View size. Because setting this parameter to {@code true}
+     *                      forces Glide to wait for the layout pass to occur before starting the load, setting this parameter to {@code true} can cause flashing in some cases and
+     *                      should be used sparingly. If layout parameters are set to fixed sizes, they will still be used instead of the View's dimensions even if this parameter is set
+     *                      to {@code true}. This parameter is a fallback only.
      * @deprecated Use {@link #waitForLayout()} instead.
      */
     @SuppressWarnings("WeakerAccess") // Public API
@@ -74,13 +80,15 @@ public abstract class ViewTarget<T extends View, Z> extends BaseTarget<Z> {
     }
 
     /**
-     * Clears the {@link View}'s {@link Request} when the {@link View} is detached from its {@link android.view.Window} and restarts the {@link Request} when the {@link View} is re-attached from its {@link android.view.Window}.
+     * Clears the {@link View}'s {@link Request} when the {@link View} is detached from its {@link android.view.Window} and restarts the {@link Request} when the {@link View} is
+     * re-attached from its {@link android.view.Window}.
      *
      * <p>This is an experimental API that may be removed in a future version.
      *
      * <p>Using this method can save memory by allowing Glide to more eagerly clear resources when
-     * transitioning screens or swapping adapters in scrolling views. However it also substantially increases the odds that images will not be in memory if users subsequently return to a screen where images were previously loaded. Whether or not this happens will depend on the number of images
-     * loaded in the new screen and the size of the memory cache. Increasing the size of the memory cache can improve this behavior but it largely negates the memory benefits of using this method.
+     * transitioning screens or swapping adapters in scrolling views. However it also substantially increases the odds that images will not be in memory if users subsequently return to
+     * a screen where images were previously loaded. Whether or not this happens will depend on the number of images loaded in the new screen and the size of the memory cache.
+     * Increasing the size of the memory cache can improve this behavior but it largely negates the memory benefits of using this method.
      *
      * <p>Use this method with caution and measure your memory usage to ensure that it's actually
      * improving your memory usage in the cases you care about.
@@ -137,8 +145,9 @@ public abstract class ViewTarget<T extends View, Z> extends BaseTarget<Z> {
      * size from the {@link LayoutParams} or valid non-zero values for {@link View#getWidth()} and {@link View#getHeight()}.
      *
      * <p>Because calling this method forces Glide to wait for the layout pass to occur before
-     * starting loads, setting this parameter to {@code true} can cause Glide to asynchronous load an image even if it's in the memory cache. The load will happen asynchronously because Glide has to wait for a layout pass to occur, which won't necessarily happen in the same frame as when the image
-     * is requested. As a result, using this method can resulting in flashing in some cases and should be used sparingly.
+     * starting loads, setting this parameter to {@code true} can cause Glide to asynchronous load an image even if it's in the memory cache. The load will happen asynchronously because
+     * Glide has to wait for a layout pass to occur, which won't necessarily happen in the same frame as when the image is requested. As a result, using this method can resulting in
+     * flashing in some cases and should be used sparingly.
      *
      * <p>If the {@link LayoutParams} of the wrapped {@link View} are set to fixed sizes, they will
      * still be used instead of the {@link View}'s dimensions even if this method is called. This parameter is a fallback only.
@@ -184,8 +193,9 @@ public abstract class ViewTarget<T extends View, Z> extends BaseTarget<Z> {
     }
 
     /**
-     * Determines the size of the view by first checking {@link android.view.View#getWidth()} and {@link android.view.View#getHeight()}. If one or both are zero, it then checks the view's {@link LayoutParams}. If one or both of the params width and height are less than or equal to zero, it then adds
-     * an {@link android.view.ViewTreeObserver.OnPreDrawListener} which waits until the view has been measured before calling the callback with the view's drawn width and height.
+     * Determines the size of the view by first checking {@link android.view.View#getWidth()} and {@link android.view.View#getHeight()}. If one or both are zero, it then checks the
+     * view's {@link LayoutParams}. If one or both of the params width and height are less than or equal to zero, it then adds an {@link android.view.ViewTreeObserver.OnPreDrawListener}
+     * which waits until the view has been measured before calling the callback with the view's drawn width and height.
      *
      * @param cb {@inheritDoc}
      */
@@ -226,8 +236,9 @@ public abstract class ViewTarget<T extends View, Z> extends BaseTarget<Z> {
      * Returns any stored request using {@link android.view.View#getTag()}.
      *
      * <p>For Glide to function correctly, Glide must be the only thing that calls {@link
-     * View#setTag(Object)}. If the tag is cleared or put to another object type, Glide will not be able to retrieve and cancel previous loads which will not only prevent Glide from reusing resource, but will also result in incorrect images being loaded and lots of flashing of images in lists. As a
-     * result, this will throw an {@link java.lang.IllegalArgumentException} if {@link android.view.View#getTag()}} returns a non null object that is not an {@link com.bumptech.glide.request.Request}.
+     * View#setTag(Object)}. If the tag is cleared or put to another object type, Glide will not be able to retrieve and cancel previous loads which will not only prevent Glide from
+     * reusing resource, but will also result in incorrect images being loaded and lots of flashing of images in lists. As a result, this will throw an {@link
+     * java.lang.IllegalArgumentException} if {@link android.view.View#getTag()}} returns a non null object that is not an {@link com.bumptech.glide.request.Request}.
      */
     @Override
     @Nullable
@@ -262,12 +273,14 @@ public abstract class ViewTarget<T extends View, Z> extends BaseTarget<Z> {
     }
 
     /**
-     * Sets the android resource id to use in conjunction with {@link View#setTag(int, Object)} to store temporary state allowing loads to be automatically cancelled and resources re-used in scrolling lists.
+     * Sets the android resource id to use in conjunction with {@link View#setTag(int, Object)} to store temporary state allowing loads to be automatically cancelled and resources
+     * re-used in scrolling lists.
      *
      * <p>If no tag id is set, Glide will use {@link View#setTag(Object)}.
      *
      * <p>Warning: prior to Android 4.0 tags were stored in a static map. Using this method prior to
-     * Android 4.0 may cause memory leaks and isn't recommended. If you do use this method on older versions, be sure to call {@link com.bumptech.glide.RequestManager#clear(View)} on any view you start a load into to ensure that the static state is removed.
+     * Android 4.0 may cause memory leaks and isn't recommended. If you do use this method on older versions, be sure to call {@link com.bumptech.glide.RequestManager#clear(View)} on
+     * any view you start a load into to ensure that the static state is removed.
      *
      * @param tagId The android resource to use.
      * @deprecated Glide uses it's own default tag id, so there's no need to specify your own. This method will be removed in a future version.

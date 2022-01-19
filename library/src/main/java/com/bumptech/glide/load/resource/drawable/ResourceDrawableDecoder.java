@@ -18,7 +18,8 @@ import java.util.List;
  * Decodes {@link Drawable}s given resource {@link Uri}s.
  *
  * <p>This is typically used as a fallback for resource types that either aren't Bitmaps (see #350)
- * or for resource types that we can't obtain an {@link java.io.InputStream} for using a standard {@link ContentResolver}, including some types of application icons and resources loaded from other packages.
+ * or for resource types that we can't obtain an {@link java.io.InputStream} for using a standard {@link ContentResolver}, including some types of application icons and resources loaded
+ * from other packages.
  */
 public class ResourceDrawableDecoder implements ResourceDecoder<Uri, Drawable> {
     /**

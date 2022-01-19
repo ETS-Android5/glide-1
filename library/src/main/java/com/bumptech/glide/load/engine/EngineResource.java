@@ -79,7 +79,8 @@ class EngineResource<Z> implements Resource<Z> {
      * Increments the number of consumers using the wrapped resource. Must be called on the main thread.
      *
      * <p>This must be called with a number corresponding to the number of new consumers each time new
-     * consumers begin using the wrapped resource. It is always safer to call acquire more often than necessary. Generally external users should never call this method, the framework will take care of this for you.
+     * consumers begin using the wrapped resource. It is always safer to call acquire more often than necessary. Generally external users should never call this method, the framework
+     * will take care of this for you.
      */
     synchronized void acquire() {
         if (isRecycled) {

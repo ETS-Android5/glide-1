@@ -10,7 +10,8 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * A factory interface for translating an arbitrarily complex data model into a concrete data type that can be used by an {@link DataFetcher} to obtain the data for a resource represented by the model.
+ * A factory interface for translating an arbitrarily complex data model into a concrete data type that can be used by an {@link DataFetcher} to obtain the data for a resource
+ * represented by the model.
  *
  * <p>This interface has two objectives: 1. To translate a specific model into a data type that can
  * be decoded into a resource.
@@ -19,7 +20,8 @@ import java.util.List;
  * specific size.
  *
  * <p>This not only avoids having to duplicate dimensions in xml and in your code in order to
- * determine the size of a view on devices with different densities, but also allows you to use layout weights or otherwise programmatically put the dimensions of the view without forcing you to fetch a generic resource size.
+ * determine the size of a view on devices with different densities, but also allows you to use layout weights or otherwise programmatically put the dimensions of the view without
+ * forcing you to fetch a generic resource size.
  *
  * <p>The smaller the resource you fetch, the less bandwidth and battery life you use, and the lower
  * your memory footprint per resource.
@@ -30,7 +32,8 @@ import java.util.List;
 public interface ModelLoader<Model, Data> {
 
     /**
-     * Contains a set of {@link com.bumptech.glide.load.Key Keys} identifying the source of the load, alternate cache keys pointing to equivalent data, and a {@link com.bumptech.glide.load.data.DataFetcher} that can be used to fetch data not found in cache.
+     * Contains a set of {@link com.bumptech.glide.load.Key Keys} identifying the source of the load, alternate cache keys pointing to equivalent data, and a {@link
+     * com.bumptech.glide.load.data.DataFetcher} that can be used to fetch data not found in cache.
      *
      * @param <Data> The type of data that well be loaded.
      */
@@ -54,15 +57,18 @@ public interface ModelLoader<Model, Data> {
     }
 
     /**
-     * Returns a {@link com.bumptech.glide.load.model.ModelLoader.LoadData} containing a {@link com.bumptech.glide.load.data.DataFetcher} required to decode the resource represented by this model, as well as a set of {@link com.bumptech.glide.load.Key Keys} that identify the data loaded by the
-     * {@link com.bumptech.glide.load.data.DataFetcher} as well as an optional list of alternate keys from which equivalent data can be loaded. The {@link DataFetcher} will not be used if the resource is already cached.
+     * Returns a {@link com.bumptech.glide.load.model.ModelLoader.LoadData} containing a {@link com.bumptech.glide.load.data.DataFetcher} required to decode the resource represented by
+     * this model, as well as a set of {@link com.bumptech.glide.load.Key Keys} that identify the data loaded by the {@link com.bumptech.glide.load.data.DataFetcher} as well as an
+     * optional list of alternate keys from which equivalent data can be loaded. The {@link DataFetcher} will not be used if the resource is already cached.
      *
      * <p>Note - If no valid data fetcher can be returned (for example if a model has a null URL),
      * then it is acceptable to return a null data fetcher from this method.
      *
      * @param model  The model representing the resource.
-     * @param width  The width in pixels of the view or target the resource will be loaded into, or {@link com.bumptech.glide.request.target.Target#SIZE_ORIGINAL} to indicate that the resource should be loaded at its original width.
-     * @param height The height in pixels of the view or target the resource will be loaded into, or {@link com.bumptech.glide.request.target.Target#SIZE_ORIGINAL} to indicate that the resource should be loaded at its original height.
+     * @param width  The width in pixels of the view or target the resource will be loaded into, or {@link com.bumptech.glide.request.target.Target#SIZE_ORIGINAL} to indicate that the
+     *               resource should be loaded at its original width.
+     * @param height The height in pixels of the view or target the resource will be loaded into, or {@link com.bumptech.glide.request.target.Target#SIZE_ORIGINAL} to indicate that the
+     *               resource should be loaded at its original height.
      */
     @Nullable
     LoadData<Data> buildLoadData(

@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Contains an ordered list of {@link ResourceDecoder}s capable of decoding arbitrary data types into arbitrary resource types from highest priority decoders to lowest priority decoders.
+ * Contains an ordered list of {@link ResourceDecoder}s capable of decoding arbitrary data types into arbitrary resource types from highest priority decoders to lowest priority
+ * decoders.
  */
 @SuppressWarnings("rawtypes")
 public class ResourceDecoderRegistry {

@@ -16,7 +16,8 @@ import java.nio.ByteBuffer;
 import java.util.List;
 
 /**
- * A relatively inefficient decoder for {@link com.bumptech.glide.load.resource.gif.GifDrawable} that converts {@link java.io.InputStream}s to {@link java.nio.ByteBuffer}s and then passes the buffer to a wrapped decoder.
+ * A relatively inefficient decoder for {@link com.bumptech.glide.load.resource.gif.GifDrawable} that converts {@link java.io.InputStream}s to {@link java.nio.ByteBuffer}s and then
+ * passes the buffer to a wrapped decoder.
  */
 public class StreamGifDecoder implements ResourceDecoder<InputStream, GifDrawable> {
     private static final String TAG = "StreamGifDecoder";

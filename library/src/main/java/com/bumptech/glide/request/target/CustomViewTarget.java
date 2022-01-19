@@ -24,7 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A base {@link Target} for loading resources ({@link android.graphics.Bitmap}, {@link Drawable} etc) into {@link View}s that provides default implementations for most methods and can determine the size of views using a {@link android.view.ViewTreeObserver.OnDrawListener}.
+ * A base {@link Target} for loading resources ({@link android.graphics.Bitmap}, {@link Drawable} etc) into {@link View}s that provides default implementations for most methods and can
+ * determine the size of views using a {@link android.view.ViewTreeObserver.OnDrawListener}.
  *
  * @param <T> The specific subclass of view wrapped by this target (e.g. {@link android.widget.ImageView})
  * @param <Z> The resource type this target will receive (e.g. {@link android.graphics.Bitmap}).
@@ -90,8 +91,9 @@ public abstract class CustomViewTarget<T extends View, Z> implements Target<Z> {
      * size from the {@link LayoutParams} or valid non-zero values for {@link View#getWidth()} and {@link View#getHeight()}.
      *
      * <p>Because calling this method forces Glide to wait for the layout pass to occur before
-     * starting loads, setting this parameter to {@code true} can cause Glide to asynchronous load an image even if it's in the memory cache. The load will happen asynchronously because Glide has to wait for a layout pass to occur, which won't necessarily happen in the same frame as when the image
-     * is requested. As a result, using this method can resulting in flashing in some cases and should be used sparingly.
+     * starting loads, setting this parameter to {@code true} can cause Glide to asynchronous load an image even if it's in the memory cache. The load will happen asynchronously because
+     * Glide has to wait for a layout pass to occur, which won't necessarily happen in the same frame as when the image is requested. As a result, using this method can resulting in
+     * flashing in some cases and should be used sparingly.
      *
      * <p>If the {@link LayoutParams} of the wrapped {@link View} are set to fixed sizes, they will
      * still be used instead of the {@link View}'s dimensions even if this method is called. This parameter is a fallback only.
@@ -104,13 +106,15 @@ public abstract class CustomViewTarget<T extends View, Z> implements Target<Z> {
     }
 
     /**
-     * Clears the {@link View}'s {@link Request} when the {@link View} is detached from its {@link android.view.Window} and restarts the {@link Request} when the {@link View} is re-attached from its {@link android.view.Window}.
+     * Clears the {@link View}'s {@link Request} when the {@link View} is detached from its {@link android.view.Window} and restarts the {@link Request} when the {@link View} is
+     * re-attached from its {@link android.view.Window}.
      *
      * <p>This is an experimental API that may be removed in a future version.
      *
      * <p>Using this method can save memory by allowing Glide to more eagerly clear resources when
-     * transitioning screens or swapping adapters in scrolling views. However it also substantially increases the odds that images will not be in memory if users subsequently return to a screen where images were previously loaded. Whether or not this happens will depend on the number of images
-     * loaded in the new screen and the size of the memory cache. Increasing the size of the memory cache can improve this behavior but it largely negates the memory benefits of using this method.
+     * transitioning screens or swapping adapters in scrolling views. However it also substantially increases the odds that images will not be in memory if users subsequently return to
+     * a screen where images were previously loaded. Whether or not this happens will depend on the number of images loaded in the new screen and the size of the memory cache.
+     * Increasing the size of the memory cache can improve this behavior but it largely negates the memory benefits of using this method.
      *
      * <p>Use this method with caution and measure your memory usage to ensure that it's actually
      * improving your memory usage in the cases you care about.
@@ -145,7 +149,8 @@ public abstract class CustomViewTarget<T extends View, Z> implements Target<Z> {
      * uses {@link View#setTag(Object)}. It is only necessary if loading several Glide resources into the same view, for example one foreground and one background view.
      *
      * @param tagId The android resource id to use.
-     * @deprecated Using this method prevents clearing the target from working properly. Glide uses its own internal tag id so this method should not be necessary. This method is currently a no-op.
+     * @deprecated Using this method prevents clearing the target from working properly. Glide uses its own internal tag id so this method should not be necessary. This method is
+     * currently a no-op.
      */
     // Public API.
     @SuppressWarnings({"UnusedReturnValue", "WeakerAccess"})
@@ -163,8 +168,9 @@ public abstract class CustomViewTarget<T extends View, Z> implements Target<Z> {
     }
 
     /**
-     * Determines the size of the view by first checking {@link android.view.View#getWidth()} and {@link android.view.View#getHeight()}. If one or both are zero, it then checks the view's {@link LayoutParams}. If one or both of the params width and height are less than or equal to zero, it then adds
-     * an {@link android.view.ViewTreeObserver.OnPreDrawListener} which waits until the view has been measured before calling the callback with the view's drawn width and height.
+     * Determines the size of the view by first checking {@link android.view.View#getWidth()} and {@link android.view.View#getHeight()}. If one or both are zero, it then checks the
+     * view's {@link LayoutParams}. If one or both of the params width and height are less than or equal to zero, it then adds an {@link android.view.ViewTreeObserver.OnPreDrawListener}
+     * which waits until the view has been measured before calling the callback with the view's drawn width and height.
      *
      * @param cb {@inheritDoc}
      */

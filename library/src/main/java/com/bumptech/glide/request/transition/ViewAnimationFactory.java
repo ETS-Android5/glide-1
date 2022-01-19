@@ -30,7 +30,8 @@ public class ViewAnimationFactory<R> implements TransitionFactory<R> {
     }
 
     /**
-     * Returns a new {@link Transition} for the given arguments. If isFromMemoryCache is {@code true} or isFirstImage is {@code false}, returns a {@link NoTransition} and otherwise returns a new {@link ViewTransition}.
+     * Returns a new {@link Transition} for the given arguments. If isFromMemoryCache is {@code true} or isFirstImage is {@code false}, returns a {@link NoTransition} and otherwise
+     * returns a new {@link ViewTransition}.
      *
      * @param dataSource      {@inheritDoc}
      * @param isFirstResource {@inheritDoc}

@@ -5,7 +5,8 @@ import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.util.Preconditions;
 
 /**
- * Simple wrapper for an arbitrary object which helps to satisfy some of the glide engine's contracts. <b>Suggested usages only include resource object which don't have size and cannot be recycled/closed.</b>
+ * Simple wrapper for an arbitrary object which helps to satisfy some of the glide engine's contracts. <b>Suggested usages only include resource object which don't have size and cannot
+ * be recycled/closed.</b>
  *
  * @param <T> type of the wrapped resource
  */

@@ -3,7 +3,8 @@ package com.bumptech.glide.module;
 import com.bumptech.glide.Registry;
 
 /**
- * An interface allowing lazy configuration of Glide including setting options using {@link com.bumptech.glide.GlideBuilder} and registering {@link com.bumptech.glide.load.model.ModelLoader ModelLoaders}.
+ * An interface allowing lazy configuration of Glide including setting options using {@link com.bumptech.glide.GlideBuilder} and registering {@link
+ * com.bumptech.glide.load.model.ModelLoader ModelLoaders}.
  *
  * <p>To use this interface:
  *

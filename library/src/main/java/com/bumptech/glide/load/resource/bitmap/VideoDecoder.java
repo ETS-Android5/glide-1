@@ -43,10 +43,12 @@ public class VideoDecoder<T> implements ResourceDecoder<T, Bitmap> {
     static final int DEFAULT_FRAME_OPTION = MediaMetadataRetriever.OPTION_CLOSEST_SYNC;
 
     /**
-     * A long indicating the time position (in microseconds) of the target frame which will be retrieved. {@link android.media.MediaMetadataRetriever#getFrameAtTime(long)} is used to extract the video frame.
+     * A long indicating the time position (in microseconds) of the target frame which will be retrieved. {@link android.media.MediaMetadataRetriever#getFrameAtTime(long)} is used to
+     * extract the video frame.
      *
      * <p>When retrieving the frame at the given time position, there is no guarantee that the data
-     * source has a frame located at the position. When this happens, a frame nearby will be returned. If the long is negative, time position and option will ignored, and any frame that the implementation considers as representative may be returned.
+     * source has a frame located at the position. When this happens, a frame nearby will be returned. If the long is negative, time position and option will ignored, and any frame that
+     * the implementation considers as representative may be returned.
      */
     public static final Option<Long> TARGET_FRAME =
             Option.disk(

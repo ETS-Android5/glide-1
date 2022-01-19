@@ -136,7 +136,8 @@ public final class MemorySizeCalculator {
         @VisibleForTesting static final int MEMORY_CACHE_TARGET_SCREENS = 2;
 
         /**
-         * On Android O+, we use {@link android.graphics.Bitmap.Config#HARDWARE} for all reasonably sized images unless we're creating thumbnails for the first time. As a result, the Bitmap pool is much less important on O than it was on previous versions.
+         * On Android O+, we use {@link android.graphics.Bitmap.Config#HARDWARE} for all reasonably sized images unless we're creating thumbnails for the first time. As a result, the
+         * Bitmap pool is much less important on O than it was on previous versions.
          */
         static final int BITMAP_POOL_TARGET_SCREENS =
                 Build.VERSION.SDK_INT < Build.VERSION_CODES.O ? 4 : 1;
@@ -194,7 +195,8 @@ public final class MemorySizeCalculator {
         }
 
         /**
-         * Sets the maximum percentage of the device's memory class for standard devices that can be taken up by Glide's {@link com.bumptech.glide.load.engine.cache.MemoryCache} and {@link com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool} put together, and returns this builder.
+         * Sets the maximum percentage of the device's memory class for standard devices that can be taken up by Glide's {@link com.bumptech.glide.load.engine.cache.MemoryCache} and
+         * {@link com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool} put together, and returns this builder.
          */
         public Builder setMaxSizeMultiplier(float maxSizeMultiplier) {
             Preconditions.checkArgument(
@@ -205,7 +207,8 @@ public final class MemorySizeCalculator {
         }
 
         /**
-         * Sets the maximum percentage of the device's memory class for low ram devices that can be taken up by Glide's {@link com.bumptech.glide.load.engine.cache.MemoryCache} and {@link com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool} put together, and returns this builder.
+         * Sets the maximum percentage of the device's memory class for low ram devices that can be taken up by Glide's {@link com.bumptech.glide.load.engine.cache.MemoryCache} and
+         * {@link com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool} put together, and returns this builder.
          *
          * @see ActivityManager#isLowRamDevice()
          */

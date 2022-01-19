@@ -21,7 +21,8 @@ public final class PreFillType {
      * @param width  The width in pixels of the {@link android.graphics.Bitmap Bitmaps} to pre-fill.
      * @param height The height in pixels of the {@link android.graphics.Bitmap Bitmaps} to pre-fill.
      * @param config The {@link android.graphics.Bitmap.Config} of the {@link android.graphics.Bitmap Bitmaps} to pre-fill.
-     * @param weight An integer indicating how to balance pre-filling this size and configuration of {@link android.graphics.Bitmap} against any other sizes/configurations that may be being pre-filled.
+     * @param weight An integer indicating how to balance pre-filling this size and configuration of {@link android.graphics.Bitmap} against any other sizes/configurations that may be
+     *               being pre-filled.
      */
     PreFillType(int width, int height, Bitmap.Config config, int weight) {
         this.config = Preconditions.checkNotNull(config, "Config must not be null");
@@ -150,7 +151,8 @@ public final class PreFillType {
         /**
          * Sets the weight to use to balance how many Bitmaps of this type are prefilled relative to the other requested types.
          *
-         * @param weight An integer indicating how to balance pre-filling this size and configuration of {@link android.graphics.Bitmap} against any other sizes/configurations that may be being pre-filled.
+         * @param weight An integer indicating how to balance pre-filling this size and configuration of {@link android.graphics.Bitmap} against any other sizes/configurations that may
+         *               be being pre-filled.
          * @return This builder.
          */
         public Builder setWeight(int weight) {

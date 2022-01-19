@@ -14,7 +14,8 @@ import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 
 /**
- * Runs the final steps of Glide's annotation process and generates the combined {@code AppGlideModule}, {@code com.bumptech.glide.Glide}, {@code com.bumptech.glide.RequestManager}, and {@code com.bumptech.glide.request.RequestOptions} classes.
+ * Runs the final steps of Glide's annotation process and generates the combined {@code AppGlideModule}, {@code com.bumptech.glide.Glide}, {@code com.bumptech.glide.RequestManager}, and
+ * {@code com.bumptech.glide.request.RequestOptions} classes.
  */
 final class AppModuleProcessor {
     private static final String COMPILER_PACKAGE_NAME =

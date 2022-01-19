@@ -95,7 +95,8 @@ public class AppWidgetTarget extends CustomTarget<Bitmap> {
     }
 
     /**
-     * Constructor using a ComponentName, when override has been put to get a handle on the Widget in order to update it that uses {@link #SIZE_ORIGINAL} as the target width and height.
+     * Constructor using a ComponentName, when override has been put to get a handle on the Widget in order to update it that uses {@link #SIZE_ORIGINAL} as the target width and
+     * height.
      *
      * @param context       Context to use in the AppWidgetManager initialization.
      * @param viewId        The id of the ImageView view that will load the image.

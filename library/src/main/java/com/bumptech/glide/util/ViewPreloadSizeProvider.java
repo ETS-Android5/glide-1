@@ -25,7 +25,8 @@ public class ViewPreloadSizeProvider<T>
     private SizeViewTarget viewTarget;
 
     /**
-     * Constructor that does nothing by default and requires users to call {@link #setView(android.view.View)} when a View is available to registerComponents the dimensions returned by this class.
+     * Constructor that does nothing by default and requires users to call {@link #setView(android.view.View)} when a View is available to registerComponents the dimensions returned by
+     * this class.
      */
     public ViewPreloadSizeProvider() {
         // This constructor is intentionally empty. Nothing special is needed here.

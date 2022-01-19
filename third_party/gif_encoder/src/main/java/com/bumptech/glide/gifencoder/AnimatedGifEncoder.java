@@ -26,7 +26,8 @@ import java.io.OutputStream;
  *     e.finish();
  * </pre>
  * <p>
- * No copyright asserted on the source code of this class. May be used for any purpose, however, refer to the Unisys LZW patent for restrictions on use of the associated LZWEncoder class. Please forward any corrections to kweiner@fmsware.com.
+ * No copyright asserted on the source code of this class. May be used for any purpose, however, refer to the Unisys LZW patent for restrictions on use of the associated LZWEncoder
+ * class. Please forward any corrections to kweiner@fmsware.com.
  *
  * @author Kevin Weiner, FM Software
  * @version 1.03 November 2003
@@ -117,8 +118,8 @@ public class AnimatedGifEncoder {
     }
 
     /**
-     * Sets the transparent color for the last added frame and any subsequent frames. Since all colors are subject to modification in the quantization process, the color in the final palette for each frame closest to the given color becomes the transparent color for that frame. May be set to null to
-     * indicate no transparent color.
+     * Sets the transparent color for the last added frame and any subsequent frames. Since all colors are subject to modification in the quantization process, the color in the final
+     * palette for each frame closest to the given color becomes the transparent color for that frame. May be set to null to indicate no transparent color.
      *
      * @param color Color to be treated as transparent on display.
      */
@@ -127,7 +128,8 @@ public class AnimatedGifEncoder {
     }
 
     /**
-     * Adds next GIF frame. The frame is not written immediately, but is actually deferred until the next frame is received so that timing data can be inserted. Invoking <code>finish()</code> flushes all frames. If
+     * Adds next GIF frame. The frame is not written immediately, but is actually deferred until the next frame is received so that timing data can be inserted. Invoking
+     * <code>finish()</code> flushes all frames. If
      * <code>setSize</code> was invoked, the size is used for all subsequent frames.
      * Otherwise, the actual size of the image is used for each frames.
      *
@@ -139,8 +141,9 @@ public class AnimatedGifEncoder {
     }
 
     /**
-     * Adds next GIF frame to the specified position. The frame is not written immediately, but is actually deferred until the next frame is received so that timing data can be inserted. Invoking <code>finish()</code> flushes all frames. If <code>setSize</code> was invoked, the size is used for all
-     * subsequent frames. Otherwise, the actual size of the image is used for each frame.
+     * Adds next GIF frame to the specified position. The frame is not written immediately, but is actually deferred until the next frame is received so that timing data can be
+     * inserted. Invoking <code>finish()</code> flushes all frames. If <code>setSize</code> was invoked, the size is used for all subsequent frames. Otherwise, the actual size of the
+     * image is used for each frame.
      * <p>
      * See page 11 of http://giflib.sourceforge.net/gif89.txt for the position of the frame
      *
@@ -228,8 +231,8 @@ public class AnimatedGifEncoder {
     }
 
     /**
-     * Sets quality of color quantization (conversion of images to the maximum 256 colors allowed by the GIF specification). Lower values (minimum = 1) produce better colors, but slow processing significantly. 10 is the default, and produces good color mapping at reasonable speeds. Values greater
-     * than 20 do not yield significant improvements in speed.
+     * Sets quality of color quantization (conversion of images to the maximum 256 colors allowed by the GIF specification). Lower values (minimum = 1) produce better colors, but slow
+     * processing significantly. 10 is the default, and produces good color mapping at reasonable speeds. Values greater than 20 do not yield significant improvements in speed.
      *
      * @param quality int greater than 0.
      */

@@ -97,7 +97,8 @@ public final class GlideException extends Exception {
      * Returns the list of root causes that are the leaf nodes of all children of this exception.
      *
      * <p>Use this method to do things like look for http exceptions that indicate the load may have
-     * failed due to an error that can be retried. Keep in mind that because Glide may attempt to load a given model using multiple different pathways, there may be multiple related or unrelated reasons for a load to fail.
+     * failed due to an error that can be retried. Keep in mind that because Glide may attempt to load a given model using multiple different pathways, there may be multiple related or
+     * unrelated reasons for a load to fail.
      */
     public List<Throwable> getRootCauses() {
         List<Throwable> rootCauses = new ArrayList<>();

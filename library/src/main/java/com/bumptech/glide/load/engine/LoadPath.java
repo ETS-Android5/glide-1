@@ -10,7 +10,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * For a given {@link com.bumptech.glide.load.data.DataFetcher} for a given data class, attempts to fetch the data and then run it through one or more {@link com.bumptech.glide.load.engine.DecodePath}s.
+ * For a given {@link com.bumptech.glide.load.data.DataFetcher} for a given data class, attempts to fetch the data and then run it through one or more {@link
+ * com.bumptech.glide.load.engine.DecodePath}s.
  *
  * @param <Data>         The type of data that will be fetched.
  * @param <ResourceType> The type of intermediate resource that will be decoded within one of the {@link com.bumptech.glide.load.engine.DecodePath}s.

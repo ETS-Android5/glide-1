@@ -14,10 +14,12 @@ import java.util.List;
 import java.util.Queue;
 
 /**
- * Loads a few resources ahead in the direction of scrolling in any {@link AbsListView} so that images are in the memory cache just before the corresponding view in created in the list. Gives the appearance of an infinitely large image cache, depending on scrolling speed, cpu speed, and cache size.
+ * Loads a few resources ahead in the direction of scrolling in any {@link AbsListView} so that images are in the memory cache just before the corresponding view in created in the list.
+ * Gives the appearance of an infinitely large image cache, depending on scrolling speed, cpu speed, and cache size.
  *
  * <p>Must be put using {@link
- * AbsListView#setOnScrollListener(android.widget.AbsListView.OnScrollListener)}, or have its corresponding methods called from another {@link android.widget.AbsListView.OnScrollListener} to function.
+ * AbsListView#setOnScrollListener(android.widget.AbsListView.OnScrollListener)}, or have its corresponding methods called from another {@link
+ * android.widget.AbsListView.OnScrollListener} to function.
  *
  * @param <T> The type of the model being displayed in the list.
  */
@@ -62,8 +64,8 @@ public class ListPreloader<T> implements AbsListView.OnScrollListener {
          * Returns a {@link RequestBuilder} for a given item on which {@link RequestBuilder#load(Object)}} has been called or {@code null} if no valid load can be started.
          *
          * <p>For the preloader to be effective, the {@link RequestBuilder} returned here must use
-         * exactly the same size and set of options as the {@link RequestBuilder} used when the ``View`` is bound. You may need to specify a size in both places to ensure that the width and height match exactly. If so, you can use {@link com.bumptech.glide.request.RequestOptions#override(int, int)}
-         * to do so.
+         * exactly the same size and set of options as the {@link RequestBuilder} used when the ``View`` is bound. You may need to specify a size in both places to ensure that the width
+         * and height match exactly. If so, you can use {@link com.bumptech.glide.request.RequestOptions#override(int, int)} to do so.
          *
          * <p>The target and context will be provided by the preloader.
          *
@@ -97,7 +99,8 @@ public class ListPreloader<T> implements AbsListView.OnScrollListener {
     }
 
     /**
-     * Constructor for {@link com.bumptech.glide.ListPreloader} that accepts interfaces for providing the dimensions of images to preload, the list of models to preload for a given position, and the request to use to load images.
+     * Constructor for {@link com.bumptech.glide.ListPreloader} that accepts interfaces for providing the dimensions of images to preload, the list of models to preload for a given
+     * position, and the request to use to load images.
      *
      * @param preloadModelProvider     Provides models to load and requests capable of loading them.
      * @param preloadDimensionProvider Provides the dimensions of images to load.

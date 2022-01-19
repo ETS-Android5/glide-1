@@ -20,8 +20,8 @@ import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.util.Preconditions;
 
 /**
- * An activity that demonstrates loading photos using {@link com.bumptech.glide.load.data.StreamLocalUriFetcher content uris} through Glide. It works by making the user to choose a contact when presses a button, and after he chooses a contact with photo, We try to load both a high res image and
- * thumbnail image of that contact with various Uris.
+ * An activity that demonstrates loading photos using {@link com.bumptech.glide.load.data.StreamLocalUriFetcher content uris} through Glide. It works by making the user to choose a
+ * contact when presses a button, and after he chooses a contact with photo, We try to load both a high res image and thumbnail image of that contact with various Uris.
  */
 public class MainActivity extends Activity {
     private static final int REQUEST_CONTACT = 1;

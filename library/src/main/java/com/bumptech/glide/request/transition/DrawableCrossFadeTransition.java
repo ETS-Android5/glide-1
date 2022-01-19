@@ -6,17 +6,19 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 
 /**
- * A cross fade {@link Transition} for {@link android.graphics.drawable.Drawable}s that uses an {@link android.graphics.drawable.TransitionDrawable} to transition from an existing drawable already visible on the target to a new drawable. If no existing drawable exists, this class can instead fall
- * back to a default animation that doesn't rely on {@link android.graphics.drawable.TransitionDrawable}.
+ * A cross fade {@link Transition} for {@link android.graphics.drawable.Drawable}s that uses an {@link android.graphics.drawable.TransitionDrawable} to transition from an existing
+ * drawable already visible on the target to a new drawable. If no existing drawable exists, this class can instead fall back to a default animation that doesn't rely on {@link
+ * android.graphics.drawable.TransitionDrawable}.
  */
 public class DrawableCrossFadeTransition implements Transition<Drawable> {
     private final int duration;
     private final boolean isCrossFadeEnabled;
 
     /**
-     * @param duration           The duration that the cross fade animation should run if there is something to cross fade from when a new {@link android.graphics.drawable.Drawable} is put.
-     * @param isCrossFadeEnabled If {@code true}, animates the previous resource's alpha to 0 while animating the new resource's alpha to 100. Otherwise, only animates the new resource's alpha to 100 while leaving the previous resource's alpha at 100. See {@link
-     *                           TransitionDrawable#setCrossFadeEnabled(boolean)}.
+     * @param duration           The duration that the cross fade animation should run if there is something to cross fade from when a new {@link android.graphics.drawable.Drawable} is
+     *                           put.
+     * @param isCrossFadeEnabled If {@code true}, animates the previous resource's alpha to 0 while animating the new resource's alpha to 100. Otherwise, only animates the new
+     *                           resource's alpha to 100 while leaving the previous resource's alpha at 100. See {@link TransitionDrawable#setCrossFadeEnabled(boolean)}.
      */
     // Public API.
     @SuppressWarnings("WeakerAccess")

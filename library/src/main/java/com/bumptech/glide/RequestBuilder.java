@@ -127,7 +127,8 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
      * Applies the given options to the request.
      *
      * <p>As with {@link RequestOptions#apply(BaseRequestOptions)}, {@code #apply} only replaces those
-     * values that are explicitly set in the given {@link RequestOptions} object. If you need to completely reset all previously set options, create a new {@code RequestBuilder} instead of using this method.
+     * values that are explicitly set in the given {@link RequestOptions} object. If you need to completely reset all previously set options, create a new {@code RequestBuilder} instead
+     * of using this method.
      *
      * @return This request builder.
      * @see RequestOptions#apply(BaseRequestOptions)
@@ -187,26 +188,35 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
      * removed. If you want to replace any previously added listeners, use {@link #listener(RequestListener)}.
      *
      * <p>Listeners track the state of the request started by this particular {@code builder}. When
-     * used with the thumbnail APIs ({@link #thumbnail(RequestBuilder)}) this can start to seem confusing because multiple requests are running and each may succeed or fail, independent of each other. As a rule, Glide does not add {@link RequestListener}s to thumbnail requests automatically. That
-     * means that {@link RequestListener}s track the state of exactly one request in the chain. For example, if you start a primary request with a single nested thumbnail and you add a {@link RequestListener} only to the primary request, then the {@link RequestListener} will only be notified when
-     * the primary request succeeds or fails. If the thumbnail succeeds, but the primary request fails, the {@link RequestListener} added to the primary request will still be called with {@link RequestListener#onLoadFailed(GlideException, Object, Target, boolean)}. In the same scenario, the {@link
-     * RequestListener} added only to the primary request will not have {@link RequestListener#onResourceReady(Object, Object, Target, DataSource, boolean)} called when the thumbnail request finishes successfully. Similarly, if you add a {@link RequestListener} only to a thumbnail request, but not
-     * the primary request, that {@code listener} will only be called for changes related to the thumbnail request. If the thumbnail request fails, the {@code listener} added to the thumbnail request will be immediately called via {@link RequestListener#onLoadFailed(GlideException, Object, Target,
-     * boolean)}, even though the primary request may eventually succeed. It is perfectly possible to add a {@link RequestListener} to both the primary and a thumbnail request. If you do so, the {@link RequestListener} will be called independently for each request when it finishes. Keep in mind that
-     * if any parent request finishes before its thumbnail request(s), it will attempt to cancel those requests. As a result there's no guarantee that a {@link RequestListener} added to a thumbnail request will actually be called with either success or failure. These same patterns hold for
-     * arbitrarily nested thumbnails. The {@code listener} is only called for the requests it is added to and may not be called for every thumbnail request if those requests are cancelled due to the completion of a parent request.
+     * used with the thumbnail APIs ({@link #thumbnail(RequestBuilder)}) this can start to seem confusing because multiple requests are running and each may succeed or fail, independent
+     * of each other. As a rule, Glide does not add {@link RequestListener}s to thumbnail requests automatically. That means that {@link RequestListener}s track the state of exactly one
+     * request in the chain. For example, if you start a primary request with a single nested thumbnail and you add a {@link RequestListener} only to the primary request, then the
+     * {@link RequestListener} will only be notified when the primary request succeeds or fails. If the thumbnail succeeds, but the primary request fails, the {@link RequestListener}
+     * added to the primary request will still be called with {@link RequestListener#onLoadFailed(GlideException, Object, Target, boolean)}. In the same scenario, the {@link
+     * RequestListener} added only to the primary request will not have {@link RequestListener#onResourceReady(Object, Object, Target, DataSource, boolean)} called when the thumbnail
+     * request finishes successfully. Similarly, if you add a {@link RequestListener} only to a thumbnail request, but not the primary request, that {@code listener} will only be called
+     * for changes related to the thumbnail request. If the thumbnail request fails, the {@code listener} added to the thumbnail request will be immediately called via {@link
+     * RequestListener#onLoadFailed(GlideException, Object, Target, boolean)}, even though the primary request may eventually succeed. It is perfectly possible to add a {@link
+     * RequestListener} to both the primary and a thumbnail request. If you do so, the {@link RequestListener} will be called independently for each request when it finishes. Keep in
+     * mind that if any parent request finishes before its thumbnail request(s), it will attempt to cancel those requests. As a result there's no guarantee that a {@link
+     * RequestListener} added to a thumbnail request will actually be called with either success or failure. These same patterns hold for arbitrarily nested thumbnails. The {@code
+     * listener} is only called for the requests it is added to and may not be called for every thumbnail request if those requests are cancelled due to the completion of a parent
+     * request.
      *
      * <p>The one exception to the rules about thumbnails is {@link #thumbnail(float)}. In this case
-     * we appear to be passing {@link RequestListener}s added to the parent request to the generated thumbnail requests. To try to reduce confusion, the {@link #thumbnail(float)} method has been deprecated. It can be easily replicated using {@link #thumbnail(RequestBuilder)} and {@link
-     * BaseRequestOptions#sizeMultiplier(float)}.
+     * we appear to be passing {@link RequestListener}s added to the parent request to the generated thumbnail requests. To try to reduce confusion, the {@link #thumbnail(float)} method
+     * has been deprecated. It can be easily replicated using {@link #thumbnail(RequestBuilder)} and {@link BaseRequestOptions#sizeMultiplier(float)}.
      *
      * <p>Often in UIs it's desirable to try to track the overall status of a request, including the
-     * thumbnails. For example, you might want to load an image, start an animation if the asynchronous image load succeeds and perform some fallback action if it fails. If you're using a single primary request, {@link RequestListener} will work for this. However, if you then decide to try to make
-     * things more performant by adding a thumbnail (or multiple thumbnails), {@link RequestListener} is awkward because either you only add it to the main request and it's not called when the thumbnails complete (which defeats the purpose) or it's called for every request and it's hard to keep
-     * track of when the overall request has failed. A better option than using {@link RequestListener} to track the state of the UI then is to use {@link Target} instead. {@link Target#onResourceReady(Object, Transition)} will be called when any thumbnail finishes, which you can use to trigger your
-     * animation starting. {@link Target#onLoadFailed(Drawable)} will only be called if every request in the chain, including the primary request, fails, which you can use to trigger your fallback behavior. Be sure to pick an appropriate {@link Target} subclass when possible, like {@link
-     * com.bumptech.glide.request.target.BitmapImageViewTarget} or {@link com.bumptech.glide.request.target.DrawableImageViewTarget} when loading into {@link ImageView} or {@link com.bumptech.glide.request.target.CustomTarget} when using custom rendering. Don't forget to call {@code super()} in the
-     * {@code ImageViewTarget}s.
+     * thumbnails. For example, you might want to load an image, start an animation if the asynchronous image load succeeds and perform some fallback action if it fails. If you're using
+     * a single primary request, {@link RequestListener} will work for this. However, if you then decide to try to make things more performant by adding a thumbnail (or multiple
+     * thumbnails), {@link RequestListener} is awkward because either you only add it to the main request and it's not called when the thumbnails complete (which defeats the purpose) or
+     * it's called for every request and it's hard to keep track of when the overall request has failed. A better option than using {@link RequestListener} to track the state of the UI
+     * then is to use {@link Target} instead. {@link Target#onResourceReady(Object, Transition)} will be called when any thumbnail finishes, which you can use to trigger your animation
+     * starting. {@link Target#onLoadFailed(Drawable)} will only be called if every request in the chain, including the primary request, fails, which you can use to trigger your
+     * fallback behavior. Be sure to pick an appropriate {@link Target} subclass when possible, like {@link com.bumptech.glide.request.target.BitmapImageViewTarget} or {@link
+     * com.bumptech.glide.request.target.DrawableImageViewTarget} when loading into {@link ImageView} or {@link com.bumptech.glide.request.target.CustomTarget} when using custom
+     * rendering. Don't forget to call {@code super()} in the {@code ImageViewTarget}s.
      *
      * <p>It's best to create a single instance of an exception handler per type of request (usually
      * activity/fragment) rather than pass one in per request to avoid some redundant object allocation.
@@ -239,7 +249,8 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
      * #thumbnail(RequestBuilder)} are supported for the given error {@link RequestBuilder}.
      *
      * <p>Unlike {@link #thumbnail(RequestBuilder)} and {@link #thumbnail(float)}, no options from
-     * this primary {@link RequestBuilder} are propagated to the given error {@link RequestBuilder}. Options like priority, override widths and heights and transitions must be applied independently to the error builder.
+     * this primary {@link RequestBuilder} are propagated to the given error {@link RequestBuilder}. Options like priority, override widths and heights and transitions must be applied
+     * independently to the error builder.
      *
      * <p>The given {@link RequestBuilder} will start and potentially override a fallback drawable if
      * it's set on this {@link RequestBuilder} via {@link RequestOptions#fallback(android.graphics.drawable.Drawable)} or {@link RequestOptions#fallback(int)}.
@@ -256,14 +267,16 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
     }
 
     /**
-     * Identical to calling {@link #error(RequestBuilder)} where the {@code RequestBuilder} is the result of calling {@link #clone()} and removing any existing thumbnail and error {@code RequestBuilders}.
+     * Identical to calling {@link #error(RequestBuilder)} where the {@code RequestBuilder} is the result of calling {@link #clone()} and removing any existing thumbnail and error
+     * {@code RequestBuilders}.
      *
      * <p>Other than thumbnail and error {@code RequestBuilder}s, which are removed, all other options
      * are retained from the primary request. However, <b>order matters!</b> Any options applied after this method is called will not be applied to the error {@code RequestBuilder}.
      *
      * <p>WARNING: Calling this method with a {@code model} whose type does not match the type of the
-     * model passed to {@code load()} may be dangerous! Any options that were applied by the various type specific {@code load()} methods, like {@link #load(byte[])} will be copied to the error request here even if the {@code model} you pass to this method doesn't match. Similary, options that would
-     * be normally applied by type specific {@code load()} methods will <em>not</em> be applied to this request. If this behavior is confusing or unexpected, use {@link #error(RequestBuilder)} instead.
+     * model passed to {@code load()} may be dangerous! Any options that were applied by the various type specific {@code load()} methods, like {@link #load(byte[])} will be copied to
+     * the error request here even if the {@code model} you pass to this method doesn't match. Similary, options that would be normally applied by type specific {@code load()} methods
+     * will <em>not</em> be applied to this request. If this behavior is confusing or unexpected, use {@link #error(RequestBuilder)} instead.
      */
     @NonNull
     @CheckResult
@@ -281,8 +294,9 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
     }
 
     /**
-     * Loads and displays the resource retrieved by the given thumbnail request if it finishes before this request. Best used for loading thumbnail resources that are smaller and will be loaded more quickly than the full size resource. There are no guarantees about the order in which the requests
-     * will actually finish. However, if the thumb request completes after the full request, the thumb resource will never replace the full resource.
+     * Loads and displays the resource retrieved by the given thumbnail request if it finishes before this request. Best used for loading thumbnail resources that are smaller and will
+     * be loaded more quickly than the full size resource. There are no guarantees about the order in which the requests will actually finish. However, if the thumb request completes
+     * after the full request, the thumb resource will never replace the full resource.
      *
      * <p>Recursive calls to thumbnail are supported.
      *
@@ -311,7 +325,8 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
      * Recursively applies {@link #thumbnail(RequestBuilder)} so that the {@link RequestBuilder}s are loaded as thumbnails in the given priority order.
      *
      * <p>{@link #thumbnail(RequestBuilder)} is applied in the order given so that the {@link
-     * RequestBuilder} at position 0 has the {@link RequestBuilder} at position 1 applied as using its thumbnail method, the {@link RequestBuilder} at position 1 has the {@link RequestBuilder} at position 2 applied using its thumbnail method and so on.
+     * RequestBuilder} at position 0 has the {@link RequestBuilder} at position 1 applied as using its thumbnail method, the {@link RequestBuilder} at position 1 has the {@link
+     * RequestBuilder} at position 2 applied using its thumbnail method and so on.
      *
      * <p>Calling this method with an {@code null} array of {@link RequestBuilder} thumbnails or an
      * empty array of {@link RequestBuilder} thumbnails is equivalent to calling {@link #thumbnail(RequestBuilder)} with {@code null}.
@@ -345,7 +360,8 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
      * Recursively applies {@link #thumbnail(RequestBuilder)} so that the {@link RequestBuilder}s are loaded as thumbnails in the given priority order.
      *
      * <p>{@link #thumbnail(RequestBuilder)} is applied in the order given so that the {@link
-     * RequestBuilder} at position 0 has the {@link RequestBuilder} at position 1 applied as using its thumbnail method, the {@link RequestBuilder} at position 1 has the {@link RequestBuilder} at position 2 applied using its thumbnail method and so on.
+     * RequestBuilder} at position 0 has the {@link RequestBuilder} at position 1 applied as using its thumbnail method, the {@link RequestBuilder} at position 1 has the {@link
+     * RequestBuilder} at position 2 applied using its thumbnail method and so on.
      *
      * <p>Calling this method with a {@code null} list of {@link RequestBuilder} thumbnails or an
      * empty list of {@link RequestBuilder} thumbnails is equivalent to calling {@link #thumbnail(RequestBuilder)} with {@code null}.
@@ -397,15 +413,16 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
     }
 
     /**
-     * Loads a resource in an identical manner to this request except with the dimensions of the target multiplied by the given size multiplier. If the thumbnail load completes before the full size load, the thumbnail will be shown. If the thumbnail load completes after the full size load, the
-     * thumbnail will not be shown.
+     * Loads a resource in an identical manner to this request except with the dimensions of the target multiplied by the given size multiplier. If the thumbnail load completes before
+     * the full size load, the thumbnail will be shown. If the thumbnail load completes after the full size load, the thumbnail will not be shown.
      *
      * <p>Note - The thumbnail resource will be smaller than the size requested so the target (or
      * {@link ImageView}) must be able to scale the thumbnail appropriately. See {@link android.widget.ImageView.ScaleType}.
      *
      * <p>Almost all options will be copied from the original load, including the {@link
-     * com.bumptech.glide.load.model.ModelLoader}, {@link com.bumptech.glide.load.ResourceDecoder}, and {@link com.bumptech.glide.load.Transformation}s. However, {@link com.bumptech.glide.request.RequestOptions#placeholder(int)} and {@link com.bumptech.glide.request.RequestOptions#error(int)}, and
-     * {@link #listener(RequestListener)} will only be used on the full size load and will not be copied for the thumbnail load.
+     * com.bumptech.glide.load.model.ModelLoader}, {@link com.bumptech.glide.load.ResourceDecoder}, and {@link com.bumptech.glide.load.Transformation}s. However, {@link
+     * com.bumptech.glide.request.RequestOptions#placeholder(int)} and {@link com.bumptech.glide.request.RequestOptions#error(int)}, and {@link #listener(RequestListener)} will only be
+     * used on the full size load and will not be copied for the thumbnail load.
      *
      * <p>Recursive calls to thumbnail are supported.
      *
@@ -416,9 +433,12 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
      * @return This request builder.
      * @see #thumbnail(RequestBuilder)
      * @see #thumbnail(RequestBuilder[])
-     * @deprecated The behavior differences between this method and {@link #thumbnail(RequestBuilder)} are subtle, hard to understand for users and hard to maintain for developers. See the javadoc on {@link #listener(RequestListener)} for one concrete example of the behavior differences and
-     * complexity introduced by this method. Better consistency and readability can be obtained by calling {@link #thumbnail(RequestBuilder)} with a duplicate {@code RequestBuilder} on which you have called {@link BaseRequestOptions#sizeMultiplier(float)}. In practice this method also isn't
-     * especially useful. It's much more common to want to specify a number of different attributes for thumbnails than just a simple percentage modifier on the target size, so there's little justification for keeping this method. This method will be removed in a future version of Glide.
+     * @deprecated The behavior differences between this method and {@link #thumbnail(RequestBuilder)} are subtle, hard to understand for users and hard to maintain for developers. See
+     * the javadoc on {@link #listener(RequestListener)} for one concrete example of the behavior differences and complexity introduced by this method. Better consistency and
+     * readability can be obtained by calling {@link #thumbnail(RequestBuilder)} with a duplicate {@code RequestBuilder} on which you have called {@link
+     * BaseRequestOptions#sizeMultiplier(float)}. In practice this method also isn't especially useful. It's much more common to want to specify a number of different attributes for
+     * thumbnails than just a simple percentage modifier on the target size, so there's little justification for keeping this method. This method will be removed in a future version of
+     * Glide.
      */
     @NonNull
     @CheckResult
@@ -464,10 +484,12 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
      * Returns an object to load the given {@link Bitmap}.
      *
      * <p>It's almost always better to allow Glide to load {@link Bitmap}s than pass {@link Bitmap}s
-     * into Glide. If you have a custom way to obtain {@link Bitmap}s that is not supported by Glide by default, consider registering a custom {@link com.bumptech.glide.load.model.ModelLoader} or {@link com.bumptech.glide.load.ResourceDecoder} instead of using this method.
+     * into Glide. If you have a custom way to obtain {@link Bitmap}s that is not supported by Glide by default, consider registering a custom {@link
+     * com.bumptech.glide.load.model.ModelLoader} or {@link com.bumptech.glide.load.ResourceDecoder} instead of using this method.
      *
      * <p>The {@link DiskCacheStrategy} is set to {@link DiskCacheStrategy#NONE}. Previous calls to
-     * {@link #apply(BaseRequestOptions)} or previously applied {@link DiskCacheStrategy}s will be overridden by this method. Applying an {@link DiskCacheStrategy} other than {@link DiskCacheStrategy#NONE} after calling this method may result in undefined behavior.
+     * {@link #apply(BaseRequestOptions)} or previously applied {@link DiskCacheStrategy}s will be overridden by this method. Applying an {@link DiskCacheStrategy} other than {@link
+     * DiskCacheStrategy#NONE} after calling this method may result in undefined behavior.
      *
      * <p>In memory caching relies on Object equality. The contents of the {@link Bitmap}s are not
      * compared.
@@ -485,11 +507,12 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
      * Returns a request builder to load the given {@link Drawable}.
      *
      * <p>It's almost always better to allow Glide to load {@link Bitmap}s than to pass {@link
-     * Bitmap}s into Glide using this method . If you have a custom way to obtain {@link Bitmap}s that is not supported by Glide by default, consider registering a custom {@link com.bumptech.glide.load.model.ModelLoader} or {@link com.bumptech.glide.load.ResourceDecoder} instead of using this
-     * method.
+     * Bitmap}s into Glide using this method . If you have a custom way to obtain {@link Bitmap}s that is not supported by Glide by default, consider registering a custom {@link
+     * com.bumptech.glide.load.model.ModelLoader} or {@link com.bumptech.glide.load.ResourceDecoder} instead of using this method.
      *
      * <p>The {@link DiskCacheStrategy} is set to {@link DiskCacheStrategy#NONE}. Previous calls to
-     * {@link #apply(BaseRequestOptions)} or previously applied {@link DiskCacheStrategy}s will be overridden by this method. Applying an {@link DiskCacheStrategy} other than {@link DiskCacheStrategy#NONE} after calling this method may result in undefined behavior.
+     * {@link #apply(BaseRequestOptions)} or previously applied {@link DiskCacheStrategy}s will be overridden by this method. Applying an {@link DiskCacheStrategy} other than {@link
+     * DiskCacheStrategy#NONE} after calling this method may result in undefined behavior.
      *
      * <p>In memory caching relies on Object equality. The contents of the {@link Drawable}s are not
      * compared.
@@ -507,8 +530,10 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
      * Returns a request builder to load the given {@link java.lang.String}.
      *
      * <p>Note - this method caches data using only the given String as the cache key. If the data is
-     * a Uri outside of your control, or you otherwise expect the data represented by the given String to change without the String identifier changing, Consider using {@link com.bumptech.glide.request.RequestOptions#signature(com.bumptech.glide.load.Key)} to mixin a signature you create that
-     * identifies the data currently at the given String that will invalidate the cache if that data changes. Alternatively, using {@link com.bumptech.glide.load.engine.DiskCacheStrategy#NONE} and/or {@link com.bumptech.glide.request.RequestOptions#skipMemoryCache(boolean)} may be appropriate.
+     * a Uri outside of your control, or you otherwise expect the data represented by the given String to change without the String identifier changing, Consider using {@link
+     * com.bumptech.glide.request.RequestOptions#signature(com.bumptech.glide.load.Key)} to mixin a signature you create that identifies the data currently at the given String that will
+     * invalidate the cache if that data changes. Alternatively, using {@link com.bumptech.glide.load.engine.DiskCacheStrategy#NONE} and/or {@link
+     * com.bumptech.glide.request.RequestOptions#skipMemoryCache(boolean)} may be appropriate.
      *
      * @param string A file path, or a uri or url handled by {@link com.bumptech.glide.load.model.UriLoader}.
      * @see #load(Object)
@@ -524,8 +549,10 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
      * Returns a request builder to load the given {@link Uri}.
      *
      * <p>Note - this method caches data at Uris using only the Uri itself as the cache key. The data
-     * represented by Uris from some content providers may change without the Uri changing, which means using this method can lead to displaying stale data. Consider using {@link com.bumptech.glide.request.RequestOptions#signature(com.bumptech.glide.load.Key)} to mixin a signature you create based
-     * on the data at the given Uri that will invalidate the cache if that data changes. Alternatively, using {@link com.bumptech.glide.load.engine.DiskCacheStrategy#NONE} and/or {@link com.bumptech.glide.request.RequestOptions#skipMemoryCache(boolean)} may be appropriate.
+     * represented by Uris from some content providers may change without the Uri changing, which means using this method can lead to displaying stale data. Consider using {@link
+     * com.bumptech.glide.request.RequestOptions#signature(com.bumptech.glide.load.Key)} to mixin a signature you create based on the data at the given Uri that will invalidate the
+     * cache if that data changes. Alternatively, using {@link com.bumptech.glide.load.engine.DiskCacheStrategy#NONE} and/or {@link
+     * com.bumptech.glide.request.RequestOptions#skipMemoryCache(boolean)} may be appropriate.
      *
      * @param uri The Uri representing the image. Must be of a type handled by {@link com.bumptech.glide.load.model.UriLoader}.
      * @see #load(Object)
@@ -541,8 +568,10 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
      * Returns a request builder to load the given {@link File}.
      *
      * <p>Note - this method caches data for Files using only the file path itself as the cache key.
-     * The data in the File can change so using this method can lead to displaying stale data. If you expect the data in the File to change, Consider using {@link com.bumptech.glide.request.RequestOptions#signature(com.bumptech.glide.load.Key)} to mixin a signature you create that identifies the
-     * data currently in the File that will invalidate the cache if that data changes. Alternatively, using {@link com.bumptech.glide.load.engine.DiskCacheStrategy#NONE} and/or {@link com.bumptech.glide.request.RequestOptions#skipMemoryCache(boolean)} may be appropriate.
+     * The data in the File can change so using this method can lead to displaying stale data. If you expect the data in the File to change, Consider using {@link
+     * com.bumptech.glide.request.RequestOptions#signature(com.bumptech.glide.load.Key)} to mixin a signature you create that identifies the data currently in the File that will
+     * invalidate the cache if that data changes. Alternatively, using {@link com.bumptech.glide.load.engine.DiskCacheStrategy#NONE} and/or {@link
+     * com.bumptech.glide.request.RequestOptions#skipMemoryCache(boolean)} may be appropriate.
      *
      * @param file The File containing the image
      * @see #load(Object)
@@ -555,18 +584,20 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
     }
 
     /**
-     * Returns a request builder that uses the {@link com.bumptech.glide.load.model.ModelLoaderFactory} currently registered or {@link Integer} to load the image represented by the given {@link Integer} resource id. Defaults to {@link com.bumptech.glide.load.model.ResourceLoader} to load resource id
-     * models.
+     * Returns a request builder that uses the {@link com.bumptech.glide.load.model.ModelLoaderFactory} currently registered or {@link Integer} to load the image represented by the
+     * given {@link Integer} resource id. Defaults to {@link com.bumptech.glide.load.model.ResourceLoader} to load resource id models.
      *
      * <p>By default this method adds a version code and night mode based signature to the cache key
-     * used to cache this resource in Glide. This signature is sufficient to guarantee that end users will see the most up to date versions of your Drawables, but during development if you do not increment your version code before each install and you replace a Drawable with different data without
-     * changing the Drawable name, you may see inconsistent cached data. To get around this, consider using {@link com.bumptech.glide.load.engine.DiskCacheStrategy#NONE} via {@link RequestOptions#diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy)} during development, and re-enabling
-     * the default {@link com.bumptech.glide.load.engine.DiskCacheStrategy#RESOURCE} for release builds.
+     * used to cache this resource in Glide. This signature is sufficient to guarantee that end users will see the most up to date versions of your Drawables, but during development if
+     * you do not increment your version code before each install and you replace a Drawable with different data without changing the Drawable name, you may see inconsistent cached
+     * data. To get around this, consider using {@link com.bumptech.glide.load.engine.DiskCacheStrategy#NONE} via {@link RequestOptions#diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy)}
+     * during development, and re-enabling the default {@link com.bumptech.glide.load.engine.DiskCacheStrategy#RESOURCE} for release builds.
      *
      * <p>This method will load non-{@link android.graphics.Bitmap} resources like {@link
-     * android.graphics.drawable.VectorDrawable}s. Although Glide makes a best effort to apply {@link com.bumptech.glide.load.Transformation}s to these {@link Drawable}s by either extracting the underlying {@link Bitmap} or by converting the {@link Drawable} to a {@link Bitmap}, Glide is still not
-     * able to transform all types of resources. Animated {@link Drawable}s cannot be transformed (other than {@link com.bumptech.glide.load.resource.gif.GifDrawable}). To avoid load failures if a {@link Drawable} can't be transformed, use the optional transformation methods like {@link
-     * RequestOptions#optionalTransform(Class, Transformation)}.
+     * android.graphics.drawable.VectorDrawable}s. Although Glide makes a best effort to apply {@link com.bumptech.glide.load.Transformation}s to these {@link Drawable}s by either
+     * extracting the underlying {@link Bitmap} or by converting the {@link Drawable} to a {@link Bitmap}, Glide is still not able to transform all types of resources. Animated {@link
+     * Drawable}s cannot be transformed (other than {@link com.bumptech.glide.load.resource.gif.GifDrawable}). To avoid load failures if a {@link Drawable} can't be transformed, use the
+     * optional transformation methods like {@link RequestOptions#optionalTransform(Class, Transformation)}.
      *
      * <p>In some cases converting {@link Drawable}s to {@link Bitmap}s may be inefficient. Use this
      * method, especially in conjunction with {@link com.bumptech.glide.load.Transformation}s with caution for non-{@link Bitmap} {@link Drawable}s.
@@ -586,7 +617,8 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
      *
      * @param url The URL representing the image.
      * @see #load(Object)
-     * @deprecated The {@link java.net.URL} class has <a href="http://goo.gl/c4hHNu">a number of performance problems</a> and should generally be avoided when possible. Prefer {@link #load(android.net.Uri)} or {@link #load(String)}.
+     * @deprecated The {@link java.net.URL} class has <a href="http://goo.gl/c4hHNu">a number of performance problems</a> and should generally be avoided when possible. Prefer {@link
+     * #load(android.net.Uri)} or {@link #load(String)}.
      */
     @Deprecated
     @CheckResult
@@ -621,7 +653,8 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
      * Returns a copy of this request builder with all of the options put so far on this builder.
      *
      * <p>This method returns a "deep" copy in that all non-immutable arguments are copied such that
-     * changes to one builder will not affect the other builder. However, in addition to immutable arguments, the current model is not copied so changes to the model will affect both builders.
+     * changes to one builder will not affect the other builder. However, in addition to immutable arguments, the current model is not copied so changes to the model will affect both
+     * builders.
      */
     @SuppressWarnings({
             // we don't want to throw to be user friendly
@@ -678,7 +711,8 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
 
         @Important("13.虽然这个target在每次请求的时候都会new一个（它总是与之前用在该view上的target不同），但是它关联着的view的tagId保存着上一个请求，参见ViewTarget#setRequest")
         Request previous = target.getRequest();
-        System.out.println("sameAsOldRequest?:" + request.isEquivalentTo(previous) + " | target:" + System.identityHashCode(target) + " | newRequest:" + System.identityHashCode(request) +  " | previousRequest:" + System.identityHashCode(previous));
+        System.out.println("sameAsOldRequest?:" + request.isEquivalentTo(previous) + " | target:" + System.identityHashCode(target) + " | newRequest:" + System.identityHashCode(request)
+                + " | previousRequest:" + System.identityHashCode(previous));
         /*
          * sameAsOldRequest?:false | target:111782553 | newRequest:59666782  | previousRequest:0
          * sameAsOldRequest?:true  | target:149800481 | newRequest:237083206 | previousRequest:59666782
@@ -718,7 +752,8 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
     }
 
     /**
-     * Sets the {@link ImageView} the resource will be loaded into, cancels any existing loads into the view, and frees any resources Glide may have previously loaded into the view so they may be reused.
+     * Sets the {@link ImageView} the resource will be loaded into, cancels any existing loads into the view, and frees any resources Glide may have previously loaded into the view so
+     * they may be reused.
      *
      * @param view The view to cancel previous loads for and load the new resource into.
      * @return The {@link com.bumptech.glide.request.target.Target} used to wrap the given {@link ImageView}.
@@ -768,8 +803,10 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
     /**
      * Returns a future that can be used to do a blocking get on a background thread.
      *
-     * @param width  The desired width in pixels, or {@link Target#SIZE_ORIGINAL}. This will be overridden by {@link com.bumptech.glide.request.RequestOptions#override(int, int)} if previously called.
-     * @param height The desired height in pixels, or {@link Target#SIZE_ORIGINAL}. This will be overridden by {@link com.bumptech.glide.request.RequestOptions#override(int, int)}} if previously called).
+     * @param width  The desired width in pixels, or {@link Target#SIZE_ORIGINAL}. This will be overridden by {@link com.bumptech.glide.request.RequestOptions#override(int, int)} if
+     *               previously called.
+     * @param height The desired height in pixels, or {@link Target#SIZE_ORIGINAL}. This will be overridden by {@link com.bumptech.glide.request.RequestOptions#override(int, int)}} if
+     *               previously called).
      * @see RequestManager#clear(Target)
      * @deprecated Use {@link #submit(int, int)} instead.
      */
@@ -782,7 +819,8 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
      * Returns a future that can be used to do a blocking get on a background thread.
      *
      * <p>This method defaults to {@link Target#SIZE_ORIGINAL} for the width and the height. However,
-     * since the width and height will be overridden by values passed to {@link RequestOptions#override(int, int)}, this method can be used whenever {@link RequestOptions} with override values are applied, or whenever you want to retrieve the image in its original size.
+     * since the width and height will be overridden by values passed to {@link RequestOptions#override(int, int)}, this method can be used whenever {@link RequestOptions} with override
+     * values are applied, or whenever you want to retrieve the image in its original size.
      *
      * @see #submit(int, int)
      * @see #into(Target)
@@ -795,8 +833,10 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
     /**
      * Returns a future that can be used to do a blocking get on a background thread.
      *
-     * @param width  The desired width in pixels, or {@link Target#SIZE_ORIGINAL}. This will be overridden by {@link com.bumptech.glide.request.RequestOptions#override(int, int)} if previously called.
-     * @param height The desired height in pixels, or {@link Target#SIZE_ORIGINAL}. This will be overridden by {@link com.bumptech.glide.request.RequestOptions#override(int, int)}} if previously called).
+     * @param width  The desired width in pixels, or {@link Target#SIZE_ORIGINAL}. This will be overridden by {@link com.bumptech.glide.request.RequestOptions#override(int, int)} if
+     *               previously called.
+     * @param height The desired height in pixels, or {@link Target#SIZE_ORIGINAL}. This will be overridden by {@link com.bumptech.glide.request.RequestOptions#override(int, int)}} if
+     *               previously called).
      */
     @NonNull
     public FutureTarget<TranscodeType> submit(int width, int height) {
@@ -811,11 +851,14 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
      * future are available quickly.
      *
      * <p>Note - Any thumbnail request that does not complete before the primary request will be
-     * cancelled and may not be preloaded successfully. Cancellation of outstanding thumbnails after the primary request succeeds is a common behavior of all Glide requests. We do not try to prevent that behavior here. If you absolutely need all thumbnails to be preloaded individually, make separate
-     * preload() requests for each thumbnail (you can still combine them into one call when loading the image(s) into the UI in a subsequent request).
+     * cancelled and may not be preloaded successfully. Cancellation of outstanding thumbnails after the primary request succeeds is a common behavior of all Glide requests. We do not
+     * try to prevent that behavior here. If you absolutely need all thumbnails to be preloaded individually, make separate preload() requests for each thumbnail (you can still combine
+     * them into one call when loading the image(s) into the UI in a subsequent request).
      *
-     * @param width  The desired width in pixels, or {@link Target#SIZE_ORIGINAL}. This will be overridden by {@link com.bumptech.glide.request.RequestOptions#override(int, int)} if previously called.
-     * @param height The desired height in pixels, or {@link Target#SIZE_ORIGINAL}. This will be overridden by {@link com.bumptech.glide.request.RequestOptions#override(int, int)}} if previously called).
+     * @param width  The desired width in pixels, or {@link Target#SIZE_ORIGINAL}. This will be overridden by {@link com.bumptech.glide.request.RequestOptions#override(int, int)} if
+     *               previously called.
+     * @param height The desired height in pixels, or {@link Target#SIZE_ORIGINAL}. This will be overridden by {@link com.bumptech.glide.request.RequestOptions#override(int, int)}} if
+     *               previously called).
      * @return A {@link Target} that can be used to cancel the load via {@link RequestManager#clear(Target)}.
      * @see com.bumptech.glide.ListPreloader
      */
@@ -826,7 +869,8 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
     }
 
     /**
-     * Preloads the resource into the cache using {@link Target#SIZE_ORIGINAL} as the target width and height. Equivalent to calling {@link #preload(int, int)} with {@link Target#SIZE_ORIGINAL} as the width and height.
+     * Preloads the resource into the cache using {@link Target#SIZE_ORIGINAL} as the target width and height. Equivalent to calling {@link #preload(int, int)} with {@link
+     * Target#SIZE_ORIGINAL} as the width and height.
      *
      * @return A {@link Target} that can be used to cancel the load via {@link RequestManager#clear(Target)}
      * @see #preload(int, int)

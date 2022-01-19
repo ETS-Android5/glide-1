@@ -11,7 +11,8 @@ import java.nio.ByteBuffer;
  */
 public interface ImageHeaderParser {
     /**
-     * A constant indicating we were unable to parse the orientation from the image either because no exif segment containing orientation data existed, or because of an I/O error attempting to read the exif segment.
+     * A constant indicating we were unable to parse the orientation from the image either because no exif segment containing orientation data existed, or because of an I/O error
+     * attempting to read the exif segment.
      */
     int UNKNOWN_ORIENTATION = -1;
 

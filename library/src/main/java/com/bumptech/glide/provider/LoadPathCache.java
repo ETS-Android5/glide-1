@@ -33,14 +33,16 @@ public class LoadPathCache {
     private final AtomicReference<MultiClassKey> keyRef = new AtomicReference<>();
 
     /**
-     * Returns {@code} true if the given {@link LoadPath} is the signal object returned from {@link #get(Class, Class, Class)} that indicates that we've previously found that there are no available paths to load the requested resources and {@code false} otherwise.
+     * Returns {@code} true if the given {@link LoadPath} is the signal object returned from {@link #get(Class, Class, Class)} that indicates that we've previously found that there are
+     * no available paths to load the requested resources and {@code false} otherwise.
      */
     public boolean isEmptyLoadPath(@Nullable LoadPath<?, ?, ?> path) {
         return NO_PATHS_SIGNAL.equals(path);
     }
 
     /**
-     * May return {@link #NO_PATHS_SIGNAL} to indicate that we've previously found that there are 0 available load paths for the requested types. Callers must check using {@link #isEmptyLoadPath(LoadPath)} before using any load path returned by this method.
+     * May return {@link #NO_PATHS_SIGNAL} to indicate that we've previously found that there are 0 available load paths for the requested types. Callers must check using {@link
+     * #isEmptyLoadPath(LoadPath)} before using any load path returned by this method.
      */
     @SuppressWarnings("unchecked")
     @Nullable

@@ -19,7 +19,8 @@ public final class HardwareConfigState {
     private static final String TAG = "HardwareConfig";
 
     /**
-     * Force the state to wait until a call to allow hardware Bitmaps to be used when they'd otherwise be eligible to work around a framework issue pre Q that can cause a native crash when allocating a hardware Bitmap in this specific circumstance. See b/126573603#comment12 for details.
+     * Force the state to wait until a call to allow hardware Bitmaps to be used when they'd otherwise be eligible to work around a framework issue pre Q that can cause a native crash
+     * when allocating a hardware Bitmap in this specific circumstance. See b/126573603#comment12 for details.
      */
     public static final boolean BLOCK_HARDWARE_BITMAPS_WHEN_GL_CONTEXT_MIGHT_NOT_BE_INITIALIZED =
             Build.VERSION.SDK_INT < Build.VERSION_CODES.Q;
@@ -46,8 +47,8 @@ public final class HardwareConfigState {
      * Allows us to check to make sure we're not exceeding the FD limit for a process with hardware {@link Bitmap}s.
      *
      * <p>{@link Bitmap.Config#HARDWARE} {@link Bitmap}s require two FDs (depending on the driver).
-     * Processes have an FD limit of 1024 (at least on O). With sufficiently small {@link Bitmap}s and/or a sufficiently large {@link com.bumptech.glide.load.engine.cache.MemoryCache}, we can end up with enough {@link Bitmap}s in memory that we blow through the FD limit, which causes graphics
-     * errors, Binder errors, and a variety of crashes.
+     * Processes have an FD limit of 1024 (at least on O). With sufficiently small {@link Bitmap}s and/or a sufficiently large {@link com.bumptech.glide.load.engine.cache.MemoryCache},
+     * we can end up with enough {@link Bitmap}s in memory that we blow through the FD limit, which causes graphics errors, Binder errors, and a variety of crashes.
      *
      * <p>Calling list.size() should be relatively efficient (hopefully < 1ms on average) because
      * /proc is an in-memory FS.

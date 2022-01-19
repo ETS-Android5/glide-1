@@ -65,7 +65,8 @@ public final class GlideExecutor implements ExecutorService {
     private final ExecutorService delegate;
 
     /**
-     * Returns a new {@link Builder} with the {@link #DEFAULT_DISK_CACHE_EXECUTOR_THREADS} threads, {@link #DEFAULT_DISK_CACHE_EXECUTOR_NAME} name and {@link UncaughtThrowableStrategy#DEFAULT} uncaught throwable strategy.
+     * Returns a new {@link Builder} with the {@link #DEFAULT_DISK_CACHE_EXECUTOR_THREADS} threads, {@link #DEFAULT_DISK_CACHE_EXECUTOR_NAME} name and {@link
+     * UncaughtThrowableStrategy#DEFAULT} uncaught throwable strategy.
      *
      * <p>Disk cache executors do not allow network operations on their threads.
      */
@@ -109,8 +110,8 @@ public final class GlideExecutor implements ExecutorService {
     }
 
     /**
-     * Returns a new {@link Builder} with the default thread count returned from {@link #calculateBestThreadCount()}, the {@link #DEFAULT_SOURCE_EXECUTOR_NAME} thread name prefix, and the {@link com.bumptech.glide.load.engine.executor.GlideExecutor.UncaughtThrowableStrategy#DEFAULT} uncaught
-     * throwable strategy.
+     * Returns a new {@link Builder} with the default thread count returned from {@link #calculateBestThreadCount()}, the {@link #DEFAULT_SOURCE_EXECUTOR_NAME} thread name prefix, and
+     * the {@link com.bumptech.glide.load.engine.executor.GlideExecutor.UncaughtThrowableStrategy#DEFAULT} uncaught throwable strategy.
      *
      * <p>Source executors allow network operations on their threads.
      */
@@ -154,8 +155,9 @@ public final class GlideExecutor implements ExecutorService {
     }
 
     /**
-     * Returns a new unlimited thread pool with zero core thread count to make sure no threads are created by default, {@link #KEEP_ALIVE_TIME_MS} keep alive time, the {@link #SOURCE_UNLIMITED_EXECUTOR_NAME} thread name prefix, the {@link
-     * com.bumptech.glide.load.engine.executor.GlideExecutor.UncaughtThrowableStrategy#DEFAULT} uncaught throwable strategy, and the {@link SynchronousQueue} since using default unbounded blocking queue, for example, {@link PriorityBlockingQueue} effectively won't create more than {@code
+     * Returns a new unlimited thread pool with zero core thread count to make sure no threads are created by default, {@link #KEEP_ALIVE_TIME_MS} keep alive time, the {@link
+     * #SOURCE_UNLIMITED_EXECUTOR_NAME} thread name prefix, the {@link com.bumptech.glide.load.engine.executor.GlideExecutor.UncaughtThrowableStrategy#DEFAULT} uncaught throwable
+     * strategy, and the {@link SynchronousQueue} since using default unbounded blocking queue, for example, {@link PriorityBlockingQueue} effectively won't create more than {@code
      * corePoolSize} threads. See <a href= "http://developer.android.com/reference/java/util/concurrent/ThreadPoolExecutor.html"> ThreadPoolExecutor documentation</a>.
      *
      * <p>Source executors allow network operations on their threads.

@@ -22,8 +22,9 @@ import java.util.concurrent.TimeUnit;
  * A class that allocates {@link android.graphics.Bitmap Bitmaps} to make sure that the {@link com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool} is pre-populated.
  *
  * <p>By posting to the main thread with backoffs, we try to avoid ANRs when the garbage collector
- * gets into a state where a high percentage of {@link Bitmap} allocations trigger a stop the world GC. We try to detect whether or not a GC has occurred by only allowing our allocator to run for a limited number of milliseconds. Since the allocations themselves very fast, a GC is the most likely
- * reason for a substantial delay. If we detect our allocator has run for more than our limit, we assume a GC has occurred, stop the current allocations, and try again after a delay.
+ * gets into a state where a high percentage of {@link Bitmap} allocations trigger a stop the world GC. We try to detect whether or not a GC has occurred by only allowing our allocator
+ * to run for a limited number of milliseconds. Since the allocations themselves very fast, a GC is the most likely reason for a substantial delay. If we detect our allocator has run
+ * for more than our limit, we assume a GC has occurred, stop the current allocations, and try again after a delay.
  */
 final class BitmapPreFillRunner implements Runnable {
     @VisibleForTesting static final String TAG = "PreFillRunner";

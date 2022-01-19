@@ -80,7 +80,8 @@ public final class TransformationUtils {
                             "XT1079"));
 
     /**
-     * https://github.com/bumptech/glide/issues/738 On some devices, bitmap drawing is not thread safe. This lock only locks for these specific devices. For other types of devices the lock is always available and therefore does not impact performance
+     * https://github.com/bumptech/glide/issues/738 On some devices, bitmap drawing is not thread safe. This lock only locks for these specific devices. For other types of devices the
+     * lock is always available and therefore does not impact performance
      */
     private static final Lock BITMAP_DRAWABLE_LOCK =
             MODELS_REQUIRING_BITMAP_LOCK.contains(Build.MODEL) ? new ReentrantLock() : new NoLock();
@@ -99,7 +100,8 @@ public final class TransformationUtils {
     }
 
     /**
-     * A potentially expensive operation to crop the given Bitmap so that it fills the given dimensions. This operation is significantly less expensive in terms of memory if a mutable Bitmap with the given dimensions is passed in as well.
+     * A potentially expensive operation to crop the given Bitmap so that it fills the given dimensions. This operation is significantly less expensive in terms of memory if a mutable
+     * Bitmap with the given dimensions is passed in as well.
      *
      * @param pool     The BitmapPool to obtain a bitmap from.
      * @param inBitmap The Bitmap to resize.
@@ -222,7 +224,8 @@ public final class TransformationUtils {
     }
 
     /**
-     * Sets the alpha of the Bitmap we're going to re-use to the alpha of the Bitmap we're going to transform. This keeps {@link android.graphics.Bitmap#hasAlpha()}} consistent before and after the transformation for transformations that don't add or remove transparent pixels.
+     * Sets the alpha of the Bitmap we're going to re-use to the alpha of the Bitmap we're going to transform. This keeps {@link android.graphics.Bitmap#hasAlpha()}} consistent before
+     * and after the transformation for transformations that don't add or remove transparent pixels.
      *
      * @param inBitmap  The {@link android.graphics.Bitmap} that will be transformed.
      * @param outBitmap The {@link android.graphics.Bitmap} that will be returned from the transformation.
@@ -232,7 +235,8 @@ public final class TransformationUtils {
     }
 
     /**
-     * This is an expensive operation that copies the image in place with the pixels rotated. If possible rather use getOrientationMatrix, and put that as the imageMatrix on an ImageView.
+     * This is an expensive operation that copies the image in place with the pixels rotated. If possible rather use getOrientationMatrix, and put that as the imageMatrix on an
+     * ImageView.
      *
      * @param imageToOrient   Image Bitmap to orient.
      * @param degreesToRotate number of degrees to rotate the image by. If zero the original image is returned unmodified.
@@ -449,7 +453,8 @@ public final class TransformationUtils {
      * Creates a bitmap from a source bitmap and rounds the corners.
      *
      * <p>This method does <em>NOT</em> resize the given {@link Bitmap}, it only rounds it's corners.
-     * To both resize and round the corners of an image, consider {@link com.bumptech.glide.request.RequestOptions#transform(Transformation[])} and/or {@link com.bumptech.glide.load.MultiTransformation}.
+     * To both resize and round the corners of an image, consider {@link com.bumptech.glide.request.RequestOptions#transform(Transformation[])} and/or {@link
+     * com.bumptech.glide.load.MultiTransformation}.
      *
      * @param inBitmap       the source bitmap to use as a basis for the created bitmap.
      * @param roundingRadius the corner radius to be applied (in device-specific pixels).
@@ -475,7 +480,8 @@ public final class TransformationUtils {
      * Creates a bitmap from a source bitmap and rounds the corners, applying a potentially different [X, Y] radius to each corner.
      *
      * <p>This method does <em>NOT</em> resize the given {@link Bitmap}, it only rounds it's corners.
-     * To both resize and round the corners of an image, consider {@link com.bumptech.glide.request.RequestOptions#transform(Transformation[])} and/or {@link com.bumptech.glide.load.MultiTransformation}.
+     * To both resize and round the corners of an image, consider {@link com.bumptech.glide.request.RequestOptions#transform(Transformation[])} and/or {@link
+     * com.bumptech.glide.load.MultiTransformation}.
      *
      * @param inBitmap    the source bitmap to use as a basis for the created bitmap.
      * @param topLeft     top-left radius

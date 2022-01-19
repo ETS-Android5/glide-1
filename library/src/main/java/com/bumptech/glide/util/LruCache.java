@@ -7,7 +7,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * A general purpose size limited cache that evicts items using an LRU algorithm. By default every item is assumed to have a size of one. Subclasses can override {@link #getSize(Object)}} to change the size on a per item basis.
+ * A general purpose size limited cache that evicts items using an LRU algorithm. By default every item is assumed to have a size of one. Subclasses can override {@link
+ * #getSize(Object)}} to change the size on a per item basis.
  *
  * @param <T> The type of the keys.
  * @param <Y> The type of the values.
@@ -29,7 +30,8 @@ public class LruCache<T, Y> {
     }
 
     /**
-     * Sets a size multiplier that will be applied to the size provided in the constructor to put the new size of the cache. If the new size is less than the current size, entries will be evicted until the current size is less than or equal to the new size.
+     * Sets a size multiplier that will be applied to the size provided in the constructor to put the new size of the cache. If the new size is less than the current size, entries will
+     * be evicted until the current size is less than or equal to the new size.
      *
      * @param multiplier The multiplier to apply.
      */
@@ -42,7 +44,8 @@ public class LruCache<T, Y> {
     }
 
     /**
-     * Returns the size of a given item, defaulting to one. The units must match those used in the size passed in to the constructor. Subclasses can override this method to return sizes in various units, usually bytes.
+     * Returns the size of a given item, defaulting to one. The units must match those used in the size passed in to the constructor. Subclasses can override this method to return sizes
+     * in various units, usually bytes.
      *
      * @param item The item to get the size of.
      */
@@ -108,11 +111,13 @@ public class LruCache<T, Y> {
      * the cache and instead {@link #onItemEvicted(Object, Object)} will be called synchronously with the given key and item.
      *
      * <p>The size of the item is determined by the {@link #getSize(Object)} method. To avoid errors
-     * where {@link #getSize(Object)} returns different values for the same object when called at different times, the size value is acquired in {@code put} and retained until the item is evicted, replaced or removed.
+     * where {@link #getSize(Object)} returns different values for the same object when called at different times, the size value is acquired in {@code put} and retained until the item
+     * is evicted, replaced or removed.
      *
      * <p>If {@code item} is null the behavior here is a little odd. For the most part it's similar to
-     * simply calling {@link #remove(Object)} with the given key. The difference is that calling this method with a null {@code item} will result in an entry remaining in the cache with a null value and 0 size. The only real consequence is that at some point {@link #onItemEvicted(Object, Object)}
-     * may be called with the given {@code key} and a null value. Ideally we'd make calling this method with a null {@code item} identical to {@link #remove(Object)} but we're preserving this odd behavior to match older versions :(.
+     * simply calling {@link #remove(Object)} with the given key. The difference is that calling this method with a null {@code item} will result in an entry remaining in the cache with
+     * a null value and 0 size. The only real consequence is that at some point {@link #onItemEvicted(Object, Object)} may be called with the given {@code key} and a null value. Ideally
+     * we'd make calling this method with a null {@code item} identical to {@link #remove(Object)} but we're preserving this odd behavior to match older versions :(.
      *
      * @param key  The key to add the item at.
      * @param item The item to add.

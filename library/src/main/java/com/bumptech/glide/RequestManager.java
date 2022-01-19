@@ -43,8 +43,8 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * A class for managing and starting requests for Glide. Can use activity, fragment and connectivity lifecycle events to intelligently stop, start, and restart requests. Retrieve either by instantiating a new object, or to take advantage built in Activity and Fragment lifecycle handling, use the
- * static Glide.load methods with your Fragment or Activity.
+ * A class for managing and starting requests for Glide. Can use activity, fragment and connectivity lifecycle events to intelligently stop, start, and restart requests. Retrieve either
+ * by instantiating a new object, or to take advantage built in Activity and Fragment lifecycle handling, use the static Glide.load methods with your Fragment or Activity.
  *
  * @see Glide#with(android.app.Activity)
  * @see Glide#with(androidx.fragment.app.FragmentActivity)
@@ -155,7 +155,8 @@ public class RequestManager implements ComponentCallbacks2, LifecycleListener, M
      * Updates the default {@link RequestOptions} for all loads started with this request manager with the given {@link RequestOptions}.
      *
      * <p>The {@link RequestOptions} provided here are applied on top of those provided via {@link
-     * GlideBuilder#setDefaultRequestOptions(RequestOptions)}. If there are conflicts, the options applied here will win. Note that this method does not mutate options provided to {@link GlideBuilder#setDefaultRequestOptions(RequestOptions)}.
+     * GlideBuilder#setDefaultRequestOptions(RequestOptions)}. If there are conflicts, the options applied here will win. Note that this method does not mutate options provided to
+     * {@link GlideBuilder#setDefaultRequestOptions(RequestOptions)}.
      *
      * <p>Multiple sets of options can be applied. If there are conflicts the last {@link
      * RequestOptions} applied will win.
@@ -195,12 +196,13 @@ public class RequestManager implements ComponentCallbacks2, LifecycleListener, M
      * Adds a default {@link RequestListener} that will be added to every request started with this {@link RequestManager}.
      *
      * <p>Multiple {@link RequestListener}s can be added here, in {@link RequestManager} scopes or to
-     * individual {@link RequestBuilder}s. {@link RequestListener}s are called in the order they're added. Even if an earlier {@link RequestListener} returns {@code true} from {@link RequestListener#onLoadFailed(GlideException, Object, Target, boolean)} or {@link
-     * RequestListener#onResourceReady(Object, Object, Target, DataSource, boolean)}, it will not prevent subsequent {@link RequestListener}s from being called.
+     * individual {@link RequestBuilder}s. {@link RequestListener}s are called in the order they're added. Even if an earlier {@link RequestListener} returns {@code true} from {@link
+     * RequestListener#onLoadFailed(GlideException, Object, Target, boolean)} or {@link RequestListener#onResourceReady(Object, Object, Target, DataSource, boolean)}, it will not
+     * prevent subsequent {@link RequestListener}s from being called.
      *
      * <p>Because Glide requests can be started for any number of individual resource types, any
-     * listener added here has to accept any generic resource type in {@link RequestListener#onResourceReady(Object, Object, Target, DataSource, boolean)}. If you must base the behavior of the listener on the resource type, you will need to use {@code instanceof} to do so. It's not safe to cast
-     * resource types without first checking with {@code instanceof}.
+     * listener added here has to accept any generic resource type in {@link RequestListener#onResourceReady(Object, Object, Target, DataSource, boolean)}. If you must base the behavior
+     * of the listener on the resource type, you will need to use {@code instanceof} to do so. It's not safe to cast resource types without first checking with {@code instanceof}.
      */
     @Important("10.为该requestManager添加一个全局的请求监听器，这样所有通过该requestManager发起的请求都会被该监听器监听")
     public RequestManager addDefaultRequestListener(RequestListener<Object> requestListener) {
@@ -245,7 +247,8 @@ public class RequestManager implements ComponentCallbacks2, LifecycleListener, M
      * manager is paused to complete. RequestManagers attached to Fragments and Activities automatically resume onStart().
      *
      * <p>This will release the memory used by completed bitmaps but leaves them in any configured
-     * caches. When an #{@link android.app.Activity} receives #{@link android.app.Activity#onTrimMemory(int)} at a level of #{@link android.content.ComponentCallbacks2#TRIM_MEMORY_BACKGROUND} this is desirable in order to keep your process alive longer.
+     * caches. When an #{@link android.app.Activity} receives #{@link android.app.Activity#onTrimMemory(int)} at a level of #{@link
+     * android.content.ComponentCallbacks2#TRIM_MEMORY_BACKGROUND} this is desirable in order to keep your process alive longer.
      *
      * @see #isPaused()
      * @see #resumeRequests()
@@ -302,7 +305,8 @@ public class RequestManager implements ComponentCallbacks2, LifecycleListener, M
     }
 
     /**
-     * Performs {@link #resumeRequests()} recursively for all managers that are contextually descendant to this manager based on the Activity/Fragment hierarchy. The hierarchical semantics are identical as for {@link #pauseRequestsRecursive()}.
+     * Performs {@link #resumeRequests()} recursively for all managers that are contextually descendant to this manager based on the Activity/Fragment hierarchy. The hierarchical
+     * semantics are identical as for {@link #pauseRequestsRecursive()}.
      */
     // Public API.
     @SuppressWarnings("unused")
@@ -364,8 +368,8 @@ public class RequestManager implements ComponentCallbacks2, LifecycleListener, M
      * Attempts to always load the resource as a {@link com.bumptech.glide.load.resource.gif.GifDrawable}.
      *
      * <p>If the underlying data is not a GIF, this will fail. As a result, this should only be used
-     * if the model represents an animated GIF and the caller wants to interact with the GifDrawable directly. Normally using just {@link #asDrawable()} is sufficient because it will determine whether or not the given data represents an animated GIF and return the appropriate {@link Drawable},
-     * animated or not, automatically.
+     * if the model represents an animated GIF and the caller wants to interact with the GifDrawable directly. Normally using just {@link #asDrawable()} is sufficient because it will
+     * determine whether or not the given data represents an animated GIF and return the appropriate {@link Drawable}, animated or not, automatically.
      *
      * @return A new request builder for loading a {@link com.bumptech.glide.load.resource.gif.GifDrawable}.
      */
@@ -503,7 +507,8 @@ public class RequestManager implements ComponentCallbacks2, LifecycleListener, M
      * Attempts always load the resource into the cache and return the {@link File} containing the cached source data.
      *
      * <p>This method is designed to work for remote data that is or will be cached using {@link
-     * com.bumptech.glide.load.engine.DiskCacheStrategy#DATA}. As a result, specifying a {@link com.bumptech.glide.load.engine.DiskCacheStrategy} on this request is generally not recommended.
+     * com.bumptech.glide.load.engine.DiskCacheStrategy#DATA}. As a result, specifying a {@link com.bumptech.glide.load.engine.DiskCacheStrategy} on this request is generally not
+     * recommended.
      *
      * @return A new request builder for downloading content to cache and returning the cache File.
      */
@@ -525,7 +530,8 @@ public class RequestManager implements ComponentCallbacks2, LifecycleListener, M
     }
 
     /**
-     * Attempts to always load a {@link File} containing the resource, either using a file path obtained from the media store (for local images/videos), or using Glide's disk cache (for remote images/videos).
+     * Attempts to always load a {@link File} containing the resource, either using a file path obtained from the media store (for local images/videos), or using Glide's disk cache (for
+     * remote images/videos).
      *
      * <p>For remote content, prefer {@link #downloadOnly()}.
      *
@@ -538,7 +544,8 @@ public class RequestManager implements ComponentCallbacks2, LifecycleListener, M
     }
 
     /**
-     * Attempts to load the resource using any registered {@link com.bumptech.glide.load.ResourceDecoder}s that can decode the given resource class or any subclass of the given resource class.
+     * Attempts to load the resource using any registered {@link com.bumptech.glide.load.ResourceDecoder}s that can decode the given resource class or any subclass of the given resource
+     * class.
      *
      * @param resourceClass The resource to decode.
      * @return A new request builder for loading the given resource class.

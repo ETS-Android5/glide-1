@@ -6,7 +6,8 @@ import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import java.security.MessageDigest;
 
 /**
- * Scale the image so that either the width of the image matches the given width and the height of the image is greater than the given height or vice versa, and then crop the larger dimension to match the given dimension.
+ * Scale the image so that either the width of the image matches the given width and the height of the image is greater than the given height or vice versa, and then crop the larger
+ * dimension to match the given dimension.
  *
  * <p>Does not maintain the image's aspect ratio
  */
