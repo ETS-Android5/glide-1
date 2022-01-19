@@ -197,8 +197,8 @@ public class LruBitmapPool implements BitmapPool {
     }
 
     @Nullable
-    private synchronized Bitmap getDirtyOrNull(
-            int width, int height, @Nullable Bitmap.Config config) {
+    private synchronized Bitmap getDirtyOrNull(int width, int height, @Nullable Bitmap.Config config) {
+        Log.i("trackBug","LruBitmapPool#getDirtyOrNull");
         assertNotHardwareConfig(config);
         // Config will be null for non public config types, which can lead to transformations naively
         // passing in null as the requested config here. See issue #194.

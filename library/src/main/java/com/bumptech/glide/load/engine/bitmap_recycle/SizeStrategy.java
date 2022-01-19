@@ -2,6 +2,7 @@ package com.bumptech.glide.load.engine.bitmap_recycle;
 
 import android.graphics.Bitmap;
 import android.os.Build;
+import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.annotation.VisibleForTesting;
@@ -48,6 +49,7 @@ final class SizeStrategy implements LruPoolStrategy {
         // lru pool
         final Bitmap result = groupedMap.get(key);
         if (result != null) {
+            Log.i("trackBug", "SizeStrategy invoke reconfigure");
             result.reconfigure(width, height, config);
             decrementBitmapOfSize(possibleSize);
         }

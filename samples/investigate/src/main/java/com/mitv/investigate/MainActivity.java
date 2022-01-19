@@ -18,6 +18,7 @@ public class MainActivity extends FragmentActivity {
     private AtomicInteger count = new AtomicInteger(0);
 
     ImageView mIvImg;
+    Bitmap mBitmap;
     CustomTarget<Bitmap> customTarget = new CustomTarget<Bitmap>() {
         @Override
         public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
