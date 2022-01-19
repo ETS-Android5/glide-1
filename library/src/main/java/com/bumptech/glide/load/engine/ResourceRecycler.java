@@ -10,8 +10,7 @@ import com.bumptech.glide.util.Synthetic;
  */
 class ResourceRecycler {
     private boolean isRecycling;
-    private final Handler handler =
-            new Handler(Looper.getMainLooper(), new ResourceRecyclerCallback());
+    private final Handler handler = new Handler(Looper.getMainLooper(), new ResourceRecyclerCallback());
 
     synchronized void recycle(Resource<?> resource, boolean forceNextFrame) {
         if (isRecycling || forceNextFrame) {

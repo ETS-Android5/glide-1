@@ -176,7 +176,7 @@ public class Glide implements ComponentCallbacks2 {
      *
      * @return the singleton
      */
-    @Important("0.currentMaxIndex:19")
+    @Important("0.currentMaxIndex:20")
     @NonNull
     // Double checked locking is safe here.
     @SuppressWarnings("GuardedBy")

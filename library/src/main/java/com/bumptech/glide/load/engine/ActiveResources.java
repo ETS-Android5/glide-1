@@ -4,6 +4,8 @@ import android.os.Process;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import com.bumptech.glide.Important;
+import com.bumptech.glide.Why;
 import com.bumptech.glide.load.Key;
 import com.bumptech.glide.load.engine.EngineResource.ResourceListener;
 import com.bumptech.glide.util.Executors;
@@ -20,6 +22,8 @@ import java.util.concurrent.ThreadFactory;
 final class ActiveResources {
     private final boolean isActiveResourceRetentionAllowed;
     private final Executor monitorClearedResourcesExecutor;
+    @Important("20.当从activeEngineResources中通过key移除掉一个ResourceWeakReference后，该ResourceWeakReference将不再被引用（只有被该activeEngineResources引用的话），之后它将会被自动添加到"
+            + "resourceReferenceQueue中，然后会在cleanReferenceQueue方法中执行该ResourceWeakReference相关的清理工作")
     @VisibleForTesting final Map<Key, ResourceWeakReference> activeEngineResources = new HashMap<>();
     private final ReferenceQueue<EngineResource<?>> resourceReferenceQueue = new ReferenceQueue<>();
 
@@ -108,6 +112,7 @@ final class ActiveResources {
             }
         }
 
+        @Why("onResourceReleased回调中会移除这个ResourceWeakReference，为什么上面的同步代码块中还要移除？")
         EngineResource<?> newResource = new EngineResource<>(ref.resource, /*isMemoryCacheable=*/ true, /*isRecyclable=*/ false, ref.key, listener);
         listener.onResourceReleased(ref.key, newResource);
     }
@@ -166,6 +171,7 @@ final class ActiveResources {
         @Synthetic
         Resource<?> resource;
 
+        @Important("21.super(referent, queue)将EngineResource和ReferenceQueue关联起来")
         @Synthetic
         @SuppressWarnings("WeakerAccess")
         ResourceWeakReference(
