@@ -1,5 +1,6 @@
 package com.bumptech.glide.load.engine;
 
+import android.util.Log;
 import androidx.annotation.NonNull;
 import com.bumptech.glide.load.Key;
 import com.bumptech.glide.util.Preconditions;
@@ -87,6 +88,7 @@ class EngineResource<Z> implements Resource<Z> {
             throw new IllegalStateException("Cannot acquire a recycled resource");
         }
         ++acquired;
+        Log.i("EngineResource","acquire:" + acquired);
     }
 
     /**

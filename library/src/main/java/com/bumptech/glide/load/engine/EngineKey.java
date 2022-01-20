@@ -1,5 +1,6 @@
 package com.bumptech.glide.load.engine;
 
+import android.util.Log;
 import androidx.annotation.NonNull;
 import com.bumptech.glide.load.Key;
 import com.bumptech.glide.load.Options;
@@ -39,13 +40,23 @@ class EngineKey implements Key {
         this.resourceClass = Preconditions.checkNotNull(resourceClass, "Resource class must not be null");
         this.transcodeClass = Preconditions.checkNotNull(transcodeClass, "Transcode class must not be null");
         this.options = Preconditions.checkNotNull(options);
+
+        Log.i("engineKey",
+                "model:" + System.identityHashCode(model) + "\n" +
+                "width:" + width + "\n" +
+                "height:" + height + "\n" +
+                "transformations:" + System.identityHashCode(transformations) + "\n" +
+                "resourceClass:" + resourceClass.getSimpleName() + "\n" +
+                "transcodeClass:" + transcodeClass.getSimpleName() + "\n" +
+                "options:" + System.identityHashCode(options) + "\n"
+                );
     }
 
     @Override
     public boolean equals(Object o) {
         if (o instanceof EngineKey) {
             EngineKey other = (EngineKey) o;
-            return model.equals(other.model)
+            boolean result =  model.equals(other.model)
                     && signature.equals(other.signature)
                     && height == other.height
                     && width == other.width
@@ -53,6 +64,10 @@ class EngineKey implements Key {
                     && resourceClass.equals(other.resourceClass)
                     && transcodeClass.equals(other.transcodeClass)
                     && options.equals(other.options);
+            Log.i("engineKey","equals:" + result);
+            Log.i("engineKey","equals - transformations:" + transformations.equals(other.transformations));
+            Log.i("engineKey","equals - options:" + options.equals(other.options));
+            return result;
         }
         return false;
     }

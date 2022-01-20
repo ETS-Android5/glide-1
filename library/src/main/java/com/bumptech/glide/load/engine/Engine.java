@@ -184,6 +184,7 @@ public class Engine implements EngineJobListener, MemoryCache.ResourceRemovedLis
                         transcodeClass,
                         options);
 
+        Log.i("Engine","key:" + System.identityHashCode(key));
         EngineResource<?> memoryResource;
         synchronized (this) {
             memoryResource = loadFromMemory(key, isMemoryCacheable, startTime);
