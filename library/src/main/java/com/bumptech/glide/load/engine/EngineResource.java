@@ -2,6 +2,7 @@ package com.bumptech.glide.load.engine;
 
 import android.util.Log;
 import androidx.annotation.NonNull;
+import com.bumptech.glide.Important;
 import com.bumptech.glide.load.Key;
 import com.bumptech.glide.util.Preconditions;
 
@@ -20,6 +21,7 @@ class EngineResource<Z> implements Resource<Z> {
     private int acquired;
     private boolean isRecycled;
 
+    @Important("22.EngineResource的acquired变量为0时回调onResourceReleased")
     interface ResourceListener {
         void onResourceReleased(Key key, EngineResource<?> resource);
     }

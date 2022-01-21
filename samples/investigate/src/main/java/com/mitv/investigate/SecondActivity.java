@@ -1,5 +1,6 @@
 package com.mitv.investigate;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.drawable.BitmapDrawable;
@@ -60,7 +61,8 @@ public class SecondActivity extends FragmentActivity {
 //            } else {
 //                Glide.with(this).asBitmap().load("https://c-ssl.duitang.com/uploads/item/202003/18/20200318222019_SFuNx.thumb.700_0.jpeg").into(customTarget);
 //            }
-            simpleInvestigate(mIvImgTop);
+//            simpleInvestigate(mIvImgTop);
+            startActivity(new Intent(this, LeakActivity.class));
         }
         return true;
     }

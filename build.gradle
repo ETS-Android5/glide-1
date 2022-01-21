@@ -2,6 +2,7 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import se.bjurr.violations.gradle.plugin.ViolationsTask
 
 buildscript {
+    ext.kotlin_version = '1.6.10'
     repositories {
         google()
         mavenCentral()
@@ -19,6 +20,7 @@ buildscript {
         classpath "se.bjurr.violations:violations-gradle-plugin:${VIOLATIONS_PLUGIN_VERSION}"
         classpath "com.diffplug.spotless:spotless-plugin-gradle:5.11.0"
         classpath "androidx.benchmark:benchmark-gradle-plugin:${ANDROID_X_BENCHMARK_VERSION}"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
