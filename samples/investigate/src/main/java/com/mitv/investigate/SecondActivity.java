@@ -61,8 +61,8 @@ public class SecondActivity extends FragmentActivity {
 //            } else {
 //                Glide.with(this).asBitmap().load("https://c-ssl.duitang.com/uploads/item/202003/18/20200318222019_SFuNx.thumb.700_0.jpeg").into(customTarget);
 //            }
-//            simpleInvestigate(mIvImgTop);
-            startActivity(new Intent(this, LeakActivity.class));
+            simpleInvestigate(mIvImgTop);
+//            startActivity(new Intent(this, LeakActivity.class));
         }
         return true;
     }

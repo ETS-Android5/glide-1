@@ -3,6 +3,7 @@ package com.bumptech.glide.load.engine;
 import android.util.Log;
 import androidx.annotation.NonNull;
 import com.bumptech.glide.Important;
+import com.bumptech.glide.PrettyLogger;
 import com.bumptech.glide.load.Key;
 import com.bumptech.glide.util.Preconditions;
 
@@ -86,6 +87,7 @@ class EngineResource<Z> implements Resource<Z> {
      * will take care of this for you.
      */
     synchronized void acquire() {
+        PrettyLogger.invokeTrack();
         if (isRecycled) {
             throw new IllegalStateException("Cannot acquire a recycled resource");
         }
