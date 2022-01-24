@@ -52,8 +52,7 @@ import java.util.concurrent.Executor;
  */
 // Public API.
 @SuppressWarnings({"unused", "WeakerAccess"})
-public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBuilder<TranscodeType>>
-        implements Cloneable, ModelTypes<RequestBuilder<TranscodeType>> {
+public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBuilder<TranscodeType>> implements Cloneable, ModelTypes<RequestBuilder<TranscodeType>> {
     // Used in generated subclasses
     protected static final RequestOptions DOWNLOAD_ONLY_OPTIONS =
             new RequestOptions()
@@ -1047,8 +1046,7 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
                 thumbOverrideHeight = requestOptions.getOverrideHeight();
             }
 
-            ThumbnailRequestCoordinator coordinator =
-                    new ThumbnailRequestCoordinator(requestLock, parentCoordinator);
+            ThumbnailRequestCoordinator coordinator = new ThumbnailRequestCoordinator(requestLock, parentCoordinator);
             Request fullRequest =
                     obtainRequest(
                             requestLock,
@@ -1080,8 +1078,7 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
             return coordinator;
         } else if (thumbSizeMultiplier != null) {
             // Base case: thumbnail multiplier generates a thumbnail request, but cannot recurse.
-            ThumbnailRequestCoordinator coordinator =
-                    new ThumbnailRequestCoordinator(requestLock, parentCoordinator);
+            ThumbnailRequestCoordinator coordinator = new ThumbnailRequestCoordinator(requestLock, parentCoordinator);
             Request fullRequest =
                     obtainRequest(
                             requestLock,

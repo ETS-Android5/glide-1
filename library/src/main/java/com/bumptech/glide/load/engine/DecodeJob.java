@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.core.util.Pools;
 import com.bumptech.glide.GlideContext;
+import com.bumptech.glide.Important;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.Registry;
 import com.bumptech.glide.load.DataSource;
@@ -498,8 +499,7 @@ class DecodeJob<R>
             return options;
         }
 
-        boolean isHardwareConfigSafe =
-                dataSource == DataSource.RESOURCE_DISK_CACHE || decodeHelper.isScaleOnlyOrNoTransform();
+        boolean isHardwareConfigSafe = dataSource == DataSource.RESOURCE_DISK_CACHE || decodeHelper.isScaleOnlyOrNoTransform();
         Boolean isHardwareConfigAllowed = options.get(Downsampler.ALLOW_HARDWARE_CONFIG);
 
         // If allow hardware config is defined, we can use it if it's set to false or if it's safe to
@@ -712,8 +712,7 @@ class DecodeJob<R>
 
     interface Callback<R> {
 
-        void onResourceReady(
-                Resource<R> resource, DataSource dataSource, boolean isLoadedFromAlternateCacheKey);
+        void onResourceReady(Resource<R> resource, DataSource dataSource, boolean isLoadedFromAlternateCacheKey);
 
         void onLoadFailed(GlideException e);
 
@@ -753,14 +752,17 @@ class DecodeJob<R>
         /**
          * Decode from a cached resource.
          */
+        @Important("23.对原数据处理过后的缓存数据，优先级：RESOURCE_CACHE > DATA_CACHE > SOURCE")
         RESOURCE_CACHE,
         /**
          * Decode from cached source data.
          */
+        @Important("24.缓存的原数据，优先级：RESOURCE_CACHE > DATA_CACHE > SOURCE")
         DATA_CACHE,
         /**
          * Decode from retrieved source.
          */
+        @Important("25.未缓存的原数据，优先级：RESOURCE_CACHE > DATA_CACHE > SOURCE")
         SOURCE,
         /**
          * Encoding transformed resources after a successful load.

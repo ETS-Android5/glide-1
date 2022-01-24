@@ -34,13 +34,28 @@ public class SecondActivity extends FragmentActivity {
     Button mBtnClearDisk;
 
     Bitmap mBitmapTop;
+    Drawable mDrawableTop;
 
-    CustomTarget<Bitmap> mCustomTarget = new CustomTarget<Bitmap>() {
+    CustomTarget<Bitmap> mCustomBitmapTarget = new CustomTarget<Bitmap>() {
         @RequiresApi(api = VERSION_CODES.KITKAT)
         @Override
         public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
             mBitmapTop = resource;
             mIvImgTop.setImageBitmap(mBitmapTop);
+        }
+
+        @Override
+        public void onLoadCleared(@Nullable Drawable placeholder) {
+
+        }
+    };
+
+    CustomTarget<Drawable> mCustomDrawableTarget = new CustomTarget<Drawable>() {
+        @RequiresApi(api = VERSION_CODES.KITKAT)
+        @Override
+        public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+            mDrawableTop = resource;
+            mIvImgTop.setImageDrawable(mDrawableTop);
         }
 
         @Override
@@ -96,10 +111,10 @@ public class SecondActivity extends FragmentActivity {
         Glide.with(this)
                 .asBitmap()
                 .load("https://lmg.jj20.com/up/allimg/1114/113020142315/201130142315-1-1200.jpg")
-                .skipMemoryCache(true)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
+//                .skipMemoryCache(true)
+//                .diskCacheStrategy(DiskCacheStrategy.NONE)
 //                .apply(requestOptions)
-                .into(mCustomTarget);
+                .into(mCustomBitmapTarget);
 //        Glide
 //                .with(this)
 //                .load("https://lmg.jj20.com/up/allimg/1114/113020142315/201130142315-1-1200.jpg")

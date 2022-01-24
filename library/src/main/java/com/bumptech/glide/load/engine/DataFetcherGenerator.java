@@ -44,7 +44,9 @@ interface DataFetcherGenerator {
          * @param dataSource   The data source we were loading from.
          */
         void onDataFetcherFailed(
-                Key attemptedKey, Exception e, DataFetcher<?> fetcher, DataSource dataSource);
+                Key attemptedKey,
+                Exception e,
+                DataFetcher<?> fetcher, DataSource dataSource);
     }
 
     /**
