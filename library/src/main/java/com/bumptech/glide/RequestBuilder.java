@@ -1094,8 +1094,7 @@ public class RequestBuilder<TranscodeType> extends BaseRequestOptions<RequestBui
                             overrideWidth,
                             overrideHeight,
                             callbackExecutor);
-            BaseRequestOptions<?> thumbnailOptions =
-                    requestOptions.clone().sizeMultiplier(thumbSizeMultiplier);
+            BaseRequestOptions<?> thumbnailOptions = requestOptions.clone().sizeMultiplier(thumbSizeMultiplier);
 
             Request thumbnailRequest =
                     obtainRequest(

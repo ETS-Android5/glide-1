@@ -9,7 +9,10 @@ import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +20,8 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.FragmentActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.BaseRequestOptions;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -26,6 +31,7 @@ public class SecondActivity extends FragmentActivity {
 
     ImageView mIvImgTop;
     ImageView mIvImgBottom;
+    Button mBtnClearDisk;
 
     Bitmap mBitmapTop;
 
@@ -49,6 +55,17 @@ public class SecondActivity extends FragmentActivity {
         setContentView(R.layout.activity_second);
         mIvImgTop = findViewById(R.id.iv_img_top);
         mIvImgBottom = findViewById(R.id.iv_img_bottom);
+        findViewById(R.id.btn_clear_disk).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Glide.get(SecondActivity.this).clearDiskCache();
+                    }
+                }).start();
+            }
+        });
     }
 
     @RequiresApi(api = VERSION_CODES.KITKAT)
@@ -75,21 +92,25 @@ public class SecondActivity extends FragmentActivity {
         previousWidth -= 10;
         previousHeight -= 10;
 
-//        Glide.with(this)
-//                .asBitmap()
+        RequestOptions requestOptions = new RequestOptions().onlyRetrieveFromCache(true);
+        Glide.with(this)
+                .asBitmap()
+                .load("https://lmg.jj20.com/up/allimg/1114/113020142315/201130142315-1-1200.jpg")
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+//                .apply(requestOptions)
+                .into(mCustomTarget);
+//        Glide
+//                .with(this)
 //                .load("https://lmg.jj20.com/up/allimg/1114/113020142315/201130142315-1-1200.jpg")
-//                .into(mCustomTarget);
-        Glide
-                .with(this)
-                .load("https://lmg.jj20.com/up/allimg/1114/113020142315/201130142315-1-1200.jpg")
 //                .override(previousWidth, previousHeight) // 因为每次需要的宽高都与上次请求的宽高不同，因此不会使用上次的请求，而是重新创建一个
-                .into(mIvImgBottom);
+//                .into(mIvImgBottom);
 
-        Glide
-                .with(this)
-                .load("https://lmg.jj20.com/up/allimg/1114/113020142315/201130142315-1-1200.jpg")
-//                .override(previousWidth, previousHeight) // 因为每次需要的宽高都与上次请求的宽高不同，因此不会使用上次的请求，而是重新创建一个
-                .into(mIvImgTop);
+//        Glide
+//                .with(this)
+//                .load("https://lmg.jj20.com/up/allimg/1114/113020142315/201130142315-1-1200.jpg")
+////                .override(previousWidth, previousHeight) // 因为每次需要的宽高都与上次请求的宽高不同，因此不会使用上次的请求，而是重新创建一个
+//                .into(mIvImgTop);
 
 ////        iv.setDrawingCacheEnabled(true);
 //        iv.postDelayed(new Runnable() {

@@ -330,8 +330,7 @@ class DecodeJob<R>
         onLoadFailed();
     }
 
-    private void notifyComplete(
-            Resource<R> resource, DataSource dataSource, boolean isLoadedFromAlternateCacheKey) {
+    private void notifyComplete(Resource<R> resource, DataSource dataSource, boolean isLoadedFromAlternateCacheKey) {
         setNotifiedOrThrow();
         callback.onResourceReady(resource, dataSource, isLoadedFromAlternateCacheKey);
     }
@@ -373,8 +372,7 @@ class DecodeJob<R>
     }
 
     @Override
-    public void onDataFetcherReady(
-            Key sourceKey, Object data, DataFetcher<?> fetcher, DataSource dataSource, Key attemptedKey) {
+    public void onDataFetcherReady(Key sourceKey, Object data, DataFetcher<?> fetcher, DataSource dataSource, Key attemptedKey) {
         this.currentSourceKey = sourceKey;
         this.currentData = data;
         this.currentFetcher = fetcher;
@@ -396,8 +394,7 @@ class DecodeJob<R>
     }
 
     @Override
-    public void onDataFetcherFailed(
-            Key attemptedKey, Exception e, DataFetcher<?> fetcher, DataSource dataSource) {
+    public void onDataFetcherFailed(Key attemptedKey, Exception e, DataFetcher<?> fetcher, DataSource dataSource) {
         fetcher.cleanup();
         GlideException exception = new GlideException("Fetching data failed", e);
         exception.setLoggingDetails(attemptedKey, dataSource, fetcher.getDataClass());
@@ -436,8 +433,7 @@ class DecodeJob<R>
         }
     }
 
-    private void notifyEncodeAndRelease(
-            Resource<R> resource, DataSource dataSource, boolean isLoadedFromAlternateCacheKey) {
+    private void notifyEncodeAndRelease(Resource<R> resource, DataSource dataSource, boolean isLoadedFromAlternateCacheKey) {
         GlideTrace.beginSection("DecodeJob.notifyEncodeAndRelease");
         try {
             if (resource instanceof Initializable) {
@@ -472,8 +468,7 @@ class DecodeJob<R>
         }
     }
 
-    private <Data> Resource<R> decodeFromData(
-            DataFetcher<?> fetcher, Data data, DataSource dataSource) throws GlideException {
+    private <Data> Resource<R> decodeFromData(DataFetcher<?> fetcher, Data data, DataSource dataSource) throws GlideException {
         try {
             if (data == null) {
                 return null;

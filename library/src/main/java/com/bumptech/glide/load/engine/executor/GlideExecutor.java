@@ -134,8 +134,7 @@ public final class GlideExecutor implements ExecutorService {
     // Public API.
     @SuppressWarnings("unused")
     @Deprecated
-    public static GlideExecutor newSourceExecutor(
-            UncaughtThrowableStrategy uncaughtThrowableStrategy) {
+    public static GlideExecutor newSourceExecutor(UncaughtThrowableStrategy uncaughtThrowableStrategy) {
         return newSourceBuilder().setUncaughtThrowableStrategy(uncaughtThrowableStrategy).build();
     }
 
@@ -417,8 +416,7 @@ public final class GlideExecutor implements ExecutorService {
                                 @Override
                                 public void run() {
                                     if (preventNetworkOperations) {
-                                        StrictMode.setThreadPolicy(
-                                                new ThreadPolicy.Builder().detectNetwork().penaltyDeath().build());
+                                        StrictMode.setThreadPolicy(new ThreadPolicy.Builder().detectNetwork().penaltyDeath().build());
                                     }
                                     try {
                                         runnable.run();
@@ -509,8 +507,7 @@ public final class GlideExecutor implements ExecutorService {
                             /*keepAliveTime=*/ threadTimeoutMillis,
                             TimeUnit.MILLISECONDS,
                             new PriorityBlockingQueue<Runnable>(),
-                            new DefaultThreadFactory(
-                                    threadFactory, name, uncaughtThrowableStrategy, preventNetworkOperations));
+                            new DefaultThreadFactory(threadFactory, name, uncaughtThrowableStrategy, preventNetworkOperations));
 
             if (threadTimeoutMillis != NO_THREAD_TIMEOUT) {
                 executor.allowCoreThreadTimeOut(true);

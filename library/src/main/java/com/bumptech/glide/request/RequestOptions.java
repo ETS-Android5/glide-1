@@ -40,8 +40,7 @@ public class RequestOptions extends BaseRequestOptions<RequestOptions> {
     @SuppressWarnings("WeakerAccess") // Public API
     @NonNull
     @CheckResult
-    public static RequestOptions sizeMultiplierOf(
-            @FloatRange(from = 0, to = 1) float sizeMultiplier) {
+    public static RequestOptions sizeMultiplierOf(@FloatRange(from = 0, to = 1) float sizeMultiplier) {
         return new RequestOptions().sizeMultiplier(sizeMultiplier);
     }
 

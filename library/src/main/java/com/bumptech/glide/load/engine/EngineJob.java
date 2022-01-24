@@ -312,8 +312,7 @@ class EngineJob<R> implements DecodeJob.Callback<R>, Poolable {
     }
 
     @Override
-    public void onResourceReady(
-            Resource<R> resource, DataSource dataSource, boolean isLoadedFromAlternateCacheKey) {
+    public void onResourceReady(Resource<R> resource, DataSource dataSource, boolean isLoadedFromAlternateCacheKey) {
         synchronized (this) {
             this.resource = resource;
             this.dataSource = dataSource;
@@ -432,8 +431,7 @@ class EngineJob<R> implements DecodeJob.Callback<R>, Poolable {
         }
     }
 
-    static final class ResourceCallbacksAndExecutors
-            implements Iterable<ResourceCallbackAndExecutor> {
+    static final class ResourceCallbacksAndExecutors implements Iterable<ResourceCallbackAndExecutor> {
         private final List<ResourceCallbackAndExecutor> callbacksAndExecutors;
 
         ResourceCallbacksAndExecutors() {
@@ -509,10 +507,8 @@ class EngineJob<R> implements DecodeJob.Callback<R>, Poolable {
 
     @VisibleForTesting
     static class EngineResourceFactory {
-        public <R> EngineResource<R> build(
-                Resource<R> resource, boolean isMemoryCacheable, Key key, ResourceListener listener) {
-            return new EngineResource<>(
-                    resource, isMemoryCacheable, /*isRecyclable=*/ true, key, listener);
+        public <R> EngineResource<R> build(Resource<R> resource, boolean isMemoryCacheable, Key key, ResourceListener listener) {
+            return new EngineResource<>(resource, isMemoryCacheable, /*isRecyclable=*/ true, key, listener);
         }
     }
 }
