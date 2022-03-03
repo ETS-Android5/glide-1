@@ -26,13 +26,12 @@ public class ModelCache<A, B> {
    }
 
    public ModelCache(long size) {
-      cache =
-            new LruCache<ModelKey<A>, B>(size) {
-               @Override
-               protected void onItemEvicted(@NonNull ModelKey<A> key, @Nullable B item) {
-                  key.release();
-               }
-            };
+      cache = new LruCache<ModelKey<A>, B>(size) {
+         @Override
+         protected void onItemEvicted(@NonNull ModelKey<A> key, @Nullable B item) {
+            key.release();
+         }
+      };
    }
 
    /**
