@@ -10,17 +10,17 @@ import androidx.annotation.RequiresApi;
 @RequiresApi(Build.VERSION_CODES.O)
 final class FirstFrameAndAfterTrimMemoryWaiter implements FrameWaiter, ComponentCallbacks2 {
 
-    @Override
-    public void registerSelf(Activity activity) {}
+   @Override
+   public void registerSelf(Activity activity) {}
 
-    @Override
-    public void onTrimMemory(int level) {}
+   @Override
+   public void onTrimMemory(int level) {}
 
-    @Override
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {}
+   @Override
+   public void onConfigurationChanged(@NonNull Configuration newConfig) {}
 
-    @Override
-    public void onLowMemory() {
-        onTrimMemory(TRIM_MEMORY_UI_HIDDEN);
-    }
+   @Override
+   public void onLowMemory() {
+      onTrimMemory(TRIM_MEMORY_UI_HIDDEN);
+   }
 }

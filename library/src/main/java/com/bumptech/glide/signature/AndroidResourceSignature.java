@@ -13,40 +13,40 @@ import java.security.MessageDigest;
  */
 public final class AndroidResourceSignature implements Key {
 
-    private final int nightMode;
-    private final Key applicationVersion;
+   private final int nightMode;
+   private final Key applicationVersion;
 
-    @NonNull
-    public static Key obtain(@NonNull Context context) {
-        Key signature = ApplicationVersionSignature.obtain(context);
-        int nightMode =
-                context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
-        return new AndroidResourceSignature(nightMode, signature);
-    }
+   @NonNull
+   public static Key obtain(@NonNull Context context) {
+      Key signature = ApplicationVersionSignature.obtain(context);
+      int nightMode =
+            context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+      return new AndroidResourceSignature(nightMode, signature);
+   }
 
-    private AndroidResourceSignature(int nightMode, Key applicationVersion) {
-        this.nightMode = nightMode;
-        this.applicationVersion = applicationVersion;
-    }
+   private AndroidResourceSignature(int nightMode, Key applicationVersion) {
+      this.nightMode = nightMode;
+      this.applicationVersion = applicationVersion;
+   }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o instanceof AndroidResourceSignature) {
-            AndroidResourceSignature that = (AndroidResourceSignature) o;
-            return nightMode == that.nightMode && applicationVersion.equals(that.applicationVersion);
-        }
-        return false;
-    }
+   @Override
+   public boolean equals(Object o) {
+      if (o instanceof AndroidResourceSignature) {
+         AndroidResourceSignature that = (AndroidResourceSignature) o;
+         return nightMode == that.nightMode && applicationVersion.equals(that.applicationVersion);
+      }
+      return false;
+   }
 
-    @Override
-    public int hashCode() {
-        return Util.hashCode(applicationVersion, nightMode);
-    }
+   @Override
+   public int hashCode() {
+      return Util.hashCode(applicationVersion, nightMode);
+   }
 
-    @Override
-    public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
-        applicationVersion.updateDiskCacheKey(messageDigest);
-        byte[] nightModeData = ByteBuffer.allocate(4).putInt(nightMode).array();
-        messageDigest.update(nightModeData);
-    }
+   @Override
+   public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
+      applicationVersion.updateDiskCacheKey(messageDigest);
+      byte[] nightModeData = ByteBuffer.allocate(4).putInt(nightMode).array();
+      messageDigest.update(nightModeData);
+   }
 }

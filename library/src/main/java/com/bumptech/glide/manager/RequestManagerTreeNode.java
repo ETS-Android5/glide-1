@@ -9,9 +9,9 @@ import java.util.Set;
  * does not provide access to any other RequestManagers hierarchically.
  */
 public interface RequestManagerTreeNode {
-    /**
-     * Returns all descendant {@link RequestManager}s relative to the context of the current {@link RequestManager}.
-     */
-    @NonNull
-    Set<RequestManager> getDescendants();
+   /**
+    * Returns all descendant {@link RequestManager}s relative to the context of the current {@link RequestManager}.
+    */
+   @NonNull
+   Set<RequestManager> getDescendants();
 }

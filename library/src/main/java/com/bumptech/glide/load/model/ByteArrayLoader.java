@@ -17,131 +17,131 @@ import java.nio.ByteBuffer;
  * @param <Data> The type of data that will be loaded from a given byte array.
  */
 public class ByteArrayLoader<Data> implements ModelLoader<byte[], Data> {
-    private final Converter<Data> converter;
+   private final Converter<Data> converter;
 
-    @SuppressWarnings("WeakerAccess") // Public API
-    public ByteArrayLoader(Converter<Data> converter) {
-        this.converter = converter;
-    }
+   @SuppressWarnings("WeakerAccess") // Public API
+   public ByteArrayLoader(Converter<Data> converter) {
+      this.converter = converter;
+   }
 
-    @Override
-    public LoadData<Data> buildLoadData(
-            @NonNull byte[] model, int width, int height, @NonNull Options options) {
-        return new LoadData<>(new ObjectKey(model), new Fetcher<>(model, converter));
-    }
+   @Override
+   public LoadData<Data> buildLoadData(
+         @NonNull byte[] model, int width, int height, @NonNull Options options) {
+      return new LoadData<>(new ObjectKey(model), new Fetcher<>(model, converter));
+   }
 
-    @Override
-    public boolean handles(@NonNull byte[] model) {
-        return true;
-    }
+   @Override
+   public boolean handles(@NonNull byte[] model) {
+      return true;
+   }
 
-    /**
-     * Converts between a byte array a desired model class.
-     *
-     * @param <Data> The type of data to convert to.
-     */
-    public interface Converter<Data> {
-        Data convert(byte[] model);
+   /**
+    * Converts between a byte array a desired model class.
+    *
+    * @param <Data> The type of data to convert to.
+    */
+   public interface Converter<Data> {
+      Data convert(byte[] model);
 
-        Class<Data> getDataClass();
-    }
+      Class<Data> getDataClass();
+   }
 
-    private static class Fetcher<Data> implements DataFetcher<Data> {
-        private final byte[] model;
-        private final Converter<Data> converter;
+   private static class Fetcher<Data> implements DataFetcher<Data> {
+      private final byte[] model;
+      private final Converter<Data> converter;
 
-        /**
-         * @param model We really ought to copy the model, but doing so can be hugely expensive and/or lead to OOMs. In practice it's unlikely that users would pass an array into Glide
-         *              and then mutate it.
-         */
-        @SuppressWarnings("PMD.ArrayIsStoredDirectly")
-        Fetcher(byte[] model, Converter<Data> converter) {
-            this.model = model;
-            this.converter = converter;
-        }
+      /**
+       * @param model We really ought to copy the model, but doing so can be hugely expensive and/or lead to OOMs. In practice it's unlikely that users would pass an array into Glide
+       *              and then mutate it.
+       */
+      @SuppressWarnings("PMD.ArrayIsStoredDirectly")
+      Fetcher(byte[] model, Converter<Data> converter) {
+         this.model = model;
+         this.converter = converter;
+      }
 
-        @Override
-        public void loadData(@NonNull Priority priority, @NonNull DataCallback<? super Data> callback) {
-            Data result = converter.convert(model);
-            callback.onDataReady(result);
-        }
+      @Override
+      public void loadData(@NonNull Priority priority, @NonNull DataCallback<? super Data> callback) {
+         Data result = converter.convert(model);
+         callback.onDataReady(result);
+      }
 
-        @Override
-        public void cleanup() {
-            // Do nothing.
-        }
+      @Override
+      public void cleanup() {
+         // Do nothing.
+      }
 
-        @Override
-        public void cancel() {
-            // Do nothing.
-        }
+      @Override
+      public void cancel() {
+         // Do nothing.
+      }
 
-        @NonNull
-        @Override
-        public Class<Data> getDataClass() {
-            return converter.getDataClass();
-        }
+      @NonNull
+      @Override
+      public Class<Data> getDataClass() {
+         return converter.getDataClass();
+      }
 
-        @NonNull
-        @Override
-        public DataSource getDataSource() {
-            return DataSource.LOCAL;
-        }
-    }
+      @NonNull
+      @Override
+      public DataSource getDataSource() {
+         return DataSource.LOCAL;
+      }
+   }
 
-    /**
-     * Factory for {@link com.bumptech.glide.load.model.ByteArrayLoader} and {@link java.nio.ByteBuffer}.
-     */
-    public static class ByteBufferFactory implements ModelLoaderFactory<byte[], ByteBuffer> {
+   /**
+    * Factory for {@link com.bumptech.glide.load.model.ByteArrayLoader} and {@link java.nio.ByteBuffer}.
+    */
+   public static class ByteBufferFactory implements ModelLoaderFactory<byte[], ByteBuffer> {
 
-        @NonNull
-        @Override
-        public ModelLoader<byte[], ByteBuffer> build(@NonNull MultiModelLoaderFactory multiFactory) {
-            return new ByteArrayLoader<>(
-                    new Converter<ByteBuffer>() {
-                        @Override
-                        public ByteBuffer convert(byte[] model) {
-                            return ByteBuffer.wrap(model);
-                        }
+      @NonNull
+      @Override
+      public ModelLoader<byte[], ByteBuffer> build(@NonNull MultiModelLoaderFactory multiFactory) {
+         return new ByteArrayLoader<>(
+               new Converter<ByteBuffer>() {
+                  @Override
+                  public ByteBuffer convert(byte[] model) {
+                     return ByteBuffer.wrap(model);
+                  }
 
-                        @Override
-                        public Class<ByteBuffer> getDataClass() {
-                            return ByteBuffer.class;
-                        }
-                    });
-        }
+                  @Override
+                  public Class<ByteBuffer> getDataClass() {
+                     return ByteBuffer.class;
+                  }
+               });
+      }
 
-        @Override
-        public void teardown() {
-            // Do nothing.
-        }
-    }
+      @Override
+      public void teardown() {
+         // Do nothing.
+      }
+   }
 
-    /**
-     * Factory for {@link ByteArrayLoader} and {@link java.io.InputStream}.
-     */
-    public static class StreamFactory implements ModelLoaderFactory<byte[], InputStream> {
+   /**
+    * Factory for {@link ByteArrayLoader} and {@link java.io.InputStream}.
+    */
+   public static class StreamFactory implements ModelLoaderFactory<byte[], InputStream> {
 
-        @NonNull
-        @Override
-        public ModelLoader<byte[], InputStream> build(@NonNull MultiModelLoaderFactory multiFactory) {
-            return new ByteArrayLoader<>(
-                    new Converter<InputStream>() {
-                        @Override
-                        public InputStream convert(byte[] model) {
-                            return new ByteArrayInputStream(model);
-                        }
+      @NonNull
+      @Override
+      public ModelLoader<byte[], InputStream> build(@NonNull MultiModelLoaderFactory multiFactory) {
+         return new ByteArrayLoader<>(
+               new Converter<InputStream>() {
+                  @Override
+                  public InputStream convert(byte[] model) {
+                     return new ByteArrayInputStream(model);
+                  }
 
-                        @Override
-                        public Class<InputStream> getDataClass() {
-                            return InputStream.class;
-                        }
-                    });
-        }
+                  @Override
+                  public Class<InputStream> getDataClass() {
+                     return InputStream.class;
+                  }
+               });
+      }
 
-        @Override
-        public void teardown() {
-            // Do nothing.
-        }
-    }
+      @Override
+      public void teardown() {
+         // Do nothing.
+      }
+   }
 }

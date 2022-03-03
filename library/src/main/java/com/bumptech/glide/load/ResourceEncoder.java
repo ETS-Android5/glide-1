@@ -9,7 +9,7 @@ import com.bumptech.glide.load.engine.Resource;
  * @param <T> The type of the data contained by the resource.
  */
 public interface ResourceEncoder<T> extends Encoder<Resource<T>> {
-    // specializing the generic arguments
-    @NonNull
-    EncodeStrategy getEncodeStrategy(@NonNull Options options);
+   // specializing the generic arguments
+   @NonNull
+   EncodeStrategy getEncodeStrategy(@NonNull Options options);
 }

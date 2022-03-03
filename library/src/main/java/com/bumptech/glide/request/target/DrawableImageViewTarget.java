@@ -9,22 +9,22 @@ import androidx.annotation.Nullable;
  */
 public class DrawableImageViewTarget extends ImageViewTarget<Drawable> {
 
-    public DrawableImageViewTarget(ImageView view) {
-        super(view);
-    }
+   public DrawableImageViewTarget(ImageView view) {
+      super(view);
+   }
 
-    /**
-     * @deprecated Use {@link #waitForLayout()} instead.
-     */
-    // Public API.
-    @SuppressWarnings({"unused", "deprecation"})
-    @Deprecated
-    public DrawableImageViewTarget(ImageView view, boolean waitForLayout) {
-        super(view, waitForLayout);
-    }
+   /**
+    * @deprecated Use {@link #waitForLayout()} instead.
+    */
+   // Public API.
+   @SuppressWarnings({"unused", "deprecation"})
+   @Deprecated
+   public DrawableImageViewTarget(ImageView view, boolean waitForLayout) {
+      super(view, waitForLayout);
+   }
 
-    @Override
-    protected void setResource(@Nullable Drawable resource) {
-        view.setImageDrawable(resource);
-    }
+   @Override
+   protected void setResource(@Nullable Drawable resource) {
+      view.setImageDrawable(resource);
+   }
 }

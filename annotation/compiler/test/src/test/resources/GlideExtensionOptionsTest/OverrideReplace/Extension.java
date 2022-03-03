@@ -8,13 +8,13 @@ import com.bumptech.glide.request.BaseRequestOptions;
 @GlideExtension
 public final class Extension {
 
-    private Extension() {
-        // Utility class.
-    }
+   private Extension() {
+      // Utility class.
+   }
 
-    @NonNull
-    @GlideOption(override = GlideOption.OVERRIDE_REPLACE)
-    public static BaseRequestOptions<?> centerCrop(BaseRequestOptions<?> requestOptions) {
-        return requestOptions.centerCrop();
-    }
+   @NonNull
+   @GlideOption(override = GlideOption.OVERRIDE_REPLACE)
+   public static BaseRequestOptions<?> centerCrop(BaseRequestOptions<?> requestOptions) {
+      return requestOptions.centerCrop();
+   }
 }

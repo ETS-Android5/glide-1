@@ -13,18 +13,18 @@ import java.io.File;
  * @param <DataType> The type of data that will be encoded (InputStream, ByteBuffer, Resource<Bitmap> etc).
  */
 class DataCacheWriter<DataType> implements DiskCache.Writer {
-    private final Encoder<DataType> encoder;
-    private final DataType data;
-    private final Options options;
+   private final Encoder<DataType> encoder;
+   private final DataType data;
+   private final Options options;
 
-    DataCacheWriter(Encoder<DataType> encoder, DataType data, Options options) {
-        this.encoder = encoder;
-        this.data = data;
-        this.options = options;
-    }
+   DataCacheWriter(Encoder<DataType> encoder, DataType data, Options options) {
+      this.encoder = encoder;
+      this.data = data;
+      this.options = options;
+   }
 
-    @Override
-    public boolean write(@NonNull File file) {
-        return encoder.encode(data, file, options);
-    }
+   @Override
+   public boolean write(@NonNull File file) {
+      return encoder.encode(data, file, options);
+   }
 }

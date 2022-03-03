@@ -13,19 +13,19 @@ import java.nio.ByteBuffer;
  * Writes {@link ByteBuffer ByteBuffers} to {@link File Files}.
  */
 public class ByteBufferEncoder implements Encoder<ByteBuffer> {
-    private static final String TAG = "ByteBufferEncoder";
+   private static final String TAG = "ByteBufferEncoder";
 
-    @Override
-    public boolean encode(@NonNull ByteBuffer data, @NonNull File file, @NonNull Options options) {
-        boolean success = false;
-        try {
-            ByteBufferUtil.toFile(data, file);
-            success = true;
-        } catch (IOException e) {
-            if (Log.isLoggable(TAG, Log.DEBUG)) {
-                Log.d(TAG, "Failed to write data", e);
-            }
-        }
-        return success;
-    }
+   @Override
+   public boolean encode(@NonNull ByteBuffer data, @NonNull File file, @NonNull Options options) {
+      boolean success = false;
+      try {
+         ByteBufferUtil.toFile(data, file);
+         success = true;
+      } catch (IOException e) {
+         if (Log.isLoggable(TAG, Log.DEBUG)) {
+            Log.d(TAG, "Failed to write data", e);
+         }
+      }
+      return success;
+   }
 }

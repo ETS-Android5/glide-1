@@ -27,28 +27,28 @@ import com.bumptech.glide.request.target.Target;
  */
 public class ResourceBitmapDecoder implements ResourceDecoder<Uri, Bitmap> {
 
-    private final ResourceDrawableDecoder drawableDecoder;
-    private final BitmapPool bitmapPool;
+   private final ResourceDrawableDecoder drawableDecoder;
+   private final BitmapPool bitmapPool;
 
-    public ResourceBitmapDecoder(ResourceDrawableDecoder drawableDecoder, BitmapPool bitmapPool) {
-        this.drawableDecoder = drawableDecoder;
-        this.bitmapPool = bitmapPool;
-    }
+   public ResourceBitmapDecoder(ResourceDrawableDecoder drawableDecoder, BitmapPool bitmapPool) {
+      this.drawableDecoder = drawableDecoder;
+      this.bitmapPool = bitmapPool;
+   }
 
-    @Override
-    public boolean handles(@NonNull Uri source, @NonNull Options options) {
-        return ContentResolver.SCHEME_ANDROID_RESOURCE.equals(source.getScheme());
-    }
+   @Override
+   public boolean handles(@NonNull Uri source, @NonNull Options options) {
+      return ContentResolver.SCHEME_ANDROID_RESOURCE.equals(source.getScheme());
+   }
 
-    @Nullable
-    @Override
-    public Resource<Bitmap> decode(
-            @NonNull Uri source, int width, int height, @NonNull Options options) {
-        Resource<Drawable> drawableResource = drawableDecoder.decode(source, width, height, options);
-        if (drawableResource == null) {
-            return null;
-        }
-        Drawable drawable = drawableResource.get();
-        return DrawableToBitmapConverter.convert(bitmapPool, drawable, width, height);
-    }
+   @Nullable
+   @Override
+   public Resource<Bitmap> decode(
+         @NonNull Uri source, int width, int height, @NonNull Options options) {
+      Resource<Drawable> drawableResource = drawableDecoder.decode(source, width, height, options);
+      if (drawableResource == null) {
+         return null;
+      }
+      Drawable drawable = drawableResource.get();
+      return DrawableToBitmapConverter.convert(bitmapPool, drawable, width, height);
+   }
 }

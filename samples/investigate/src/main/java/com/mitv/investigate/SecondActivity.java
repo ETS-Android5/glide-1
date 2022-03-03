@@ -27,94 +27,94 @@ import com.bumptech.glide.request.transition.Transition;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class SecondActivity extends FragmentActivity {
-    private AtomicInteger count = new AtomicInteger(0);
+   private AtomicInteger count = new AtomicInteger(0);
 
-    ImageView mIvImgTop;
-    ImageView mIvImgBottom;
-    Button mBtnClearDisk;
+   ImageView mIvImgTop;
+   ImageView mIvImgBottom;
+   Button mBtnClearDisk;
 
-    Bitmap mBitmapTop;
-    Drawable mDrawableTop;
+   Bitmap mBitmapTop;
+   Drawable mDrawableTop;
 
-    CustomTarget<Bitmap> mCustomBitmapTarget = new CustomTarget<Bitmap>() {
-        @RequiresApi(api = VERSION_CODES.KITKAT)
-        @Override
-        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-            mBitmapTop = resource;
-            mIvImgTop.setImageBitmap(mBitmapTop);
-        }
+   CustomTarget<Bitmap> mCustomBitmapTarget = new CustomTarget<Bitmap>() {
+      @RequiresApi(api = VERSION_CODES.KITKAT)
+      @Override
+      public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+         mBitmapTop = resource;
+         mIvImgTop.setImageBitmap(mBitmapTop);
+      }
 
-        @Override
-        public void onLoadCleared(@Nullable Drawable placeholder) {
+      @Override
+      public void onLoadCleared(@Nullable Drawable placeholder) {
 
-        }
-    };
+      }
+   };
 
-    CustomTarget<Drawable> mCustomDrawableTarget = new CustomTarget<Drawable>() {
-        @RequiresApi(api = VERSION_CODES.KITKAT)
-        @Override
-        public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
-            mDrawableTop = resource;
-            mIvImgTop.setImageDrawable(mDrawableTop);
-        }
+   CustomTarget<Drawable> mCustomDrawableTarget = new CustomTarget<Drawable>() {
+      @RequiresApi(api = VERSION_CODES.KITKAT)
+      @Override
+      public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+         mDrawableTop = resource;
+         mIvImgTop.setImageDrawable(mDrawableTop);
+      }
 
-        @Override
-        public void onLoadCleared(@Nullable Drawable placeholder) {
+      @Override
+      public void onLoadCleared(@Nullable Drawable placeholder) {
 
-        }
-    };
+      }
+   };
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_second);
-        mIvImgTop = findViewById(R.id.iv_img_top);
-        mIvImgBottom = findViewById(R.id.iv_img_bottom);
-        findViewById(R.id.btn_clear_disk).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Glide.get(SecondActivity.this).clearDiskCache();
-                    }
-                }).start();
-            }
-        });
-    }
+   @Override
+   protected void onCreate(Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+      setContentView(R.layout.activity_second);
+      mIvImgTop = findViewById(R.id.iv_img_top);
+      mIvImgBottom = findViewById(R.id.iv_img_bottom);
+      findViewById(R.id.btn_clear_disk).setOnClickListener(new OnClickListener() {
+         @Override
+         public void onClick(View v) {
+            new Thread(new Runnable() {
+               @Override
+               public void run() {
+                  Glide.get(SecondActivity.this).clearDiskCache();
+               }
+            }).start();
+         }
+      });
+   }
 
-    @RequiresApi(api = VERSION_CODES.KITKAT)
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            Log.i("investigate", "load start");
+   @RequiresApi(api = VERSION_CODES.KITKAT)
+   @Override
+   public boolean onTouchEvent(MotionEvent event) {
+      if (event.getAction() == MotionEvent.ACTION_DOWN) {
+         Log.i("investigate", "load start");
 //            if (count.get() % 2 == 0) {
 //                Glide.with(this).asBitmap().load("https://c-ssl.duitang.com/uploads/item/202002/03/20200203232102_hjcin.thumb.700_0.jpg").into(customTarget);
 //            } else {
 //                Glide.with(this).asBitmap().load("https://c-ssl.duitang.com/uploads/item/202003/18/20200318222019_SFuNx.thumb.700_0.jpeg").into(customTarget);
 //            }
-            simpleInvestigate(mIvImgTop);
+         simpleInvestigate(mIvImgTop);
 //            startActivity(new Intent(this, LeakActivity.class));
-        }
-        return true;
-    }
+      }
+      return true;
+   }
 
-    int previousWidth = 1200;
-    int previousHeight = 675;
+   int previousWidth = 1200;
+   int previousHeight = 675;
 
-    @RequiresApi(api = VERSION_CODES.KITKAT)
-    private void simpleInvestigate(ImageView iv) {
-        previousWidth -= 10;
-        previousHeight -= 10;
+   @RequiresApi(api = VERSION_CODES.KITKAT)
+   private void simpleInvestigate(ImageView iv) {
+      previousWidth -= 10;
+      previousHeight -= 10;
 
-        RequestOptions requestOptions = new RequestOptions().onlyRetrieveFromCache(true);
-        Glide.with(this)
-                .asBitmap()
-                .load("https://lmg.jj20.com/up/allimg/1114/113020142315/201130142315-1-1200.jpg")
+      RequestOptions requestOptions = new RequestOptions().onlyRetrieveFromCache(true);
+      Glide.with(this)
+            .asBitmap()
+            .load("https://lmg.jj20.com/up/allimg/1114/113020142315/201130142315-1-1200.jpg")
 //                .skipMemoryCache(true)
 //                .diskCacheStrategy(DiskCacheStrategy.NONE)
 //                .apply(requestOptions)
-                .into(mCustomBitmapTarget);
+            .into(mCustomBitmapTarget);
 //        Glide
 //                .with(this)
 //                .load("https://lmg.jj20.com/up/allimg/1114/113020142315/201130142315-1-1200.jpg")
@@ -162,5 +162,5 @@ public class SecondActivity extends FragmentActivity {
 //                simpleInvestigate(mIvImgBottom);
 //            }
 //        }, 1000);
-    }
+   }
 }

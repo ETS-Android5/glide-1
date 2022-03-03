@@ -14,86 +14,86 @@ import com.bumptech.glide.util.pool.StateVerifier;
  * recycle the resource.
  */
 final class LockedResource<Z> implements Resource<Z>, FactoryPools.Poolable {
-    private static final Pools.Pool<LockedResource<?>> POOL =
-            FactoryPools.threadSafe(
-                    20,
-                    new FactoryPools.Factory<LockedResource<?>>() {
-                        @Override
-                        public LockedResource<?> create() {
-                            return new LockedResource<Object>();
-                        }
-                    });
-    private final StateVerifier stateVerifier = StateVerifier.newInstance();
-    private Resource<Z> toWrap;
-    private boolean isLocked;
-    private boolean isRecycled;
+   private static final Pools.Pool<LockedResource<?>> POOL =
+         FactoryPools.threadSafe(
+               20,
+               new FactoryPools.Factory<LockedResource<?>>() {
+                  @Override
+                  public LockedResource<?> create() {
+                     return new LockedResource<Object>();
+                  }
+               });
+   private final StateVerifier stateVerifier = StateVerifier.newInstance();
+   private Resource<Z> toWrap;
+   private boolean isLocked;
+   private boolean isRecycled;
 
-    @SuppressWarnings("unchecked")
-    @NonNull
-    static <Z> LockedResource<Z> obtain(Resource<Z> resource) {
-        LockedResource<Z> result = Preconditions.checkNotNull((LockedResource<Z>) POOL.acquire());
-        result.init(resource);
-        return result;
-    }
+   @SuppressWarnings("unchecked")
+   @NonNull
+   static <Z> LockedResource<Z> obtain(Resource<Z> resource) {
+      LockedResource<Z> result = Preconditions.checkNotNull((LockedResource<Z>) POOL.acquire());
+      result.init(resource);
+      return result;
+   }
 
-    @SuppressWarnings("WeakerAccess")
-    @Synthetic
-    LockedResource() {}
+   @SuppressWarnings("WeakerAccess")
+   @Synthetic
+   LockedResource() {}
 
-    private void init(Resource<Z> toWrap) {
-        isRecycled = false;
-        isLocked = true;
-        this.toWrap = toWrap;
-    }
+   private void init(Resource<Z> toWrap) {
+      isRecycled = false;
+      isLocked = true;
+      this.toWrap = toWrap;
+   }
 
-    private void release() {
-        toWrap = null;
-        POOL.release(this);
-    }
+   private void release() {
+      toWrap = null;
+      POOL.release(this);
+   }
 
-    synchronized void unlock() {
-        stateVerifier.throwIfRecycled();
+   synchronized void unlock() {
+      stateVerifier.throwIfRecycled();
 
-        if (!isLocked) {
-            throw new IllegalStateException("Already unlocked");
-        }
-        this.isLocked = false;
-        if (isRecycled) {
-            recycle();
-        }
-    }
+      if (!isLocked) {
+         throw new IllegalStateException("Already unlocked");
+      }
+      this.isLocked = false;
+      if (isRecycled) {
+         recycle();
+      }
+   }
 
-    @NonNull
-    @Override
-    public Class<Z> getResourceClass() {
-        return toWrap.getResourceClass();
-    }
+   @NonNull
+   @Override
+   public Class<Z> getResourceClass() {
+      return toWrap.getResourceClass();
+   }
 
-    @NonNull
-    @Override
-    public Z get() {
-        return toWrap.get();
-    }
+   @NonNull
+   @Override
+   public Z get() {
+      return toWrap.get();
+   }
 
-    @Override
-    public int getSize() {
-        return toWrap.getSize();
-    }
+   @Override
+   public int getSize() {
+      return toWrap.getSize();
+   }
 
-    @Override
-    public synchronized void recycle() {
-        stateVerifier.throwIfRecycled();
+   @Override
+   public synchronized void recycle() {
+      stateVerifier.throwIfRecycled();
 
-        this.isRecycled = true;
-        if (!isLocked) {
-            toWrap.recycle();
-            release();
-        }
-    }
+      this.isRecycled = true;
+      if (!isLocked) {
+         toWrap.recycle();
+         release();
+      }
+   }
 
-    @NonNull
-    @Override
-    public StateVerifier getVerifier() {
-        return stateVerifier;
-    }
+   @NonNull
+   @Override
+   public StateVerifier getVerifier() {
+      return stateVerifier;
+   }
 }

@@ -8,6 +8,6 @@ import org.chromium.net.UrlRequest;
  */
 public interface CronetRequestFactory {
 
-    UrlRequest.Builder newRequest(
-            String url, int requestPriority, Map<String, String> headers, UrlRequest.Callback listener);
+   UrlRequest.Builder newRequest(
+         String url, int requestPriority, Map<String, String> headers, UrlRequest.Callback listener);
 }

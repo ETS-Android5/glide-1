@@ -26,85 +26,85 @@ import org.junit.runner.RunWith;
  */
 @RunWith(AndroidJUnit4.class)
 public class BenchmarkMediaStoreData {
-    // Pick a media store Uri on the device that you know has lat/lng.
-    private static final Uri MEDIA_STORE_URI = Uri.parse("content://media/external/images/media/194");
-    private final Application app = ApplicationProvider.getApplicationContext();
-    @Rule private final BenchmarkRule benchmarkRule = new BenchmarkRule();
+   // Pick a media store Uri on the device that you know has lat/lng.
+   private static final Uri MEDIA_STORE_URI = Uri.parse("content://media/external/images/media/194");
+   private final Application app = ApplicationProvider.getApplicationContext();
+   @Rule private final BenchmarkRule benchmarkRule = new BenchmarkRule();
 
-    @Before
-    public void setUp() {
-        benchmarkRule.getState().pauseTiming();
-        Preconditions.checkState(
-                ContextCompat.checkSelfPermission(app, permission.ACCESS_MEDIA_LOCATION)
-                        == PackageManager.PERMISSION_GRANTED);
-        benchmarkRule.getState().resumeTiming();
-    }
+   @Before
+   public void setUp() {
+      benchmarkRule.getState().pauseTiming();
+      Preconditions.checkState(
+            ContextCompat.checkSelfPermission(app, permission.ACCESS_MEDIA_LOCATION)
+                  == PackageManager.PERMISSION_GRANTED);
+      benchmarkRule.getState().resumeTiming();
+   }
 
-    @Test
-    public void readCacheFileFully() throws Exception {
-        benchmarkRule.getState().pauseTiming();
-        InputStream is = null;
-        OutputStream os = null;
-        final File file;
-        try {
-            is = app.getContentResolver().openInputStream(MEDIA_STORE_URI);
-            file = File.createTempFile("tempBenchmarkModel", "jpg", app.getCacheDir());
-            os = new FileOutputStream(file);
+   @Test
+   public void readCacheFileFully() throws Exception {
+      benchmarkRule.getState().pauseTiming();
+      InputStream is = null;
+      OutputStream os = null;
+      final File file;
+      try {
+         is = app.getContentResolver().openInputStream(MEDIA_STORE_URI);
+         file = File.createTempFile("tempBenchmarkModel", "jpg", app.getCacheDir());
+         os = new FileOutputStream(file);
 
-            byte[] buffer = new byte[1024 * 1024];
-            int read;
-            while ((read = is.read(buffer, 0, buffer.length)) != -1) {
-                os.write(buffer, 0, read);
-            }
+         byte[] buffer = new byte[1024 * 1024];
+         int read;
+         while ((read = is.read(buffer, 0, buffer.length)) != -1) {
+            os.write(buffer, 0, read);
+         }
+         os.close();
+      } finally {
+         if (is != null) {
+            is.close();
+         }
+         if (os != null) {
             os.close();
-        } finally {
-            if (is != null) {
-                is.close();
-            }
-            if (os != null) {
-                os.close();
-            }
-        }
-        benchmarkRule.getState().resumeTiming();
+         }
+      }
+      benchmarkRule.getState().resumeTiming();
 
-        BenchmarkState state = benchmarkRule.getState();
-        while (state.keepRunning()) {
-            readFully(
-                    new Callable<InputStream>() {
-                        @Override
-                        public InputStream call() throws Exception {
-                            return new FileInputStream(file);
-                        }
-                    });
-        }
-    }
+      BenchmarkState state = benchmarkRule.getState();
+      while (state.keepRunning()) {
+         readFully(
+               new Callable<InputStream>() {
+                  @Override
+                  public InputStream call() throws Exception {
+                     return new FileInputStream(file);
+                  }
+               });
+      }
+   }
 
-    @Test
-    public void readMediaStoreFileFully() throws Exception {
-        BenchmarkState state = benchmarkRule.getState();
-        while (state.keepRunning()) {
-            readFully(
-                    new Callable<InputStream>() {
-                        @Override
-                        public InputStream call() throws Exception {
-                            return app.getContentResolver().openInputStream(MEDIA_STORE_URI);
-                        }
-                    });
-        }
-    }
+   @Test
+   public void readMediaStoreFileFully() throws Exception {
+      BenchmarkState state = benchmarkRule.getState();
+      while (state.keepRunning()) {
+         readFully(
+               new Callable<InputStream>() {
+                  @Override
+                  public InputStream call() throws Exception {
+                     return app.getContentResolver().openInputStream(MEDIA_STORE_URI);
+                  }
+               });
+      }
+   }
 
-    private void readFully(Callable<InputStream> openInputStream) throws Exception {
-        InputStream is = null;
-        try {
-            is = openInputStream.call();
-            byte[] buffer = new byte[1024 * 1024];
-            while (is.read(buffer, 0, buffer.length) != -1) {
-                // Continue
-            }
-        } finally {
-            if (is != null) {
-                is.close();
-            }
-        }
-    }
+   private void readFully(Callable<InputStream> openInputStream) throws Exception {
+      InputStream is = null;
+      try {
+         is = openInputStream.call();
+         byte[] buffer = new byte[1024 * 1024];
+         while (is.read(buffer, 0, buffer.length) != -1) {
+            // Continue
+         }
+      } finally {
+         if (is != null) {
+            is.close();
+         }
+      }
+   }
 }

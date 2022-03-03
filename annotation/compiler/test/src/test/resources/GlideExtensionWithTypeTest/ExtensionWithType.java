@@ -8,13 +8,13 @@ import com.bumptech.glide.annotation.GlideType;
 @GlideExtension
 public final class ExtensionWithType {
 
-    private ExtensionWithType() {
-        // Utility class.
-    }
+   private ExtensionWithType() {
+      // Utility class.
+   }
 
-    @NonNull
-    @GlideType(Number.class)
-    public static RequestBuilder<Number> asNumber(RequestBuilder<Number> builder) {
-        return builder;
-    }
+   @NonNull
+   @GlideType(Number.class)
+   public static RequestBuilder<Number> asNumber(RequestBuilder<Number> builder) {
+      return builder;
+   }
 }

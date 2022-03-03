@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
  */
 public interface ConnectivityMonitorFactory {
 
-    @NonNull
-    ConnectivityMonitor build(
-            @NonNull Context context, @NonNull ConnectivityMonitor.ConnectivityListener listener);
+   @NonNull
+   ConnectivityMonitor build(
+         @NonNull Context context, @NonNull ConnectivityMonitor.ConnectivityListener listener);
 }

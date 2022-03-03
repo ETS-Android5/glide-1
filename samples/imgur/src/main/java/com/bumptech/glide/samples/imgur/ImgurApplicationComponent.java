@@ -11,12 +11,12 @@ import javax.inject.Singleton;
  */
 @Singleton
 @Component(
-        modules = {
-                AndroidSupportInjectionModule.class,
-                MainActivityModule.class,
-                ApplicationModule.class,
-                ApiModule.class
-        })
+      modules = {
+            AndroidSupportInjectionModule.class,
+            MainActivityModule.class,
+            ApplicationModule.class,
+            ApiModule.class
+      })
 public interface ImgurApplicationComponent extends AndroidInjector<ImgurApplication> {
-    // Empty.
+   // Empty.
 }

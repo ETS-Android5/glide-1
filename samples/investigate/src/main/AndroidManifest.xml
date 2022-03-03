@@ -19,8 +19,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".LeakActivity"
-            android:launchMode="singleInstance"/>
+        <activity
+            android:name=".LeakActivity"
+            android:launchMode="singleInstance" />
     </application>
 
 </manifest>

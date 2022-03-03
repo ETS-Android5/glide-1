@@ -19,9 +19,9 @@ import java.io.InputStream;
  */
 @GlideModule
 public class VolleyLibraryGlideModule extends LibraryGlideModule {
-    @Override
-    public void registerComponents(
-            @NonNull Context context, @NonNull Glide glide, @NonNull Registry registry) {
-        registry.replace(GlideUrl.class, InputStream.class, new VolleyUrlLoader.Factory(context));
-    }
+   @Override
+   public void registerComponents(
+         @NonNull Context context, @NonNull Glide glide, @NonNull Registry registry) {
+      registry.replace(GlideUrl.class, InputStream.class, new VolleyUrlLoader.Factory(context));
+   }
 }

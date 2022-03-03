@@ -15,14 +15,14 @@ import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 @Deprecated
 public class VideoBitmapDecoder extends VideoDecoder<ParcelFileDescriptor> {
 
-    @SuppressWarnings("unused")
-    public VideoBitmapDecoder(Context context) {
-        this(Glide.get(context).getBitmapPool());
-    }
+   @SuppressWarnings("unused")
+   public VideoBitmapDecoder(Context context) {
+      this(Glide.get(context).getBitmapPool());
+   }
 
-    // Public API
-    @SuppressWarnings("WeakerAccess")
-    public VideoBitmapDecoder(BitmapPool bitmapPool) {
-        super(bitmapPool, new ParcelFileDescriptorInitializer());
-    }
+   // Public API
+   @SuppressWarnings("WeakerAccess")
+   public VideoBitmapDecoder(BitmapPool bitmapPool) {
+      super(bitmapPool, new ParcelFileDescriptorInitializer());
+   }
 }

@@ -15,23 +15,23 @@ import java.io.File;
  */
 public class BitmapDrawableEncoder implements ResourceEncoder<BitmapDrawable> {
 
-    private final BitmapPool bitmapPool;
-    private final ResourceEncoder<Bitmap> encoder;
+   private final BitmapPool bitmapPool;
+   private final ResourceEncoder<Bitmap> encoder;
 
-    public BitmapDrawableEncoder(BitmapPool bitmapPool, ResourceEncoder<Bitmap> encoder) {
-        this.bitmapPool = bitmapPool;
-        this.encoder = encoder;
-    }
+   public BitmapDrawableEncoder(BitmapPool bitmapPool, ResourceEncoder<Bitmap> encoder) {
+      this.bitmapPool = bitmapPool;
+      this.encoder = encoder;
+   }
 
-    @Override
-    public boolean encode(
-            @NonNull Resource<BitmapDrawable> data, @NonNull File file, @NonNull Options options) {
-        return encoder.encode(new BitmapResource(data.get().getBitmap(), bitmapPool), file, options);
-    }
+   @Override
+   public boolean encode(
+         @NonNull Resource<BitmapDrawable> data, @NonNull File file, @NonNull Options options) {
+      return encoder.encode(new BitmapResource(data.get().getBitmap(), bitmapPool), file, options);
+   }
 
-    @NonNull
-    @Override
-    public EncodeStrategy getEncodeStrategy(@NonNull Options options) {
-        return encoder.getEncodeStrategy(options);
-    }
+   @NonNull
+   @Override
+   public EncodeStrategy getEncodeStrategy(@NonNull Options options) {
+      return encoder.getEncodeStrategy(options);
+   }
 }

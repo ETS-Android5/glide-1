@@ -9,7 +9,7 @@ import java.io.File;
 // Public API.
 @SuppressWarnings("WeakerAccess")
 public class FileResource extends SimpleResource<File> {
-    public FileResource(File file) {
-        super(file);
-    }
+   public FileResource(File file) {
+      super(file);
+   }
 }

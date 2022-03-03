@@ -13,41 +13,41 @@ import org.junit.runners.model.Statement;
  */
 public final class TearDownGlide implements TestRule {
 
-    @Override
-    public Statement apply(final Statement base, Description description) {
-        return new Statement() {
-            @Override
-            public void evaluate() throws Throwable {
-                try {
-                    base.evaluate();
-                } finally {
-                    tearDownGlide();
-                }
+   @Override
+   public Statement apply(final Statement base, Description description) {
+      return new Statement() {
+         @Override
+         public void evaluate() throws Throwable {
+            try {
+               base.evaluate();
+            } finally {
+               tearDownGlide();
             }
-        };
-    }
+         }
+      };
+   }
 
-    public void tearDownGlide() {
-        ConcurrencyHelper concurrencyHelper = new ConcurrencyHelper();
-        concurrencyHelper.runOnMainThread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        // Casting to Context explicitly is required on Java8, or the context will
-                        // be interpreted as a FragmentActivity.
-                        RequestManager requestManager =
-                                Glide.with(ApplicationProvider.<Context>getApplicationContext());
-                        requestManager.onStop();
-                        requestManager.onDestroy();
-                    }
-                });
-        concurrencyHelper.loadOnOtherThread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        Glide.get(ApplicationProvider.getApplicationContext()).clearDiskCache();
-                    }
-                });
-        Glide.tearDown();
-    }
+   public void tearDownGlide() {
+      ConcurrencyHelper concurrencyHelper = new ConcurrencyHelper();
+      concurrencyHelper.runOnMainThread(
+            new Runnable() {
+               @Override
+               public void run() {
+                  // Casting to Context explicitly is required on Java8, or the context will
+                  // be interpreted as a FragmentActivity.
+                  RequestManager requestManager =
+                        Glide.with(ApplicationProvider.<Context>getApplicationContext());
+                  requestManager.onStop();
+                  requestManager.onDestroy();
+               }
+            });
+      concurrencyHelper.loadOnOtherThread(
+            new Runnable() {
+               @Override
+               public void run() {
+                  Glide.get(ApplicationProvider.getApplicationContext()).clearDiskCache();
+               }
+            });
+      Glide.tearDown();
+   }
 }

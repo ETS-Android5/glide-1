@@ -8,5 +8,5 @@ import com.bumptech.glide.module.AppGlideModule;
  */
 @GlideModule(glideName = "ImgurGlide")
 public class ImgurGlideModule extends AppGlideModule {
-    // Intentionally Empty.
+   // Intentionally Empty.
 }

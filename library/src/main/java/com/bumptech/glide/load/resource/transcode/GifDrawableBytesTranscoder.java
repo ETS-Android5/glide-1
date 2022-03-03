@@ -14,12 +14,12 @@ import java.nio.ByteBuffer;
  * bytes of the GIF from the {@link com.bumptech.glide.load.resource.gif.GifDrawable}.
  */
 public class GifDrawableBytesTranscoder implements ResourceTranscoder<GifDrawable, byte[]> {
-    @Nullable
-    @Override
-    public Resource<byte[]> transcode(
-            @NonNull Resource<GifDrawable> toTranscode, @NonNull Options options) {
-        GifDrawable gifData = toTranscode.get();
-        ByteBuffer byteBuffer = gifData.getBuffer();
-        return new BytesResource(ByteBufferUtil.toBytes(byteBuffer));
-    }
+   @Nullable
+   @Override
+   public Resource<byte[]> transcode(
+         @NonNull Resource<GifDrawable> toTranscode, @NonNull Options options) {
+      GifDrawable gifData = toTranscode.get();
+      ByteBuffer byteBuffer = gifData.getBuffer();
+      return new BytesResource(ByteBufferUtil.toBytes(byteBuffer));
+   }
 }

@@ -8,5 +8,5 @@ import com.bumptech.glide.module.AppGlideModule;
  */
 @GlideModule
 public class ContactUriModule extends AppGlideModule {
-    // Intentionally empty.
+   // Intentionally empty.
 }

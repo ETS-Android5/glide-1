@@ -13,36 +13,36 @@ import com.bumptech.glide.request.RequestOptions;
  */
 public final class MockGlideBuilders {
 
-    private MockGlideBuilders() {}
+   private MockGlideBuilders() {}
 
-    /**
-     * Creates a new {@link RequestBuilder} instance with a matching resource type.
-     */
-    @SuppressWarnings("unchecked")
-    public static <T> RequestBuilder<T> mockRequestBuilder() {
-        return (RequestBuilder<T>) mockGlideRequest(RequestBuilder.class);
-    }
+   /**
+    * Creates a new {@link RequestBuilder} instance with a matching resource type.
+    */
+   @SuppressWarnings("unchecked")
+   public static <T> RequestBuilder<T> mockRequestBuilder() {
+      return (RequestBuilder<T>) mockGlideRequest(RequestBuilder.class);
+   }
 
-    /**
-     * Creates a new instance of a generated {@code GlideRequest} class for an application.
-     */
-    // The suppressions allow callers to get a typed class without warnings in their test code.
-    @SuppressWarnings({"unchecked", "TypeParameterUnusedInFormals"})
-    public static <T, Y extends RequestBuilder<T>> Y mockGlideRequest(Class<?> glideRequest) {
-        return (Y) mock(glideRequest, new AnswerSelf<Y>());
-    }
+   /**
+    * Creates a new instance of a generated {@code GlideRequest} class for an application.
+    */
+   // The suppressions allow callers to get a typed class without warnings in their test code.
+   @SuppressWarnings({"unchecked", "TypeParameterUnusedInFormals"})
+   public static <T, Y extends RequestBuilder<T>> Y mockGlideRequest(Class<?> glideRequest) {
+      return (Y) mock(glideRequest, new AnswerSelf<Y>());
+   }
 
-    /**
-     * Creates a new {@link RequestOptions} instance.
-     */
-    public static RequestOptions mockRequestOptions() {
-        return mockGlideOptions(RequestOptions.class);
-    }
+   /**
+    * Creates a new {@link RequestOptions} instance.
+    */
+   public static RequestOptions mockRequestOptions() {
+      return mockGlideOptions(RequestOptions.class);
+   }
 
-    /**
-     * Creates a new instance of a generated {@code GlideOptions} class for an application.
-     */
-    public static <T extends RequestOptions> T mockGlideOptions(Class<T> glideOptionsClass) {
-        return mock(glideOptionsClass, new AnswerSelf<T>());
-    }
+   /**
+    * Creates a new instance of a generated {@code GlideOptions} class for an application.
+    */
+   public static <T extends RequestOptions> T mockGlideOptions(Class<T> glideOptionsClass) {
+      return mock(glideOptionsClass, new AnswerSelf<T>());
+   }
 }

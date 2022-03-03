@@ -17,20 +17,20 @@ import java.nio.ByteBuffer;
  */
 @RequiresApi(api = 28)
 public final class ByteBufferBitmapImageDecoderResourceDecoder
-        implements ResourceDecoder<ByteBuffer, Bitmap> {
-    private final BitmapImageDecoderResourceDecoder wrapped = new BitmapImageDecoderResourceDecoder();
+      implements ResourceDecoder<ByteBuffer, Bitmap> {
+   private final BitmapImageDecoderResourceDecoder wrapped = new BitmapImageDecoderResourceDecoder();
 
-    @Override
-    public boolean handles(@NonNull ByteBuffer source, @NonNull Options options) throws IOException {
-        return true;
-    }
+   @Override
+   public boolean handles(@NonNull ByteBuffer source, @NonNull Options options) throws IOException {
+      return true;
+   }
 
-    @Nullable
-    @Override
-    public Resource<Bitmap> decode(
-            @NonNull ByteBuffer buffer, int width, int height, @NonNull Options options)
-            throws IOException {
-        Source source = ImageDecoder.createSource(buffer);
-        return wrapped.decode(source, width, height, options);
-    }
+   @Nullable
+   @Override
+   public Resource<Bitmap> decode(
+         @NonNull ByteBuffer buffer, int width, int height, @NonNull Options options)
+         throws IOException {
+      Source source = ImageDecoder.createSource(buffer);
+      return wrapped.decode(source, width, height, options);
+   }
 }

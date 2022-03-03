@@ -11,14 +11,14 @@ import java.util.Set;
  * annotation processing system and optionally provides a {@link com.bumptech.glide.manager.RequestManagerRetriever.RequestManagerFactory} impl.
  */
 abstract class GeneratedAppGlideModule extends AppGlideModule {
-    /**
-     * This method can be removed when manifest parsing is no longer supported.
-     */
-    @NonNull
-    abstract Set<Class<?>> getExcludedModuleClasses();
+   /**
+    * This method can be removed when manifest parsing is no longer supported.
+    */
+   @NonNull
+   abstract Set<Class<?>> getExcludedModuleClasses();
 
-    @Nullable
-    RequestManagerRetriever.RequestManagerFactory getRequestManagerFactory() {
-        return null;
-    }
+   @Nullable
+   RequestManagerRetriever.RequestManagerFactory getRequestManagerFactory() {
+      return null;
+   }
 }

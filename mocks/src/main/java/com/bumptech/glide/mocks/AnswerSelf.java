@@ -12,14 +12,14 @@ import org.mockito.stubbing.Answer;
  */
 final class AnswerSelf<T> implements Answer<T> {
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public T answer(InvocationOnMock invocation) throws Throwable {
-        Object mock = invocation.getMock();
-        if (invocation.getMethod().getReturnType().isInstance(mock)) {
-            return (T) mock;
-        } else {
-            return (T) RETURNS_DEFAULTS.answer(invocation);
-        }
-    }
+   @SuppressWarnings("unchecked")
+   @Override
+   public T answer(InvocationOnMock invocation) throws Throwable {
+      Object mock = invocation.getMock();
+      if (invocation.getMethod().getReturnType().isInstance(mock)) {
+         return (T) mock;
+      } else {
+         return (T) RETURNS_DEFAULTS.answer(invocation);
+      }
+   }
 }

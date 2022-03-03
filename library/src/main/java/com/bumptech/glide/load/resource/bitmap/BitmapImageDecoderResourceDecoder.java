@@ -17,32 +17,32 @@ import java.io.IOException;
  */
 @RequiresApi(api = 28)
 public final class BitmapImageDecoderResourceDecoder extends ImageDecoderResourceDecoder<Bitmap> {
-    private static final String TAG = "BitmapImageDecoder";
-    private final BitmapPool bitmapPool = new BitmapPoolAdapter();
+   private static final String TAG = "BitmapImageDecoder";
+   private final BitmapPool bitmapPool = new BitmapPoolAdapter();
 
-    @Override
-    protected Resource<Bitmap> decode(
-            Source source,
-            int requestedResourceWidth,
-            int requestedResourceHeight,
-            OnHeaderDecodedListener listener)
-            throws IOException {
-        Bitmap result = ImageDecoder.decodeBitmap(source, listener);
-        if (Log.isLoggable(TAG, Log.VERBOSE)) {
-            Log.v(
-                    TAG,
-                    "Decoded"
-                            + " ["
-                            + result.getWidth()
-                            + "x"
-                            + result.getHeight()
-                            + "]"
-                            + " for ["
-                            + requestedResourceWidth
-                            + "x"
-                            + requestedResourceHeight
-                            + "]");
-        }
-        return new BitmapResource(result, bitmapPool);
-    }
+   @Override
+   protected Resource<Bitmap> decode(
+         Source source,
+         int requestedResourceWidth,
+         int requestedResourceHeight,
+         OnHeaderDecodedListener listener)
+         throws IOException {
+      Bitmap result = ImageDecoder.decodeBitmap(source, listener);
+      if (Log.isLoggable(TAG, Log.VERBOSE)) {
+         Log.v(
+               TAG,
+               "Decoded"
+                     + " ["
+                     + result.getWidth()
+                     + "x"
+                     + result.getHeight()
+                     + "]"
+                     + " for ["
+                     + requestedResourceWidth
+                     + "x"
+                     + requestedResourceHeight
+                     + "]");
+      }
+      return new BitmapResource(result, bitmapPool);
+   }
 }

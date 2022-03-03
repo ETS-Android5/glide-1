@@ -36,197 +36,197 @@ import java.security.MessageDigest;
  */
 public class ReEncodingGifResourceEncoder implements ResourceEncoder<GifDrawable> {
 
-    private static final String KEY_ENCODE_TRANSFORMATION =
-            "com.bumptech.glide.load.resource.gif.GifResourceEncoder.EncodeTransformation";
-    /**
-     * A boolean option that, if set to <code>true</code>, causes the fully transformed GIF to be written to cache.
-     *
-     * <p>Warning - encoding GIFs is slow and often produces larger and less efficient GIFs than the
-     * originals. Re-encoding may be worth it to decrease the size of very large GIFs.
-     *
-     * <p>Defaults to <code>false</code>.
-     */
-    // Public API.
-    @SuppressWarnings("WeakerAccess")
-    public static final Option<Boolean> ENCODE_TRANSFORMATION =
-            Option.disk(
-                    KEY_ENCODE_TRANSFORMATION,
-                    false,
-                    new Option.CacheKeyUpdater<Boolean>() {
-                        @Override
-                        public void update(
-                                @NonNull byte[] keyBytes,
-                                @NonNull Boolean value,
-                                @NonNull MessageDigest messageDigest) {
-                            if (value) {
-                                messageDigest.update(keyBytes);
-                            }
-                        }
-                    });
+   private static final String KEY_ENCODE_TRANSFORMATION =
+         "com.bumptech.glide.load.resource.gif.GifResourceEncoder.EncodeTransformation";
+   /**
+    * A boolean option that, if set to <code>true</code>, causes the fully transformed GIF to be written to cache.
+    *
+    * <p>Warning - encoding GIFs is slow and often produces larger and less efficient GIFs than the
+    * originals. Re-encoding may be worth it to decrease the size of very large GIFs.
+    *
+    * <p>Defaults to <code>false</code>.
+    */
+   // Public API.
+   @SuppressWarnings("WeakerAccess")
+   public static final Option<Boolean> ENCODE_TRANSFORMATION =
+         Option.disk(
+               KEY_ENCODE_TRANSFORMATION,
+               false,
+               new Option.CacheKeyUpdater<Boolean>() {
+                  @Override
+                  public void update(
+                        @NonNull byte[] keyBytes,
+                        @NonNull Boolean value,
+                        @NonNull MessageDigest messageDigest) {
+                     if (value) {
+                        messageDigest.update(keyBytes);
+                     }
+                  }
+               });
 
-    private static final Factory FACTORY = new Factory();
-    private static final String TAG = "GifEncoder";
-    private final GifDecoder.BitmapProvider provider;
-    private final Context context;
-    private final BitmapPool bitmapPool;
-    private final Factory factory;
+   private static final Factory FACTORY = new Factory();
+   private static final String TAG = "GifEncoder";
+   private final GifDecoder.BitmapProvider provider;
+   private final Context context;
+   private final BitmapPool bitmapPool;
+   private final Factory factory;
 
-    // Public API.
-    @SuppressWarnings("unused")
-    public ReEncodingGifResourceEncoder(@NonNull Context context, @NonNull BitmapPool bitmapPool) {
-        this(context, bitmapPool, FACTORY);
-    }
+   // Public API.
+   @SuppressWarnings("unused")
+   public ReEncodingGifResourceEncoder(@NonNull Context context, @NonNull BitmapPool bitmapPool) {
+      this(context, bitmapPool, FACTORY);
+   }
 
-    @VisibleForTesting
-    ReEncodingGifResourceEncoder(Context context, BitmapPool bitmapPool, Factory factory) {
-        this.context = context;
-        this.bitmapPool = bitmapPool;
-        provider = new GifBitmapProvider(bitmapPool);
-        this.factory = factory;
-    }
+   @VisibleForTesting
+   ReEncodingGifResourceEncoder(Context context, BitmapPool bitmapPool, Factory factory) {
+      this.context = context;
+      this.bitmapPool = bitmapPool;
+      provider = new GifBitmapProvider(bitmapPool);
+      this.factory = factory;
+   }
 
-    @NonNull
-    @Override
-    public EncodeStrategy getEncodeStrategy(@NonNull Options options) {
-        Boolean encodeTransformation = options.get(ENCODE_TRANSFORMATION);
-        return encodeTransformation != null && encodeTransformation
-                ? EncodeStrategy.TRANSFORMED
-                : EncodeStrategy.SOURCE;
-    }
+   @NonNull
+   @Override
+   public EncodeStrategy getEncodeStrategy(@NonNull Options options) {
+      Boolean encodeTransformation = options.get(ENCODE_TRANSFORMATION);
+      return encodeTransformation != null && encodeTransformation
+            ? EncodeStrategy.TRANSFORMED
+            : EncodeStrategy.SOURCE;
+   }
 
-    @Override
-    public boolean encode(
-            @NonNull Resource<GifDrawable> resource, @NonNull File file, @NonNull Options options) {
-        GifDrawable drawable = resource.get();
-        Transformation<Bitmap> transformation = drawable.getFrameTransformation();
-        boolean isTransformed = !(transformation instanceof UnitTransformation);
-        if (isTransformed && options.get(ENCODE_TRANSFORMATION)) {
-            return encodeTransformedToFile(drawable, file);
-        } else {
-            return writeDataDirect(drawable.getBuffer(), file);
-        }
-    }
+   @Override
+   public boolean encode(
+         @NonNull Resource<GifDrawable> resource, @NonNull File file, @NonNull Options options) {
+      GifDrawable drawable = resource.get();
+      Transformation<Bitmap> transformation = drawable.getFrameTransformation();
+      boolean isTransformed = !(transformation instanceof UnitTransformation);
+      if (isTransformed && options.get(ENCODE_TRANSFORMATION)) {
+         return encodeTransformedToFile(drawable, file);
+      } else {
+         return writeDataDirect(drawable.getBuffer(), file);
+      }
+   }
 
-    private boolean encodeTransformedToFile(GifDrawable drawable, File file) {
-        long startTime = LogTime.getLogTime();
-        OutputStream os = null;
-        boolean success = false;
-        try {
-            os = new BufferedOutputStream(new FileOutputStream(file));
-            success = encodeTransformedToStream(drawable, os);
-            os.close();
-        } catch (IOException e) {
-            if (Log.isLoggable(TAG, Log.DEBUG)) {
-                Log.d(TAG, "Failed to encode GIF", e);
-            }
-        } finally {
-            if (os != null) {
-                try {
-                    os.close();
-                } catch (IOException e) {
-                    // Ignored.
-                }
-            }
-        }
-        if (Log.isLoggable(TAG, Log.VERBOSE)) {
-            Log.v(
-                    TAG,
-                    "Re-encoded GIF with "
-                            + drawable.getFrameCount()
-                            + " frames and "
-                            + drawable.getBuffer().limit()
-                            + " bytes in "
-                            + LogTime.getElapsedMillis(startTime)
-                            + " ms");
-        }
-
-        return success;
-    }
-
-    private boolean encodeTransformedToStream(GifDrawable drawable, OutputStream os) {
-        Transformation<Bitmap> transformation = drawable.getFrameTransformation();
-        GifDecoder decoder = decodeHeaders(drawable.getBuffer());
-        AnimatedGifEncoder encoder = factory.buildEncoder();
-        if (!encoder.start(os)) {
-            return false;
-        }
-
-        for (int i = 0; i < decoder.getFrameCount(); i++) {
-            Bitmap currentFrame = decoder.getNextFrame();
-            Resource<Bitmap> transformedResource =
-                    getTransformedFrame(currentFrame, transformation, drawable);
+   private boolean encodeTransformedToFile(GifDrawable drawable, File file) {
+      long startTime = LogTime.getLogTime();
+      OutputStream os = null;
+      boolean success = false;
+      try {
+         os = new BufferedOutputStream(new FileOutputStream(file));
+         success = encodeTransformedToStream(drawable, os);
+         os.close();
+      } catch (IOException e) {
+         if (Log.isLoggable(TAG, Log.DEBUG)) {
+            Log.d(TAG, "Failed to encode GIF", e);
+         }
+      } finally {
+         if (os != null) {
             try {
-                if (!encoder.addFrame(transformedResource.get())) {
-                    return false;
-                }
-                int currentFrameIndex = decoder.getCurrentFrameIndex();
-                int delay = decoder.getDelay(currentFrameIndex);
-                encoder.setDelay(delay);
-
-                decoder.advance();
-            } finally {
-                transformedResource.recycle();
+               os.close();
+            } catch (IOException e) {
+               // Ignored.
             }
-        }
+         }
+      }
+      if (Log.isLoggable(TAG, Log.VERBOSE)) {
+         Log.v(
+               TAG,
+               "Re-encoded GIF with "
+                     + drawable.getFrameCount()
+                     + " frames and "
+                     + drawable.getBuffer().limit()
+                     + " bytes in "
+                     + LogTime.getElapsedMillis(startTime)
+                     + " ms");
+      }
 
-        return encoder.finish();
-    }
+      return success;
+   }
 
-    private boolean writeDataDirect(ByteBuffer data, File file) {
-        try {
-            ByteBufferUtil.toFile(data, file);
-        } catch (IOException e) {
-            if (Log.isLoggable(TAG, Log.WARN)) {
-                Log.w(TAG, "Failed to write GIF data", e);
+   private boolean encodeTransformedToStream(GifDrawable drawable, OutputStream os) {
+      Transformation<Bitmap> transformation = drawable.getFrameTransformation();
+      GifDecoder decoder = decodeHeaders(drawable.getBuffer());
+      AnimatedGifEncoder encoder = factory.buildEncoder();
+      if (!encoder.start(os)) {
+         return false;
+      }
+
+      for (int i = 0; i < decoder.getFrameCount(); i++) {
+         Bitmap currentFrame = decoder.getNextFrame();
+         Resource<Bitmap> transformedResource =
+               getTransformedFrame(currentFrame, transformation, drawable);
+         try {
+            if (!encoder.addFrame(transformedResource.get())) {
+               return false;
             }
-            return false;
-        }
-        return true;
-    }
+            int currentFrameIndex = decoder.getCurrentFrameIndex();
+            int delay = decoder.getDelay(currentFrameIndex);
+            encoder.setDelay(delay);
 
-    private GifDecoder decodeHeaders(ByteBuffer data) {
-        GifHeaderParser parser = factory.buildParser();
-        parser.setData(data);
-        GifHeader header = parser.parseHeader();
+            decoder.advance();
+         } finally {
+            transformedResource.recycle();
+         }
+      }
 
-        GifDecoder decoder = factory.buildDecoder(provider);
-        decoder.setData(header, data);
-        decoder.advance();
+      return encoder.finish();
+   }
 
-        return decoder;
-    }
+   private boolean writeDataDirect(ByteBuffer data, File file) {
+      try {
+         ByteBufferUtil.toFile(data, file);
+      } catch (IOException e) {
+         if (Log.isLoggable(TAG, Log.WARN)) {
+            Log.w(TAG, "Failed to write GIF data", e);
+         }
+         return false;
+      }
+      return true;
+   }
 
-    private Resource<Bitmap> getTransformedFrame(
-            Bitmap currentFrame, Transformation<Bitmap> transformation, GifDrawable drawable) {
-        // TODO: what if current frame is null?
-        Resource<Bitmap> bitmapResource = factory.buildFrameResource(currentFrame, bitmapPool);
-        Resource<Bitmap> transformedResource =
-                transformation.transform(
-                        context, bitmapResource, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-        if (!bitmapResource.equals(transformedResource)) {
-            bitmapResource.recycle();
-        }
-        return transformedResource;
-    }
+   private GifDecoder decodeHeaders(ByteBuffer data) {
+      GifHeaderParser parser = factory.buildParser();
+      parser.setData(data);
+      GifHeader header = parser.parseHeader();
 
-    @VisibleForTesting
-    static class Factory {
+      GifDecoder decoder = factory.buildDecoder(provider);
+      decoder.setData(header, data);
+      decoder.advance();
 
-        GifDecoder buildDecoder(GifDecoder.BitmapProvider bitmapProvider) {
-            return new StandardGifDecoder(bitmapProvider);
-        }
+      return decoder;
+   }
 
-        GifHeaderParser buildParser() {
-            return new GifHeaderParser();
-        }
+   private Resource<Bitmap> getTransformedFrame(
+         Bitmap currentFrame, Transformation<Bitmap> transformation, GifDrawable drawable) {
+      // TODO: what if current frame is null?
+      Resource<Bitmap> bitmapResource = factory.buildFrameResource(currentFrame, bitmapPool);
+      Resource<Bitmap> transformedResource =
+            transformation.transform(
+                  context, bitmapResource, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+      if (!bitmapResource.equals(transformedResource)) {
+         bitmapResource.recycle();
+      }
+      return transformedResource;
+   }
 
-        AnimatedGifEncoder buildEncoder() {
-            return new AnimatedGifEncoder();
-        }
+   @VisibleForTesting
+   static class Factory {
 
-        @NonNull
-        Resource<Bitmap> buildFrameResource(@NonNull Bitmap bitmap, @NonNull BitmapPool bitmapPool) {
-            return new BitmapResource(bitmap, bitmapPool);
-        }
-    }
+      GifDecoder buildDecoder(GifDecoder.BitmapProvider bitmapProvider) {
+         return new StandardGifDecoder(bitmapProvider);
+      }
+
+      GifHeaderParser buildParser() {
+         return new GifHeaderParser();
+      }
+
+      AnimatedGifEncoder buildEncoder() {
+         return new AnimatedGifEncoder();
+      }
+
+      @NonNull
+      Resource<Bitmap> buildFrameResource(@NonNull Bitmap bitmap, @NonNull BitmapPool bitmapPool) {
+         return new BitmapResource(bitmap, bitmapPool);
+      }
+   }
 }

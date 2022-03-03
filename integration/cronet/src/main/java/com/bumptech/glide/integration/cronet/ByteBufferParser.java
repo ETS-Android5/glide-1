@@ -8,13 +8,13 @@ import java.nio.ByteBuffer;
  * @param <T> The type of data to parse the buffer to.
  */
 interface ByteBufferParser<T> {
-    /**
-     * Returns the required type of data parsed from the given {@link ByteBuffer}.
-     */
-    T parse(ByteBuffer byteBuffer);
+   /**
+    * Returns the required type of data parsed from the given {@link ByteBuffer}.
+    */
+   T parse(ByteBuffer byteBuffer);
 
-    /**
-     * Returns the {@link Class} of the data that will be parsed from {@link ByteBuffer}s.
-     */
-    Class<T> getDataClass();
+   /**
+    * Returns the {@link Class} of the data that will be parsed from {@link ByteBuffer}s.
+    */
+   Class<T> getDataClass();
 }

@@ -11,14 +11,14 @@ import java.io.File;
  */
 public class FileDecoder implements ResourceDecoder<File, File> {
 
-    @Override
-    public boolean handles(@NonNull File source, @NonNull Options options) {
-        return true;
-    }
+   @Override
+   public boolean handles(@NonNull File source, @NonNull Options options) {
+      return true;
+   }
 
-    @Override
-    public Resource<File> decode(
-            @NonNull File source, int width, int height, @NonNull Options options) {
-        return new FileResource(source);
-    }
+   @Override
+   public Resource<File> decode(
+         @NonNull File source, int width, int height, @NonNull Options options) {
+      return new FileResource(source);
+   }
 }

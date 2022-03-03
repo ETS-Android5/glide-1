@@ -22,12 +22,12 @@ package com.bumptech.glide.load;
  * framework which one we want. Setting one of these values is not a guarantee that any returned Bitmap will actually use the requested color space.
  */
 public enum PreferredColorSpace {
-    /**
-     * Prefers to decode images using {@link android.graphics.ColorSpace.Named#SRGB}.
-     */
-    SRGB,
-    /**
-     * Prefers to decode images using {@link android.graphics.ColorSpace.Named#DISPLAY_P3}.
-     */
-    DISPLAY_P3,
+   /**
+    * Prefers to decode images using {@link android.graphics.ColorSpace.Named#SRGB}.
+    */
+   SRGB,
+   /**
+    * Prefers to decode images using {@link android.graphics.ColorSpace.Named#DISPLAY_P3}.
+    */
+   DISPLAY_P3,
 }

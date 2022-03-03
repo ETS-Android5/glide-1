@@ -9,8 +9,8 @@ import okhttp3.OkHttpClient;
  */
 @Module
 class ApplicationModule {
-    @Provides
-    OkHttpClient okHttpClient() {
-        return new OkHttpClient();
-    }
+   @Provides
+   OkHttpClient okHttpClient() {
+      return new OkHttpClient();
+   }
 }

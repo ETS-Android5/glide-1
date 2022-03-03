@@ -19,13 +19,13 @@ import java.io.InputStream;
  */
 @Deprecated
 public class OkHttpGlideModule implements com.bumptech.glide.module.GlideModule {
-    @Override
-    public void applyOptions(@NonNull Context context, @NonNull GlideBuilder builder) {
-        // Do nothing.
-    }
+   @Override
+   public void applyOptions(@NonNull Context context, @NonNull GlideBuilder builder) {
+      // Do nothing.
+   }
 
-    @Override
-    public void registerComponents(Context context, Glide glide, Registry registry) {
-        registry.replace(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory());
-    }
+   @Override
+   public void registerComponents(Context context, Glide glide, Registry registry) {
+      registry.replace(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory());
+   }
 }

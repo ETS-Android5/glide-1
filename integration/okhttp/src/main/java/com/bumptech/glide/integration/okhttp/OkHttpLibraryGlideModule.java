@@ -20,8 +20,8 @@ import java.io.InputStream;
 @GlideModule
 @Deprecated
 public class OkHttpLibraryGlideModule extends LibraryGlideModule {
-    @Override
-    public void registerComponents(Context context, Glide glide, Registry registry) {
-        registry.replace(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory());
-    }
+   @Override
+   public void registerComponents(Context context, Glide glide, Registry registry) {
+      registry.replace(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory());
+   }
 }

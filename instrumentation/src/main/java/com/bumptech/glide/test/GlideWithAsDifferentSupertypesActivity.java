@@ -9,11 +9,11 @@ import com.bumptech.glide.Glide;
 
 public class GlideWithAsDifferentSupertypesActivity extends FragmentActivity {
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Glide.with(this);
-        Glide.with((Context) this);
-        Glide.with((Activity) this);
-    }
+   @Override
+   protected void onCreate(@Nullable Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+      Glide.with(this);
+      Glide.with((Context) this);
+      Glide.with((Activity) this);
+   }
 }

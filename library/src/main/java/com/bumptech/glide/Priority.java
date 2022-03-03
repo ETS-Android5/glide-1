@@ -5,8 +5,8 @@ package com.bumptech.glide;
  * no guarantees about the order in which loads will start or finish.
  */
 public enum Priority {
-    IMMEDIATE,
-    HIGH,
-    NORMAL,
-    LOW,
+   IMMEDIATE,
+   HIGH,
+   NORMAL,
+   LOW,
 }

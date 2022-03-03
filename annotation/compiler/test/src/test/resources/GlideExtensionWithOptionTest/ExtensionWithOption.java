@@ -8,13 +8,13 @@ import com.bumptech.glide.request.BaseRequestOptions;
 @GlideExtension
 public final class ExtensionWithOption {
 
-    private ExtensionWithOption() {
-        // Utility class.
-    }
+   private ExtensionWithOption() {
+      // Utility class.
+   }
 
-    @NonNull
-    @GlideOption
-    public static BaseRequestOptions<?> squareThumb(BaseRequestOptions<?> requestOptions) {
-        return requestOptions.centerCrop();
-    }
+   @NonNull
+   @GlideOption
+   public static BaseRequestOptions<?> squareThumb(BaseRequestOptions<?> requestOptions) {
+      return requestOptions.centerCrop();
+   }
 }

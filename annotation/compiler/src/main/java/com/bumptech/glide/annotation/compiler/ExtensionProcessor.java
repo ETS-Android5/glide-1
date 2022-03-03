@@ -13,36 +13,36 @@ import javax.lang.model.element.TypeElement;
  * Writes Indexer classes annotated with {@link Index} for all classes found annotated with {@link GlideExtension}.
  */
 final class ExtensionProcessor {
-    private final ProcessorUtil processorUtil;
-    private final IndexerGenerator indexerGenerator;
-    private final GlideExtensionValidator extensionValidator;
+   private final ProcessorUtil processorUtil;
+   private final IndexerGenerator indexerGenerator;
+   private final GlideExtensionValidator extensionValidator;
 
-    ExtensionProcessor(
-            ProcessingEnvironment processingEnvironment,
-            ProcessorUtil processorUtil,
-            IndexerGenerator indexerGenerator) {
-        this.processorUtil = processorUtil;
-        this.indexerGenerator = indexerGenerator;
-        extensionValidator = new GlideExtensionValidator(processingEnvironment, processorUtil);
-    }
+   ExtensionProcessor(
+         ProcessingEnvironment processingEnvironment,
+         ProcessorUtil processorUtil,
+         IndexerGenerator indexerGenerator) {
+      this.processorUtil = processorUtil;
+      this.indexerGenerator = indexerGenerator;
+      extensionValidator = new GlideExtensionValidator(processingEnvironment, processorUtil);
+   }
 
-    boolean processExtensions(RoundEnvironment env) {
-        List<TypeElement> elements = processorUtil.getElementsFor(GlideExtension.class, env);
-        processorUtil.debugLog("Processing types : " + elements);
-        for (TypeElement typeElement : elements) {
-            extensionValidator.validateExtension(typeElement);
-            processorUtil.debugLog("Processing elements: " + typeElement.getEnclosedElements());
-        }
+   boolean processExtensions(RoundEnvironment env) {
+      List<TypeElement> elements = processorUtil.getElementsFor(GlideExtension.class, env);
+      processorUtil.debugLog("Processing types : " + elements);
+      for (TypeElement typeElement : elements) {
+         extensionValidator.validateExtension(typeElement);
+         processorUtil.debugLog("Processing elements: " + typeElement.getEnclosedElements());
+      }
 
-        if (elements.isEmpty()) {
-            return false;
-        }
-        TypeSpec spec = indexerGenerator.generate(elements);
-        processorUtil.writeIndexer(spec);
-        return true;
-    }
+      if (elements.isEmpty()) {
+         return false;
+      }
+      TypeSpec spec = indexerGenerator.generate(elements);
+      processorUtil.writeIndexer(spec);
+      return true;
+   }
 
-    Set<String> getSupportedAnnotationTypes() {
-        return Collections.singleton(GlideExtension.class.getName());
-    }
+   Set<String> getSupportedAnnotationTypes() {
+      return Collections.singleton(GlideExtension.class.getName());
+   }
 }
