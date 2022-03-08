@@ -35,8 +35,7 @@ public class MultiTransformation<T> implements Transformation<T> {
 
    @NonNull
    @Override
-   public Resource<T> transform(
-         @NonNull Context context, @NonNull Resource<T> resource, int outWidth, int outHeight) {
+   public Resource<T> transform(@NonNull Context context, @NonNull Resource<T> resource, int outWidth, int outHeight) {
       Resource<T> previous = resource;
 
       for (Transformation<T> transformation : transformations) {

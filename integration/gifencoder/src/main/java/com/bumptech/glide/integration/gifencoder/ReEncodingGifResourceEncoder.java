@@ -201,8 +201,7 @@ public class ReEncodingGifResourceEncoder implements ResourceEncoder<GifDrawable
       // TODO: what if current frame is null?
       Resource<Bitmap> bitmapResource = factory.buildFrameResource(currentFrame, bitmapPool);
       Resource<Bitmap> transformedResource =
-            transformation.transform(
-                  context, bitmapResource, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+            transformation.transform(context, bitmapResource, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
       if (!bitmapResource.equals(transformedResource)) {
          bitmapResource.recycle();
       }

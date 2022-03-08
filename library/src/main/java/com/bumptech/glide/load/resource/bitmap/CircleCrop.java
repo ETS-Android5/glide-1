@@ -20,8 +20,7 @@ public class CircleCrop extends BitmapTransformation {
    // Bitmap doesn't implement equals, so == and .equals are equivalent here.
    @SuppressWarnings("PMD.CompareObjectsWithEquals")
    @Override
-   protected Bitmap transform(
-         @NonNull BitmapPool pool, @NonNull Bitmap toTransform, int outWidth, int outHeight) {
+   protected Bitmap transform(@NonNull BitmapPool pool, @NonNull Bitmap toTransform, int outWidth, int outHeight) {
       return TransformationUtils.circleCrop(pool, toTransform, outWidth, outHeight);
    }
 

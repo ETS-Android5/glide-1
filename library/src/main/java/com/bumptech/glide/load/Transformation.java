@@ -49,6 +49,5 @@ public interface Transformation<T> extends Key {
     * @return The transformed resource.
     */
    @NonNull
-   Resource<T> transform(
-         @NonNull Context context, @NonNull Resource<T> resource, int outWidth, int outHeight);
+   Resource<T> transform(@NonNull Context context, @NonNull Resource<T> resource, int outWidth, int outHeight);
 }

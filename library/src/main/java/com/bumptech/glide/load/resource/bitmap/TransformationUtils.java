@@ -356,8 +356,7 @@ public final class TransformationUtils {
     * @param destHeight The height in pixels of the final Bitmap.
     * @return The resized Bitmap (will be recycled if recycled is not null).
     */
-   public static Bitmap circleCrop(
-         @NonNull BitmapPool pool, @NonNull Bitmap inBitmap, int destWidth, int destHeight) {
+   public static Bitmap circleCrop(@NonNull BitmapPool pool, @NonNull Bitmap inBitmap, int destWidth, int destHeight) {
       int destMinEdge = Math.min(destWidth, destHeight);
       float radius = destMinEdge / 2f;
 
@@ -401,8 +400,7 @@ public final class TransformationUtils {
       return result;
    }
 
-   private static Bitmap getAlphaSafeBitmap(
-         @NonNull BitmapPool pool, @NonNull Bitmap maybeAlphaSafe) {
+   private static Bitmap getAlphaSafeBitmap(@NonNull BitmapPool pool, @NonNull Bitmap maybeAlphaSafe) {
       Bitmap.Config safeConfig = getAlphaSafeConfig(maybeAlphaSafe);
       if (safeConfig.equals(maybeAlphaSafe.getConfig())) {
          return maybeAlphaSafe;

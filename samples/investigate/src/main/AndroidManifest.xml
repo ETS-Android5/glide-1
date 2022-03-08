@@ -11,7 +11,7 @@
         android:supportsRtl="true">
         <activity
             android:exported="true"
-            android:name=".SecondActivity">
+            android:name=".ThirdActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,6 +1,8 @@
 package com.bumptech.glide.load.engine;
 
+import android.util.Log;
 import androidx.annotation.NonNull;
+import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.Key;
 import com.bumptech.glide.load.Transformation;
@@ -99,6 +101,7 @@ class ResourceCacheGenerator implements DataFetcherGenerator, DataFetcher.DataCa
             loadData = modelLoader.buildLoadData(cacheFile, helper.getWidth(), helper.getHeight(), helper.getOptions());
             if (loadData != null && helper.hasLoadPath(loadData.fetcher.getDataClass())) {
                started = true;
+               Log.i("loadDataTag", String.format("moduleLoader:" +  modelLoader.getClass().getSimpleName() + " loadData:" + loadData.getClass().getSimpleName()) + " fetcher:" + loadData.fetcher.getClass().getSimpleName());
                loadData.fetcher.loadData(helper.getPriority(), this);
             }
          }
