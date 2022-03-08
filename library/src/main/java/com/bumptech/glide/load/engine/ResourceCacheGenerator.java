@@ -96,9 +96,7 @@ class ResourceCacheGenerator implements DataFetcherGenerator, DataFetcher.DataCa
          boolean started = false;
          while (!started && hasNextModelLoader()) {
             ModelLoader<File, ?> modelLoader = modelLoaders.get(modelLoaderIndex++);
-            loadData =
-                  modelLoader.buildLoadData(
-                        cacheFile, helper.getWidth(), helper.getHeight(), helper.getOptions());
+            loadData = modelLoader.buildLoadData(cacheFile, helper.getWidth(), helper.getHeight(), helper.getOptions());
             if (loadData != null && helper.hasLoadPath(loadData.fetcher.getDataClass())) {
                started = true;
                loadData.fetcher.loadData(helper.getPriority(), this);
@@ -125,8 +123,7 @@ class ResourceCacheGenerator implements DataFetcherGenerator, DataFetcher.DataCa
 
    @Override
    public void onDataReady(Object data) {
-      cb.onDataFetcherReady(
-            sourceKey, data, loadData.fetcher, DataSource.RESOURCE_DISK_CACHE, currentKey);
+      cb.onDataFetcherReady(sourceKey, data, loadData.fetcher, DataSource.RESOURCE_DISK_CACHE, currentKey);
    }
 
    @Override

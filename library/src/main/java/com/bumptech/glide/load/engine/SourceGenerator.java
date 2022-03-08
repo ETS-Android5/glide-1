@@ -153,8 +153,7 @@ class SourceGenerator implements DataFetcherGenerator, DataFetcherGenerator.Fetc
 
          if (diskCache.get(newOriginalKey) != null) {
             originalKey = newOriginalKey;
-            sourceCacheGenerator =
-                  new DataCacheGenerator(Collections.singletonList(loadData.sourceKey), helper, this);
+            sourceCacheGenerator = new DataCacheGenerator(Collections.singletonList(loadData.sourceKey), helper, this);
             // We were able to write the data to cache.
             return true;
          } else {

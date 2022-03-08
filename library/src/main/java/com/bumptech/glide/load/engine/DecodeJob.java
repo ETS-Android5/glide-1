@@ -306,6 +306,7 @@ class DecodeJob<R>
       boolean isStarted = false;
       while (!isCancelled
             && currentGenerator != null
+            // 当startNext返回false
             && !(isStarted = currentGenerator.startNext())) {
          stage = getNextStage(stage);
          currentGenerator = getNextGenerator();

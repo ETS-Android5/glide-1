@@ -381,20 +381,15 @@ public class Glide implements ComponentCallbacks2 {
 
       List<ImageHeaderParser> imageHeaderParsers = registry.getImageHeaderParsers();
 
-      ByteBufferGifDecoder byteBufferGifDecoder =
-            new ByteBufferGifDecoder(context, imageHeaderParsers, bitmapPool, arrayPool);
-      ResourceDecoder<ParcelFileDescriptor, Bitmap> parcelFileDescriptorVideoDecoder =
-            VideoDecoder.parcel(bitmapPool);
+      ByteBufferGifDecoder byteBufferGifDecoder = new ByteBufferGifDecoder(context, imageHeaderParsers, bitmapPool, arrayPool);
+      ResourceDecoder<ParcelFileDescriptor, Bitmap> parcelFileDescriptorVideoDecoder = VideoDecoder.parcel(bitmapPool);
 
       // TODO(judds): Make ParcelFileDescriptorBitmapDecoder work with ImageDecoder.
-      Downsampler downsampler =
-            new Downsampler(
-                  registry.getImageHeaderParsers(), resources.getDisplayMetrics(), bitmapPool, arrayPool);
+      Downsampler downsampler = new Downsampler(registry.getImageHeaderParsers(), resources.getDisplayMetrics(), bitmapPool, arrayPool);
 
       ResourceDecoder<ByteBuffer, Bitmap> byteBufferBitmapDecoder;
       ResourceDecoder<InputStream, Bitmap> streamBitmapDecoder;
-      if (experiments.isEnabled(EnableImageDecoderForBitmaps.class)
-            && Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+      if (experiments.isEnabled(EnableImageDecoderForBitmaps.class) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
          streamBitmapDecoder = new InputStreamBitmapImageDecoderResourceDecoder();
          byteBufferBitmapDecoder = new ByteBufferBitmapImageDecoderResourceDecoder();
       } else {
@@ -403,13 +398,10 @@ public class Glide implements ComponentCallbacks2 {
       }
 
       ResourceDrawableDecoder resourceDrawableDecoder = new ResourceDrawableDecoder(context);
-      ResourceLoader.StreamFactory resourceLoaderStreamFactory =
-            new ResourceLoader.StreamFactory(resources);
+      ResourceLoader.StreamFactory resourceLoaderStreamFactory = new ResourceLoader.StreamFactory(resources);
       ResourceLoader.UriFactory resourceLoaderUriFactory = new ResourceLoader.UriFactory(resources);
-      ResourceLoader.FileDescriptorFactory resourceLoaderFileDescriptorFactory =
-            new ResourceLoader.FileDescriptorFactory(resources);
-      ResourceLoader.AssetFileDescriptorFactory resourceLoaderAssetFileDescriptorFactory =
-            new ResourceLoader.AssetFileDescriptorFactory(resources);
+      ResourceLoader.FileDescriptorFactory resourceLoaderFileDescriptorFactory = new ResourceLoader.FileDescriptorFactory(resources);
+      ResourceLoader.AssetFileDescriptorFactory resourceLoaderAssetFileDescriptorFactory = new ResourceLoader.AssetFileDescriptorFactory(resources);
       BitmapEncoder bitmapEncoder = new BitmapEncoder(arrayPool);
 
       BitmapBytesTranscoder bitmapBytesTranscoder = new BitmapBytesTranscoder();
@@ -473,8 +465,7 @@ public class Glide implements ComponentCallbacks2 {
             .append(GifDrawable.class, new GifDrawableEncoder())
             /* GIF Frames */
             // Compilation with Gradle requires the type to be specified for UnitModelLoader here.
-            .append(
-                  GifDecoder.class, GifDecoder.class, UnitModelLoader.Factory.<GifDecoder>getInstance())
+            .append(GifDecoder.class, GifDecoder.class, UnitModelLoader.Factory.<GifDecoder>getInstance())
             .append(
                   Registry.BUCKET_BITMAP,
                   GifDecoder.class,
@@ -482,8 +473,7 @@ public class Glide implements ComponentCallbacks2 {
                   new GifFrameResourceDecoder(bitmapPool))
             /* Drawables */
             .append(Uri.class, Drawable.class, resourceDrawableDecoder)
-            .append(
-                  Uri.class, Bitmap.class, new ResourceBitmapDecoder(resourceDrawableDecoder, bitmapPool))
+            .append(Uri.class, Bitmap.class, new ResourceBitmapDecoder(resourceDrawableDecoder, bitmapPool))
             /* Files */
             .register(new ByteBufferRewinder.Factory())
             .append(File.class, ByteBuffer.class, new ByteBufferFileLoader.Factory())

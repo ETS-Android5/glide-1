@@ -50,8 +50,7 @@ public class Registry {
    private final TranscoderRegistry transcoderRegistry;
    private final ImageHeaderParserRegistry imageHeaderParserRegistry;
 
-   private final ModelToResourceClassCache modelToResourceClassCache =
-         new ModelToResourceClassCache();
+   private final ModelToResourceClassCache modelToResourceClassCache = new ModelToResourceClassCache();
    private final LoadPathCache loadPathCache = new LoadPathCache();
    private final Pool<List<Throwable>> throwableListPool = FactoryPools.threadSafeList();
 
@@ -63,8 +62,7 @@ public class Registry {
       this.dataRewinderRegistry = new DataRewinderRegistry();
       this.transcoderRegistry = new TranscoderRegistry();
       this.imageHeaderParserRegistry = new ImageHeaderParserRegistry();
-      setResourceDecoderBucketPriorityList(
-            Arrays.asList(BUCKET_GIF, BUCKET_BITMAP, BUCKET_BITMAP_DRAWABLE));
+      setResourceDecoderBucketPriorityList(Arrays.asList(BUCKET_GIF, BUCKET_BITMAP, BUCKET_BITMAP_DRAWABLE));
    }
 
    /**
